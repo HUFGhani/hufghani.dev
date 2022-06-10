@@ -1,30 +1,57 @@
-<div class="navbar bg-base-100">
-	<div class="flex-1">
-		<!-- svelte-ignore a11y-missing-attribute -->
-		<a class="btn btn-ghost normal-case text-xl">daisyUI</a>
+<script>
+	import { AUTHORNAME,MENULINK } from '$lib/info';
+	import { faDice } from '@fortawesome/free-solid-svg-icons';
+	import Icon from 'svelte-awesome';
+		</script>
+
+<div
+	class="flex items-center 
+	sm:flex-col md:flex-row lg:flex-row xl:flex-row 
+	justify-center lg:justify-between xl:justify-between 
+	flex-wrap w-full pt-10 
+	sm:px-4 md:px-4 lg:px-8 xl:px-8 
+	bg-transparent invisible"
+>
+	<div>
+		<a href="/">
+			<h1 class="logo font-normal text-4xl">
+				{AUTHORNAME}
+			</h1>
+		</a>
 	</div>
-	<div class="flex-none">
-		<ul class="menu menu-horizontal p-0">
-			<li><a>Item 1</a></li>
-			<li tabindex="0">
-				<!-- svelte-ignore a11y-missing-attribute -->
-				<a>
-					Parent
-					<svg
-						class="fill-current"
-						xmlns="http://www.w3.org/2000/svg"
-						width="20"
-						height="20"
-						viewBox="0 0 24 24"
-						><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg
-					>
-				</a>
-				<ul class="p-2 bg-base-100">
-					<li><a>Submenu 1</a></li>
-					<li><a>Submenu 2</a></li>
-				</ul>
-			</li>
-			<li><a>Item 3</a></li>
-		</ul>
+
+	<div class="flex flex-row md:pl-10 space-x-4 items-center justify-center text-base text-center">
+		{#each MENULINK as { link, title, isExternal, abbr, fullTitle }}
+			<div class="rounded-md p-2 text-center hover:bg-slate-100">
+				{#if isExternal}
+					{#if abbr}
+						<a href={link} aria-label={title} target="_blank">
+							<abbr title={fullTitle} class="border-none cursor-default no-underline">
+								{title}
+							</abbr>
+						</a>
+					{:else}
+						<a href={link} aria-label={title} target="_blank">{title}</a>
+					{/if}
+				{:else}
+					<a href={link} aria-label={title}>{title} </a>
+				{/if}
+			</div>
+		{/each}
+		<button
+			class="rounded-md p-2 text-center hover:bg-slate-100"
+			aria-label="random theme selector"
+		>
+			<Icon data={faDice} class="w-7 h-7" />
+		</button>
 	</div>
 </div>
+
+<style>
+	.logo {
+		font-family: Dr Sugiyama, cursive;
+		background-image: linear-gradient(60deg, #7928ca, #ffb03a);
+		background-clip: text;
+		color: transparent;
+	}
+</style>

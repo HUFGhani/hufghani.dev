@@ -28,3 +28,34 @@ export const SOCIAL_LINKS: {
 		link: `https://www.instagram.com/the.ghani/`
 	}
 ];
+
+export const MENULINK: {
+	title: string;
+	link: string;
+	isExternal: boolean;
+	abbr?: boolean;
+	fullTitle?: string;
+}[] = [
+	{
+		title: 'About me',
+		link: 'aboutMe',
+		isExternal: false
+	},
+	{
+		title: 'Project',
+		link: 'project',
+		isExternal: false
+	},
+	{
+		title: 'Blog',
+		link: 'blog',
+		isExternal: false
+	},
+	{
+		title: 'CV',
+		link: 'docs/Curriculum-Vitae.pdf',
+		isExternal: true,
+		abbr: true,
+		fullTitle: 'Curriculum Vitae'
+	}
+];
