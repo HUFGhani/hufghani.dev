@@ -1,8 +1,7 @@
 <script>
-	import { AUTHORNAME,MENULINK } from '$lib/info';
-	import { faDice } from '@fortawesome/free-solid-svg-icons';
-	import Icon from 'svelte-awesome';
-		</script>
+	import Random from '$lib/icon/Random.svelte'
+	import { AUTHORNAME, MENULINK } from '$lib/info'
+</script>
 
 <div
 	class="flex items-center 
@@ -10,7 +9,7 @@
 	justify-center lg:justify-between xl:justify-between 
 	flex-wrap w-full pt-10 
 	sm:px-4 md:px-4 lg:px-8 xl:px-8 
-	bg-transparent invisible"
+	bg-transparent"
 >
 	<div>
 		<a href="/">
@@ -42,7 +41,7 @@
 			class="rounded-md p-2 text-center hover:bg-slate-100"
 			aria-label="random theme selector"
 		>
-			<Icon data={faDice} class="w-7 h-7" />
+			<Random cssClasses="w-6 h-6" />
 		</button>
 	</div>
 </div>

@@ -5,39 +5,39 @@ module.exports = {
 		{ value: ':memo: docs', name: '📝 docs:\tAdd or update documentation' },
 		{
 			value: ':lipstick: style',
-			name: '💄 style:\tAdd or update styles, ui or ux'
+			name: '💄 style:\tAdd or update styles, ui or ux',
 		},
 		{
 			value: ':recycle: refactor',
-			name: '♻️  refactor:\tCode change that neither fixes a bug nor adds a feature'
+			name: '♻️  refactor:\tCode change that neither fixes a bug nor adds a feature',
 		},
 		{
 			value: ':zap: perf',
-			name: '⚡️ perf:\tCode change that improves performance'
+			name: '⚡️ perf:\tCode change that improves performance',
 		},
 		{
 			value: ':white_check_mark: test',
-			name: '✅ test:\tAdding tests cases'
+			name: '✅ test:\tAdding tests cases',
 		},
 		{
 			value: ':truck: chore',
-			name: '🚚 chore:\tChanges to the build process or auxiliary tools\n\t\tand libraries such as documentation generation'
+			name: '🚚 chore:\tChanges to the build process or auxiliary tools\n\t\tand libraries such as documentation generation',
 		},
 		{ value: ':rewind: revert', name: '⏪️ revert:\tRevert to a commit' },
 		{ value: ':construction: wip', name: '🚧 wip:\tWork in progress' },
 		{
 			value: ':construction_worker: build',
-			name: '👷 build:\tAdd or update regards to build process'
+			name: '👷 build:\tAdd or update regards to build process',
 		},
 		{
 			value: ':green_heart: ci',
-			name: '💚 ci:\tAdd or update regards to build process'
+			name: '💚 ci:\tAdd or update regards to build process',
 		},
 		{
 			value: ':tada: init',
-			name: '🎉 init\tInit new project with first commit'
-		}
+			name: '🎉 init\tInit new project with first commit',
+		},
 	],
 	skipQuestions: ['body', 'footer'],
-	subjectLimit: 100
-};
+	subjectLimit: 100,
+}

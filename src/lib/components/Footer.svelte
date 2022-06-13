@@ -1,12 +1,9 @@
 <script lang="ts">
-	import {
-		faGithubSquare,
-		faInstagramSquare,
-		faLinkedin,
-		faTwitterSquare
-	} from '@fortawesome/free-brands-svg-icons';
-	import Icon from 'svelte-awesome';
-	import { AUTHORNAME, SOCIAL_LINKS } from '../info';
+	import Github from '$lib/icon/Github.svelte'
+	import Instagram from '$lib/icon/Instagram.svelte'
+	import Linkedin from '$lib/icon/Linkedin.svelte'
+	import Twitter from '$lib/icon/Twitter.svelte'
+	import { AUTHORNAME, SOCIAL_LINKS } from '../info'
 </script>
 
 <footer class="mt-4 text-lg text-center w-full">
@@ -18,13 +15,13 @@
 			<div class="mr-2">
 				<a href={link} class="no-underline focus:outline-none" aria-label={title} target="_blank">
 					{#if title === 'Github'}
-						<Icon data={faGithubSquare} class="w-7 h-7" />
+						<Github cssClasses="w-7 h-7" />
 					{:else if title === 'Linkedin'}
-						<Icon data={faLinkedin} class="w-7 h-7" />
+						<Linkedin cssClasses="w-7 h-7" />
 					{:else if title === 'Twitter'}
-						<Icon data={faTwitterSquare} class="w-7 h-7" />
+						<Twitter cssClasses="w-7 h-7" />
 					{:else}
-						<Icon data={faInstagramSquare} class="w-7 h-7" />
+						<Instagram cssClasses="w-7 h-7" />
 					{/if}
 				</a>
 			</div>
