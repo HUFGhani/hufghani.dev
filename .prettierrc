@@ -5,5 +5,5 @@
 	"printWidth": 100,
 	"semi": false,
 	"arrowParens": "avoid",
-	"proseWrap": "always",
+	"proseWrap": "always"
 }

@@ -23,15 +23,11 @@
 		{#each MENULINK as { link, title, isExternal, abbr, fullTitle }}
 			<div class="rounded-md p-2 text-center hover:bg-slate-100">
 				{#if isExternal}
-					{#if abbr}
-						<a href={link} aria-label={title} target="_blank">
-							<abbr title={fullTitle} class="border-none cursor-default no-underline">
-								{title}
-							</abbr>
-						</a>
-					{:else}
-						<a href={link} aria-label={title} target="_blank">{title}</a>
-					{/if}
+					<a href={link} aria-label={title} target="_blank">
+						<abbr title={fullTitle} class="border-none cursor-default no-underline">
+							{title}
+						</abbr>
+					</a>
 				{:else}
 					<a href={link} aria-label={title}>{title} </a>
 				{/if}

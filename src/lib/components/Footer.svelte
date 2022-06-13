@@ -7,7 +7,11 @@
 </script>
 
 <footer class="mt-4 text-lg text-center w-full">
-	<p class="text-sm" aria-label="© 2017 - {new Date().getFullYear()}, {AUTHORNAME}">
+	<p
+		class="text-sm"
+		aria-label="© 2017 - {new Date().getFullYear()}, All right reserved {AUTHORNAME}"
+		data-testid="copyRight-year"
+	>
 		© 2017 - {new Date().getFullYear()}, All right reserved {AUTHORNAME}
 	</p>
 	<div class="items-center flex flex-row justify-center pt-4 pb-4">

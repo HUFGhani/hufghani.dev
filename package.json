@@ -12,15 +12,24 @@
 		"check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --check --plugin-search-dir=. . && eslint .",
 		"format": "prettier --write --plugin-search-dir=. .",
-		"cm": "cz"
+		"cm": "cz",
+		"test": "NODE_OPTIONS=--experimental-vm-modules jest src --config jest.config.json",
+		"test:watch": "NODE_OPTIONS=--experimental-vm-modules jest src --config jest.config.json --watch"
 	},
 	"devDependencies": {
+		"@babel/core": "^7.14.0",
+		"@babel/preset-env": "^7.14.0",
 		"@commitlint/cli": "^17.0.2",
 		"@sveltejs/adapter-auto": "next",
 		"@sveltejs/kit": "next",
+		"@testing-library/jest-dom": "^5.14.0",
+		"@testing-library/svelte": "^3.0.0",
+		"@types/jest": "^28.1.1",
+		"@types/testing-library__jest-dom": "^5.14.0",
 		"@typescript-eslint/eslint-plugin": "^5.10.1",
 		"@typescript-eslint/parser": "^5.10.1",
 		"autoprefixer": "^10.4.7",
+		"babel-jest": "^28.1.1",
 		"commitizen": "^4.2.4",
 		"commitlint-config-gitmoji": "^2.2.5",
 		"cz-customizable": "^6.3.0",
@@ -28,15 +37,19 @@
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-svelte3": "^4.0.0",
 		"husky": "^8.0.0",
+		"jest": "^28.1.1",
+		"jest-environment-jsdom": "^28.1.1",
 		"postcss": "^8.4.14",
 		"prettier": "^2.5.1",
 		"prettier-plugin-svelte": "^2.5.0",
 		"svelte": "^3.44.0",
 		"svelte-check": "^2.2.6",
+		"svelte-jester": "^2.0.1",
 		"svelte-preprocess": "^4.10.7",
 		"tailwindcss": "^3.0.24",
+		"ts-jest": "^28.0.4",
 		"tslib": "^2.3.1",
-		"typescript": "~4.6.2"
+		"typescript": "~4.7.3"
 	},
 	"config": {
 		"commitizen": {

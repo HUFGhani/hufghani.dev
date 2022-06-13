@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Header/> with feature flag on should render Header 1`] = `
+<body>
+  <div>
+    <div
+      class="flex items-center sm:flex-col md:flex-row lg:flex-row xl:flex-row justify-center lg:justify-between xl:justify-between flex-wrap w-full pt-10 sm:px-4 md:px-4 lg:px-8 xl:px-8 bg-transparent"
+    >
+      <div>
+        <a
+          href="/"
+        >
+          <h1
+            class="logo font-normal text-4xl svelte-3g66w"
+          >
+            Hamza U. F. Ghani
+          </h1>
+        </a>
+      </div>
+       
+      <div
+        class="flex flex-row md:pl-10 space-x-4 items-center justify-center text-base text-center"
+      >
+        <div
+          class="rounded-md p-2 text-center hover:bg-slate-100"
+        >
+          <a
+            aria-label="About me"
+            href="aboutMe"
+          >
+            About me
+          </a>
+        </div>
+        <div
+          class="rounded-md p-2 text-center hover:bg-slate-100"
+        >
+          <a
+            aria-label="Project"
+            href="project"
+          >
+            Project
+          </a>
+        </div>
+        <div
+          class="rounded-md p-2 text-center hover:bg-slate-100"
+        >
+          <a
+            aria-label="Blog"
+            href="blog"
+          >
+            Blog
+          </a>
+        </div>
+        <div
+          class="rounded-md p-2 text-center hover:bg-slate-100"
+        >
+          <a
+            aria-label="CV"
+            href="docs/Curriculum-Vitae.pdf"
+            target="_blank"
+          >
+            <abbr
+              class="border-none cursor-default no-underline"
+              title="Curriculum Vitae"
+            >
+              CV
+            </abbr>
+          </a>
+        </div>
+         
+        <button
+          aria-label="random theme selector"
+          class="rounded-md p-2 text-center hover:bg-slate-100"
+        >
+          <svg
+            class="w-6 h-6"
+            viewBox="0 0 512 512"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M424.1 287c-15.13-15.12-40.1-4.426-40.1 16.97V352H336L153.6 108.8C147.6 100.8 138.1 96 128 96H32C14.31 96 0 110.3 0 128s14.31 32 32 32h80l182.4 243.2C300.4 411.3 309.9 416 320 416h63.97v47.94c0 21.39 25.86 32.12 40.99 17l79.1-79.98c9.387-9.387 9.387-24.59 0-33.97L424.1 287zM336 160h47.97v48.03c0 21.39 25.87 32.09 40.1 16.97l79.1-79.98c9.387-9.391 9.385-24.59-.0013-33.97l-79.1-79.98c-15.13-15.12-40.99-4.391-40.99 17V96H320c-10.06 0-19.56 4.75-25.59 12.81L254 162.7L293.1 216L336 160zM112 352H32c-17.69 0-32 14.31-32 32s14.31 32 32 32h96c10.06 0 19.56-4.75 25.59-12.81l40.4-53.87L154 296L112 352z"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</body>
+`;
