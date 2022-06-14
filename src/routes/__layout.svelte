@@ -2,6 +2,18 @@
 	import '../app.css'
 	import Footer from '../lib/components/Footer.svelte'
 	import NavBar from '../lib/components/NavBar.svelte'
+
+	if (typeof window !== 'undefined') {
+		const theme = localStorage.getItem('theme')
+		if (theme != undefined && theme != '') {
+			if (localStorage.getItem('theme') && localStorage.getItem('theme') != '') {
+				document.documentElement.setAttribute('data-theme', theme)
+			}
+		} else {
+			document.documentElement.setAttribute('data-theme', 'light')
+			localStorage.setItem('theme', 'light')
+		}
+	}
 </script>
 
 <div
