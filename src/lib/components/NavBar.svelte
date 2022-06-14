@@ -1,8 +1,8 @@
 <script lang="ts">
 	import Random from '$lib/icon/Random.svelte'
-	import { AUTHORNAME,MENULINK } from '$lib/info'
-	import { setHTMLAttribute,setTheme } from '$lib/utlis'
-			
+	import { AUTHORNAME, MENULINK } from '$lib/info'
+	import { setHTMLAttribute, setTheme } from '$lib/utlis'
+
 	const selectRandomTheme = (): void => {
 		let randomNumber = Math.floor(Math.random() * 29) + 1
 

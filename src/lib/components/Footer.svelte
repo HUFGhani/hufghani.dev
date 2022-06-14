@@ -6,7 +6,9 @@
 	import { AUTHORNAME, SOCIAL_LINKS } from '../info'
 </script>
 
-<footer class="mt-4 text-lg text-center w-full">
+<footer
+	class="mt-4 text-lg text-center w-full flex flex-col align-middle justify-center items-center content-center"
+>
 	<p
 		class="text-sm"
 		aria-label="© 2017 - {new Date().getFullYear()}, All right reserved {AUTHORNAME}"
