@@ -1,8 +1,8 @@
 <script lang="ts">
 	import Random from '$lib/icon/Random.svelte'
-	import { AUTHORNAME, MENULINK } from '$lib/info'
-	import { setHTMLAttribute, setTheme } from '$lib/utlis'
-
+	import { AUTHORNAME,MENULINK } from '$lib/info'
+	import { setHTMLAttribute,setTheme } from '$lib/utlis'
+			
 	const selectRandomTheme = (): void => {
 		let randomNumber = Math.floor(Math.random() * 29) + 1
 
@@ -76,7 +76,7 @@
 						</abbr>
 					</a>
 				{:else}
-					<a href={link} aria-label={title}>{title} </a>
+					<a sveltekit:prefetch href={link} aria-label={title}>{title} </a>
 				{/if}
 			</div>
 		{/each}
