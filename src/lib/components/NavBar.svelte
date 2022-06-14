@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Random from '$lib/icon/Random.svelte'
 	import { AUTHORNAME, MENULINK } from '$lib/info'
+	import { setHTMLAttribute, setTheme } from '$lib/utlis'
 
 	const selectRandomTheme = (): void => {
 		let randomNumber = Math.floor(Math.random() * 29) + 1
@@ -41,11 +42,11 @@
 		const theme = localStorage.getItem('theme')
 		if (theme != undefined && theme != '') {
 			if (localStorage.getItem('theme') && localStorage.getItem('theme') != '') {
-				document.documentElement.setAttribute('data-theme', theme)
+				setHTMLAttribute(theme)
 			}
 		}
-		document.documentElement.setAttribute('data-theme', themes(randomNumber)?.toString()!)
-		localStorage.setItem('theme', document.documentElement.getAttribute('data-theme')!)
+
+		setTheme(themes(randomNumber)?.toString()!)
 	}
 </script>
 

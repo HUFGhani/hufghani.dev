@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { setHTMLAttribute, setTheme } from '$lib/utlis'
 	import '../app.css'
 	import Footer from '../lib/components/Footer.svelte'
 	import NavBar from '../lib/components/NavBar.svelte'
@@ -7,11 +8,10 @@
 		const theme = localStorage.getItem('theme')
 		if (theme != undefined && theme != '') {
 			if (localStorage.getItem('theme') && localStorage.getItem('theme') != '') {
-				document.documentElement.setAttribute('data-theme', theme)
+				setHTMLAttribute(theme)
 			}
 		} else {
-			document.documentElement.setAttribute('data-theme', 'light')
-			localStorage.setItem('theme', 'light')
+			setTheme('light')
 		}
 	}
 </script>

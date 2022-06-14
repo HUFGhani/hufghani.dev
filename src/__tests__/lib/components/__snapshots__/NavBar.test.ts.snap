@@ -22,7 +22,7 @@ exports[`<Header/> with feature flag on should render Header 1`] = `
         class="flex flex-row md:pl-10 space-x-4 items-center justify-center text-base text-center"
       >
         <div
-          class="rounded-md p-2 text-center hover:bg-slate-100"
+          class="rounded-md p-2 text-center hover:bg-accent"
         >
           <a
             aria-label="About me"
@@ -32,7 +32,7 @@ exports[`<Header/> with feature flag on should render Header 1`] = `
           </a>
         </div>
         <div
-          class="rounded-md p-2 text-center hover:bg-slate-100"
+          class="rounded-md p-2 text-center hover:bg-accent"
         >
           <a
             aria-label="Project"
@@ -42,7 +42,7 @@ exports[`<Header/> with feature flag on should render Header 1`] = `
           </a>
         </div>
         <div
-          class="rounded-md p-2 text-center hover:bg-slate-100"
+          class="rounded-md p-2 text-center hover:bg-accent"
         >
           <a
             aria-label="Blog"
@@ -52,7 +52,7 @@ exports[`<Header/> with feature flag on should render Header 1`] = `
           </a>
         </div>
         <div
-          class="rounded-md p-2 text-center hover:bg-slate-100"
+          class="rounded-md p-2 text-center hover:bg-accent"
         >
           <a
             aria-label="CV"
@@ -70,10 +70,11 @@ exports[`<Header/> with feature flag on should render Header 1`] = `
          
         <button
           aria-label="random theme selector"
-          class="rounded-md p-2 text-center hover:bg-slate-100"
+          class="rounded-md p-2 text-center hover:bg-accent"
         >
           <svg
             class="w-6 h-6"
+            fill="currentColor"
             viewBox="0 0 512 512"
             xmlns="http://www.w3.org/2000/svg"
           >
