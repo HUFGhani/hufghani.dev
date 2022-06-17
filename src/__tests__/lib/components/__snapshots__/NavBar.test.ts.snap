@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Header/> with feature flag on should render Header 1`] = `
+exports[`NavBar/> should render NavBar 1`] = `
 <body>
   <div>
     <div
