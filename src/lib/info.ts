@@ -2,6 +2,8 @@ export const WEBSITE = 'hufghani.dev'
 
 export const AUTHORNAME = 'Hamza U. F. Ghani'
 
+export const SHROTAUTHORNAME = `Hamza Ghani`
+
 export const SOCIAL_LINKS: {
 	id: number
 	title: string
@@ -59,3 +61,7 @@ export const MENULINK: {
 		fullTitle: 'Curriculum Vitae',
 	},
 ]
+
+export const META_DATA = {
+	twitter: '@the_ghani',
+}

@@ -60,7 +60,7 @@
 >
 	<div>
 		<a href="/">
-			<h1 class="logo font-normal text-4xl">
+			<h1 class="logo font-normal text-2xl">
 				{AUTHORNAME}
 			</h1>
 		</a>

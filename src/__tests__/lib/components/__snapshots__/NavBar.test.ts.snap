@@ -11,7 +11,7 @@ exports[`<Header/> with feature flag on should render Header 1`] = `
           href="/"
         >
           <h1
-            class="logo font-normal text-4xl svelte-3g66w"
+            class="logo font-normal text-2xl svelte-3g66w"
           >
             Hamza U. F. Ghani
           </h1>
@@ -27,6 +27,7 @@ exports[`<Header/> with feature flag on should render Header 1`] = `
           <a
             aria-label="About me"
             href="aboutMe"
+            sveltekit:prefetch=""
           >
             About me
           </a>
@@ -37,6 +38,7 @@ exports[`<Header/> with feature flag on should render Header 1`] = `
           <a
             aria-label="Project"
             href="project"
+            sveltekit:prefetch=""
           >
             Project
           </a>
@@ -47,6 +49,7 @@ exports[`<Header/> with feature flag on should render Header 1`] = `
           <a
             aria-label="Blog"
             href="blog"
+            sveltekit:prefetch=""
           >
             Blog
           </a>

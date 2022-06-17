@@ -4,7 +4,7 @@ exports[`<Footer/> should render Footer 1`] = `
 <body>
   <div>
     <footer
-      class="mt-4 text-lg text-center w-full"
+      class="mt-4 text-lg text-center w-full flex flex-col align-middle justify-center items-center content-center"
     >
       <p
         aria-label="© 2017 - 2022, All right reserved Hamza U. F. Ghani"
