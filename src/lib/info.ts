@@ -39,11 +39,6 @@ export const MENULINK: {
 	fullTitle?: string
 }[] = [
 	{
-		title: 'About me',
-		link: 'aboutMe',
-		isExternal: false,
-	},
-	{
 		title: 'Project',
 		link: 'project',
 		isExternal: false,

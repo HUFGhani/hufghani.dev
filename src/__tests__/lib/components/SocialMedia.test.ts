@@ -1,4 +1,4 @@
-import { render } from "@testing-library/svelte";
+import { render } from '@testing-library/svelte'
 import SocialMedia from '$lib/components/SocialMedia.svelte'
 
 describe(`<SocialMedia/>`, () => {
