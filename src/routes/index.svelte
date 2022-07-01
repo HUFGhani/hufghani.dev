@@ -6,6 +6,7 @@
 	pageTitle={'Hello World'}
 	pageDescription={"My own little space on the internet, where I write about what I've learned from my day job."}
 />
+
 <div class="flex flex-col md:flex-col lg:flex-row xl:flex-row justify-evenly w-full px-5">
 	<div class="flex flex-col text-left justify-start items-start lg:pr-52">
 		<h1 class="text-8xl font-bold">Hi, I'm Hamza.</h1>
@@ -35,8 +36,7 @@
 			<h1 class="underline underline-offset-8 text-xl">Personally:</h1>
 			<p>
 				Hobby Code; Husband; dad jokes with a dad bod; curious learner; coffee drinker/fanatic;
-				Nintendo fan; Photography; indoor climbing; you can tell I'm a Java developer with all the
-				semicolons 😂
+				Photography; indoor climbing; you can tell I'm a Java developer with all the semicolons 😂
 			</p>
 		</div>
 	</div>
