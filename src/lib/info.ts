@@ -60,3 +60,20 @@ export const MENULINK: {
 export const META_DATA = {
 	twitter: '@the_ghani',
 }
+
+export const NON_PROJECT: string[] = [
+	'hacknotts',
+	'anvil hack',
+	'old hufghani dev',
+	'new hufghani dev',
+	'ddclient docker',
+	'HUFGHANI',
+	'code server',
+	'Multiplatform Project iOS and Android',
+	'Bluetooth Computer Lock',
+	'homebrew brewfile',
+	'dotfiles',
+	'dotBash',
+	'Curriculum Vitae',
+	'COMP66090 Masters Project',
+]

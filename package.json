@@ -4,7 +4,7 @@
 	"type": "module",
 	"scripts": {
 		"dev": "svelte-kit dev",
-		"build": "svelte-kit build",
+		"build": "sh ./patch-apollo-client.sh && svelte-kit build",
 		"package": "svelte-kit package",
 		"preview": "svelte-kit preview",
 		"prepare": "svelte-kit sync && husky install",
@@ -22,6 +22,7 @@
 		"@commitlint/cli": "^17.0.2",
 		"@sveltejs/adapter-auto": "1.0.0-next.52",
 		"@sveltejs/kit": "1.0.0-next.354",
+		"@tailwindcss/line-clamp": "^0.4.0",
 		"@tailwindcss/typography": "^0.5.2",
 		"@testing-library/jest-dom": "^5.14.0",
 		"@testing-library/svelte": "^3.0.0",
@@ -62,6 +63,10 @@
 		}
 	},
 	"dependencies": {
-		"daisyui": "^2.17.0"
+		"@apollo/client": "^3.6.9",
+		"daisyui": "^2.18.1",
+		"devicon": "^2.15.1",
+		"graphql": "^16.5.0",
+		"graphql-tag": "^2.12.6"
 	}
 }
