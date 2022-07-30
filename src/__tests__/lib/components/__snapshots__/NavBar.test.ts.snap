@@ -25,17 +25,6 @@ exports[`<NavBar/> should render NavBar 1`] = `
           class="rounded-md p-2 text-center hover:bg-accent"
         >
           <a
-            aria-label="About me"
-            href="aboutMe"
-            sveltekit:prefetch=""
-          >
-            About me
-          </a>
-        </div>
-        <div
-          class="rounded-md p-2 text-center hover:bg-accent"
-        >
-          <a
             aria-label="Project"
             href="project"
             sveltekit:prefetch=""

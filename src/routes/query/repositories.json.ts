@@ -1,7 +1,7 @@
 import { client } from '$lib/utilities/apolloClient'
 import gql from 'graphql-tag'
 
-export const get = async () => {
+export const GET = async () => {
 	try {
 		const query = gql`
 			query githubReop {
