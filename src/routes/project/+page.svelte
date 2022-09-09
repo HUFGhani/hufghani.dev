@@ -1,40 +1,8 @@
-<script lang="ts" context="module">
+<script lang="ts">
 	import Fade from '$lib/components/Fade.svelte'
 	import MetaTags from '$lib/components/Meta-Tags.svelte'
-
-	import { onMount } from 'svelte'
-
-	export async function load({
-		fetch,
-	}: any): Promise<
-		| { props: { data: any }; status?: undefined; error?: undefined }
-		| { status: any; error: Error; props?: undefined }
-	> {
-		const url = '/query/repositories.json'
-		const res = await fetch(url, {
-			method: 'get',
-			credentials: 'same-origin',
-			headers: {
-				'Content-Type': 'application/json',
-				Accept: 'application/json',
-			},
-		})
-		const { data } = await res.json()
-		if (res.ok) {
-			return {
-				props: { data },
-			}
-		}
-		return {
-			status: res.status,
-			error: new Error(`Couldn't load ${url}`),
-		}
-	}
-</script>
-
-<script lang="ts">
 	import { NON_PROJECT } from '$lib/info'
-
+	import { onMount } from 'svelte'
 	export let data
 
 	const { repositories: repoNodes } = data.viewer

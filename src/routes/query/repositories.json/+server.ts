@@ -23,14 +23,9 @@ export const GET = async () => {
 		`
 
 		const { data } = await client.query({ query })
-		return {
-			body: JSON.stringify({ data }),
-		}
+		return new Response(JSON.stringify({ data }))
 	} catch (error) {
 		console.error('Error', error)
-		return {
-			status: 500,
-			error: 'Error receiving data',
-		}
+		return new Response(undefined, { status: 500 })
 	}
 }
