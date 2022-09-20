@@ -1,4 +1,4 @@
-import { adapter } from '@sveltekit-cdk/adapter'
+import { adapter } from '@sltekit-cdk/adapter'
 import preprocess from 'svelte-preprocess'
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -10,9 +10,7 @@ const config = {
 	}),
 
 	kit: {
-		adapter: adapter({
-			cdkProjectPath: '../the-cdk-project',
-		}),
+		adapter: 
 	},
 }
 

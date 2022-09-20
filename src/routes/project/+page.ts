@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { PageLoad } from './$types'
 
-export const ssr = true
+export const prerender = true
 
 export const load: PageLoad = async ({
 	fetch,
