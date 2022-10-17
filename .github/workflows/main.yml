@@ -1,0 +1,54 @@
+on:
+  push:
+    branches:
+      - "master"
+  pull_request:
+    branches:
+      - "master"
+      
+
+jobs:
+  test:
+    name: "Test"
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        version: [12, 14, 16]
+    runs-on: ${{matrix.os}}
+
+    steps:
+      - uses: actions/checkout@master
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@master
+        with:
+           node-version: ${{ matrix.version }}
+      - name: installing dependencies
+        run: npm i
+      - name: run unit test
+        run: npm test
+      - name: Notify success 🎉
+        if: success() && ${{ matrix.version }} == 16
+        uses: appleboy/telegram-action@master
+        with:
+          status: SUCCESS
+          color: good
+          to: "2078069662"
+          token: "2070876717:AAFILoDjv1SUkra6K6eVyLq2Wg4tN-g5Bj0"
+          message: |         
+            Repository: ${{ github.repository }}
+            Test Has Passed 🎉
+      - name: Notify slack fail
+        if: failure() && ${{ matrix.version }} == 16
+        env:
+          SLACK_BOT_TOKEN: xapp-1-A046N9RPBPG-4245699359217-74d7be9e355157cdc2ad82813430c2c04af845fc23dc9f4da3b781231200b443
+        uses: appleboy/telegram-action@master
+        with:
+          status: FAILED
+          color: danger
+          to: "2078069662"
+          token: "2070876717:AAFILoDjv1SUkra6K6eVyLq2Wg4tN-g5Bj0"
+          message: |         
+            Repository: ${{ github.repository }}
+            Test Has failed 💥
+
+          
