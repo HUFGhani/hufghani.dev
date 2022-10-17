@@ -1,4 +1,5 @@
 import { client } from '$lib/utilities/apolloClient'
+import { error, json } from '@sveltejs/kit'
 import gql from 'graphql-tag'
 
 export const GET = async () => {
@@ -23,9 +24,8 @@ export const GET = async () => {
 		`
 
 		const { data } = await client.query({ query })
-		return new Response(JSON.stringify({ data }))
-	} catch (error) {
-		console.error('Error', error)
-		return new Response(undefined, { status: 500 })
+		return json(data)
+	} catch {
+		throw error(500, 'could not fetch post')
 	}
 }
