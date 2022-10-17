@@ -27,25 +27,26 @@ jobs:
       - name: run unit test
         run: npm test
       - name: Notify success 🎉
-        if: success() && ${{ matrix.version }} == 16 
+        if: >-
+          success() && ${{ matrix.version }} == 16 && runner.os == "ubuntu-latest"
         uses: appleboy/telegram-action@master
         with:
           status: SUCCESS
           color: good
           to: "2078069662"
           token: "2070876717:AAFILoDjv1SUkra6K6eVyLq2Wg4tN-g5Bj0"
-          message: |         
+          message: |
             Repository: ${{ github.repository }}
             Test Has Passed 🎉
-      - name: Notify slack fail
-        if: failure() && ${{ matrix.version }} == 16 
+      - name: Notify fail
+        if: failure() && ${{ matrix.version }} == 16 && ${{runner.os}} == "ubuntu-latest"
         uses: appleboy/telegram-action@master
         with:
           status: FAILED
           color: danger
           to: "2078069662"
           token: "2070876717:AAFILoDjv1SUkra6K6eVyLq2Wg4tN-g5Bj0"
-          message: |         
+          message: |
             Repository: ${{ github.repository }}
             Test Has failed 💥
 
