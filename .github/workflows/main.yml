@@ -29,6 +29,9 @@ jobs:
       - name: installing website dependencies
         run: npm i
       - name: build website
+        env:
+          VITE_GRAPHQL_ENDPOINT: ${{ secrets.VITE_GRAPHQL_ENDPOINT }}
+          VITE_GITHUB_PERSONAL_ACCESS_TOKEN: ${{ secrets.VITE_GITHUB_PERSONAL_ACCESS_TOKEN }}
         run: npm run build
       - name: installing infrastructure dependencies
         working-directory: ./infrastructure
