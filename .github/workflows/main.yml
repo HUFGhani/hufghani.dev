@@ -14,7 +14,7 @@ jobs:
       - uses: actions/checkout@master
       - name: installing dependencies
         run: npm i
-      - name: run unit test
+      - name: running unit test
         run: npm test
 
   deploy:
