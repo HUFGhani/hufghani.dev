@@ -1,4 +1,3 @@
-import { adapter } from '@sltekit-cdk/adapter'
 import preprocess from 'svelte-preprocess'
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -9,9 +8,7 @@ const config = {
 		postcss: true,
 	}),
 
-	kit: {
-		adapter: 
-	},
+	kit: {},
 }
 
 export default config
