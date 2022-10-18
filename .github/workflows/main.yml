@@ -2,11 +2,7 @@ on:
   push:
     branches:
       - "master"
-  pull_request:
-    branches:
-      - "master"
       
-
 jobs:
   website-test:
     name: "unit Test"
