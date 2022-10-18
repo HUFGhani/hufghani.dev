@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 import { adapter } from '@sveltekit-cdk/adapter'
->>>>>>> 23eecb2 (:sparkles: feat(custom): add cdk to project)
 import preprocess from 'svelte-preprocess'
 
 /** @type {import('@sveltejs/kit').Config} */

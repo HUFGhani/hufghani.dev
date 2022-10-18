@@ -54,7 +54,9 @@
 							{#if !NON_PROJECT.includes(cleanProjetTitle(repo.name))}
 								<tr class="hover">
 									<td class="whitespace-pre-line">
-										<a href={repo.url} target="_blank">{cleanProjetTitle(repo.name)}</a>
+										<a href={repo.url} target="_blank" rel="noreferrer"
+											>{cleanProjetTitle(repo.name)}</a
+										>
 									</td>
 									<td class="w-9/12 whitespace-pre-line"
 										>{#if repo.description != null}

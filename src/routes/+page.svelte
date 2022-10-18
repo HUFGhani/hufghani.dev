@@ -26,18 +26,22 @@
 			<div>
 				<h1 class="underline underline-offset-8 text-xl">Professionally:</h1>
 				<p>
-					Software Engineer at <a href="https://Booking.com" target="_blank">Booking.com</a> (But Personally
-					class myself as full-Stack Engineer/Devloper); Attempting to be a amateur tech blog author;
-					Open-Source Contributor.
+					Software Engineer at <a href="https://Booking.com" target="_blank" rel="noreferrer"
+						>Booking.com</a
+					> (But Personally class myself as full-Stack Engineer/Devloper); Attempting to be a amateur
+					tech blog author; Open-Source Contributor.
 				</p>
 			</div>
 			<div>
 				<h1 class="underline underline-offset-8 text-xl">Previously:</h1>
 				<p>
-					Graduate Software Engineer at <a href="https://Booking.com" target="_blank">Booking.com</a
+					Graduate Software Engineer at <a
+						href="https://Booking.com"
+						target="_blank"
+						rel="noreferrer">Booking.com</a
 					>; Inter/ Junior Software Engineer at
-					<a href="https://teamnetsol.com" target="_blank">Team Netsol</a>; Hackathon Director for
-					GreatUniHack and StudentHack.
+					<a href="https://teamnetsol.com" target="_blank" rel="noreferrer">Team Netsol</a>;
+					Hackathon Director for GreatUniHack and StudentHack.
 				</p>
 			</div>
 			<div>

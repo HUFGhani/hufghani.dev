@@ -71,7 +71,7 @@
 		{#each MENULINK as { link, title, isExternal, fullTitle }}
 			<div class="rounded-md p-2 text-center hover:bg-accent">
 				{#if isExternal}
-					<a href={link} aria-label={title} target="_blank">
+					<a href={link} aria-label={title} target="_blank" rel="noreferrer">
 						<abbr title={fullTitle} class="border-none cursor-default no-underline">
 							{title}
 						</abbr>
