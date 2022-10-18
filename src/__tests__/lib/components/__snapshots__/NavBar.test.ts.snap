@@ -26,7 +26,6 @@ exports[`<NavBar/> should render NavBar 1`] = `
         >
           <a
             aria-label="Project"
-            data-sveltekit-prefetch=""
             href="project"
           >
             Project
@@ -37,7 +36,6 @@ exports[`<NavBar/> should render NavBar 1`] = `
         >
           <a
             aria-label="Blog"
-            data-sveltekit-prefetch=""
             href="blog"
           >
             Blog
@@ -48,8 +46,8 @@ exports[`<NavBar/> should render NavBar 1`] = `
         >
           <a
             aria-label="CV"
-            data-sveltekit-prefetch=""
             href="docs/Curriculum-Vitae.pdf"
+            rel="noreferrer"
             target="_blank"
           >
             <abbr

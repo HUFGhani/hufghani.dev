@@ -1,3 +1,4 @@
+import { adapter } from '@sveltekit-cdk/adapter'
 import preprocess from 'svelte-preprocess'
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -7,8 +8,11 @@ const config = {
 	preprocess: preprocess({
 		postcss: true,
 	}),
-
-	kit: {},
+	kit: {
+		adapter: adapter({
+			cdkProjectPath: './infrastructure',
+		}),
+	},
 }
 
 export default config
