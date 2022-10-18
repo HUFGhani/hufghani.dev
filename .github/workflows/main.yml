@@ -57,7 +57,7 @@ jobs:
     needs: deploy
     steps:
       - name: Audit URLs using Lighthouse
-        uses: treosh/lighthouse-ci-action@v8
+        uses: treosh/lighthouse-ci-action@v9
         with:
           configPath: '.github/lighthouse/lighthouserc.json'
           urls: |

@@ -2,7 +2,7 @@
 	"ci": {
 		"collect": {
 			"settings": {
-				"configPath": ".github/lighthouse/desktop-config.js"
+				"configPath": ".github/lighthouse/desktop-config.cjs"
 			}
 		}
 	}
