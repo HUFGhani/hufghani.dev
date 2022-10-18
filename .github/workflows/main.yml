@@ -43,10 +43,13 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
-      - name: deploying website and infrastructure
-        working-directory: ./infrastructure
-        run: |
-          npm run cdk bootstrap
-          npm run cdk synth
-          npm run cdk deploy
+      # - name: deploying website and infrastructure
+      #   working-directory: ./infrastructure
+      #   run: |
+      #     npm run cdk bootstrap
+      #     npm run cdk synth
+      #     npm run cdk deploy
+      - name: Clear CloudFront Cache
+        run : aws cloudfront create-invalidation --distribution-id EHX5CHTZM9LDH --paths "/*"
+
           
