@@ -1,7 +1,8 @@
 <script lang="ts">
 	import Random from '$lib/icon/Random.svelte'
-	import { AUTHORNAME, MENULINK } from '$lib/info'
+	import { MENULINK } from '$lib/info'
 	import { setHTMLAttribute, setTheme } from '$lib/utlis'
+	import Logo from './Logo.svelte'
 
 	const selectRandomTheme = (): void => {
 		let randomNumber = Math.floor(Math.random() * 29) + 1
@@ -61,9 +62,7 @@
 >
 	<div>
 		<a href="/">
-			<h1 class="logo font-normal text-4xl">
-				{AUTHORNAME}
-			</h1>
+			<Logo />
 		</a>
 	</div>
 
@@ -90,12 +89,3 @@
 		</button>
 	</div>
 </div>
-
-<style>
-	.logo {
-		font-family: Dr Sugiyama, cursive;
-		background-image: linear-gradient(60deg, #7928ca, #ffb03a);
-		background-clip: text;
-		color: transparent;
-	}
-</style>
