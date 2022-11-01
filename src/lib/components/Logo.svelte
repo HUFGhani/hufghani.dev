@@ -5,6 +5,7 @@
 	fill="none"
 	xmlns="http://www.w3.org/2000/svg"
 	class="font-normal text-4xl"
+	aria-label="Hamza U. F. Ghani"
 >
 	<g id="Signature">
 		<g id="Vector">

@@ -60,7 +60,7 @@
 	bg-transparent pb-4	
 	 align-middle"
 >
-	<div>
+	<div class="mb-4 lg:mb-0 xl:mb-0">
 		<a href="/">
 			<Logo />
 		</a>
@@ -70,13 +70,13 @@
 		{#each MENULINK as { link, title, isExternal, fullTitle }}
 			<div class="rounded-md p-2 text-center hover:bg-accent">
 				{#if isExternal}
-					<a href={link} aria-label={title} target="_blank" rel="noreferrer">
+					<a href={link} aria-label={title} target="_blank" rel="noreferrer" class="w-12 h-12 ">
 						<abbr title={fullTitle} class="border-none cursor-default no-underline">
 							{title}
 						</abbr>
 					</a>
 				{:else}
-					<a href={link} aria-label={title}>{title} </a>
+					<a class="w-12 h-12" href={link} aria-label={title}>{title} </a>
 				{/if}
 			</div>
 		{/each}
