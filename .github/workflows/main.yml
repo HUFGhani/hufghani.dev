@@ -58,7 +58,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: curl health endpoint
         run: |
-        curl -X GET https://hufghani.dev
+          curl -X GET https://hufghani.dev
       - name: Audit URLs using Lighthouse
         uses: treosh/lighthouse-ci-action@v8
         with:
