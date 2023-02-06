@@ -32,9 +32,7 @@ export class InfrastructureStack extends Stack {
 		const staticPath = join(DEFAULT_ARTIFACT_PATH, PrefixPath.static)
 		const prerenderedPath = join(DEFAULT_ARTIFACT_PATH, PrefixPath.prerendered)
 		const routesPath = join(DEFAULT_ARTIFACT_PATH, 'routes.json')
-		const headersPath = join(DEFAULT_ARTIFACT_PATH, 'headers.json')
 		const routes: StaticRoutes = JSON.parse(readFileSync(routesPath, { encoding: 'utf8' }))
-		const headers: string[] = JSON.parse(readFileSync(headersPath, { encoding: 'utf8' }))
 		const envUtils = new EnvUtil({})
 
 		const s3Bucket = new aws_s3.Bucket(this, 'StaticBucket', {})
@@ -52,10 +50,6 @@ export class InfrastructureStack extends Stack {
 			'dynamicRequestPolicy',
 			{
 				cookieBehavior: aws_cloudfront.OriginRequestCookieBehavior.all(),
-				headerBehavior: aws_cloudfront.OriginRequestHeaderBehavior.allowList(
-					...headers,
-					'CloudFront-Viewer-Address'
-				),
 				queryStringBehavior: aws_cloudfront.OriginRequestQueryStringBehavior.all(),
 			}
 		)
