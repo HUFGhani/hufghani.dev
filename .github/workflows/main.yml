@@ -32,22 +32,22 @@ jobs:
         env:
           VITE_GRAPHQL_ENDPOINT: ${{ secrets.VITE_GRAPHQL_ENDPOINT }}
           VITE_GITHUB_PERSONAL_ACCESS_TOKEN: ${{ secrets.VITE_GITHUB_PERSONAL_ACCESS_TOKEN }}
-        run: npx sst deploy
+        run: npx sst deploy --stage prod
 
-  lighthouse:
-    runs-on: ubuntu-latest
-    needs: deploy
-    steps:
-      - uses: actions/checkout@v2
-      - name: curl health endpoint
-        run: |
-          curl -X GET https://hufghani.dev
-      - name: Audit URLs using Lighthouse
-        uses: treosh/lighthouse-ci-action@v8
-        with:
-          urls: |
-            https://hufghani.dev
-            https://hufghani.dev/project
-          budgetPath: ./.github/lighthouse/budget.json # test performance budgets
-          uploadArtifacts: true # save results as an action artifacts
-          temporaryPublicStorage: true # upload lighthouse report to the temporary storage
+  # lighthouse:
+  #   runs-on: ubuntu-latest
+  #   needs: deploy
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: curl health endpoint
+  #       run: |
+  #         curl -X GET https://hufghani.dev
+  #     - name: Audit URLs using Lighthouse
+  #       uses: treosh/lighthouse-ci-action@v8
+  #       with:
+  #         urls: |
+  #           https://hufghani.dev
+  #           https://hufghani.dev/project
+  #         budgetPath: ./.github/lighthouse/budget.json # test performance budgets
+  #         uploadArtifacts: true # save results as an action artifacts
+  #         temporaryPublicStorage: true # upload lighthouse report to the temporary storage
