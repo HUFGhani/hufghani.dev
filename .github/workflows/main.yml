@@ -49,5 +49,7 @@ jobs:
     needs: deploy
     steps:
       - uses: actions/setup-node@v3
+      - name: Install Dependencies
+        run: npm install -g @unlighthouse/cli puppeteer
       - name: Unlighthouse assertions and client
         run: unlighthouse-ci --site https://hufghani.dev --budget 95 --build-static --reporter jsonExpanded
