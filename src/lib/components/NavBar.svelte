@@ -1,12 +1,12 @@
 <script lang="ts">
 	import Random from '$lib/icon/Random.svelte'
 	import { MENULINK } from '$lib/info'
-	import { setHTMLAttribute, setTheme } from '$lib/utlis'
+	import { getTheme, setHTMLAttribute, setTheme } from '$lib/utlis'
 	import Logo from './Logo.svelte'
 
 	const selectRandomTheme = (): void => {
 		let randomNumber = Math.floor(Math.random() * 29) + 1
-
+		console.log('randomNumber', randomNumber)
 		const themes = (themeId: number) =>
 			({
 				1: 'light',
@@ -40,9 +40,9 @@
 				29: 'winter',
 			}[themeId])
 
-		const theme = localStorage.getItem('theme')
+		const theme = getTheme()
 		if (theme != undefined && theme != '') {
-			if (localStorage.getItem('theme') && localStorage.getItem('theme') != '') {
+			if (localStorage.getItem('theme') && getTheme() != '') {
 				setHTMLAttribute(theme)
 			}
 		}
@@ -52,12 +52,12 @@
 </script>
 
 <div
-	class="flex items-center 
-	sm:flex-col md:flex-row lg:flex-row xl:flex-row 
-	justify-center lg:justify-between xl:justify-between 
-	flex-wrap w-full 
-	sm:px-4 md:px-4 lg:px-8 xl:px-8 
-	bg-transparent pb-4	
+	class="flex items-center
+	sm:flex-col md:flex-row lg:flex-row xl:flex-row
+	justify-center lg:justify-between xl:justify-between
+	flex-wrap w-full
+	sm:px-4 md:px-4 lg:px-8 xl:px-8
+	bg-transparent pb-4
 	 align-middle"
 >
 	<div class="mb-4 lg:mb-0 xl:mb-0">
@@ -70,7 +70,7 @@
 		{#each MENULINK as { link, title, isExternal, fullTitle }}
 			<div class="rounded-md p-2 text-center hover:bg-accent">
 				{#if isExternal}
-					<a href={link} aria-label={title} target="_blank" rel="noreferrer" class="w-12 h-12 ">
+					<a href={link} aria-label={title} target="_blank" rel="noreferrer" class="w-12 h-12">
 						<abbr title={fullTitle} class="border-none cursor-default no-underline">
 							{title}
 						</abbr>

@@ -12,6 +12,7 @@
 
 <Fade {visible}>
 	<footer
+		data-testid="footer"
 		class="mt-4 text-lg text-center w-full flex flex-col align-middle justify-center items-center content-center"
 	>
 		<p

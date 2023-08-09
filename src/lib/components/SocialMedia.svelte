@@ -7,7 +7,7 @@
 </script>
 
 <div class="items-center flex flex-row justify-center pt-4 pb-4">
-	{#each SOCIAL_LINKS as { id, title, link }}
+	{#each SOCIAL_LINKS as { title, link }}
 		<div class="mr-2">
 			<a
 				href={link}
