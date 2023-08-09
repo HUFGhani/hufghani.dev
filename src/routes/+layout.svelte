@@ -1,5 +1,8 @@
 <script lang="ts">
+	import { preloadCode } from '$app/navigation'
+	import { prefersReducedData } from '$lib/utilities/prefersReducedData'
 	import { setHTMLAttribute, setTheme } from '$lib/utlis'
+	import { onMount } from 'svelte'
 	import '../app.css'
 	import Footer from '../lib/components/Footer.svelte'
 	import NavBar from '../lib/components/NavBar.svelte'
@@ -14,6 +17,11 @@
 			setTheme('light')
 		}
 	}
+	onMount(() => {
+		if (!prefersReducedData()) {
+			preloadCode('/', '/blog', '/project')
+		}
+	})
 </script>
 
 <div
