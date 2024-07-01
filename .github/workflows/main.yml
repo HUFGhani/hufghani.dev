@@ -17,9 +17,9 @@ jobs:
           node-version: 18
           cache: "npm"
       - name: installing dependencies
-        run: npm i --force
-      # - name: running unit test
-      #   run: npm test
+        run: npm i 
+      - name: running unit test
+        run: npm test
 
   deploy:
     env:
@@ -34,7 +34,7 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: installing website dependencies
-        run: npm i --force
+        run: npm i 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:

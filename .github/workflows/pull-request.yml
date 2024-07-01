@@ -13,6 +13,6 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: installing dependencies
-        run: npm i --force
-      # - name: running unit test
-      #   run: npm test
+        run: npm i
+      - name: running unit test
+        run: npm test
