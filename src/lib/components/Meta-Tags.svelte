@@ -1,9 +1,21 @@
 <script lang="ts">
-	import { AUTHORNAME, META_DATA, WEBSITE } from '$lib/info'
-
+	import { AUTHORNAME, WEBSITE } from '$lib/info'
 	import { MetaTags } from 'svelte-meta-tags'
+
+
+ 	type ogTypes = "article" | "website"
+	interface ogArticle {
+		publishedTime: string,
+		modifiedTime?: string,
+		section: string,
+		tags: [string],
+	}
+
 	export let pageTitle: string
-	export let pageDescription: any
+	export let pageDescription: string
+	export let ogType: ogTypes
+	export let OpenGraphArticle: ogArticle | undefined = undefined
+
 </script>
 
 <MetaTags
@@ -17,29 +29,19 @@
 		description: pageDescription,
 		// images: [
 		// 	{
-		// 		url: 'https://www.example.ie/og-image-01.jpg',
-		// 		width: 800,
-		// 		height: 600,
-		// 		alt: 'Og Image Alt',
-		// 	},
-		// 	{
 		// 		url: 'https://www.example.ie/og-image-02.jpg',
 		// 		width: 900,
 		// 		height: 800,
 		// 		alt: 'Og Image Alt Second',
 		// 	},
-		// 	{ url: 'https://www.example.ie/og-image-03.jpg' },
-		// 	{ url: 'https://www.example.ie/og-image-04.jpg' },
 		// ],
-		site_name: `https://${WEBSITE}/`,
+		locale:"en-gb",
+		siteName: `https://${WEBSITE}/`,
+		type: ogType,
+		article:{
+			...OpenGraphArticle,
+			authors: [AUTHORNAME],
+		}
 	}}
-	twitter={{
-		handle: META_DATA.twitter,
-		site: `https://${WEBSITE}/`,
-		cardType: 'summary_large_image',
-		title: `${pageTitle} - ${AUTHORNAME}`,
-		description: pageDescription,
-		// image: 'https://www.example.ie/twitter-image.jpg',
-		// imageAlt: 'Twitter image alt',
-	}}
+	
 />

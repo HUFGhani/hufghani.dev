@@ -13,7 +13,7 @@
 <MetaTags
 	pageTitle={'Hello World'}
 	pageDescription={"My own little space on the internet, where I write about what I've learned from my day job."}
-/>
+	ogType="website"/>
 <Fade {visible}>
 	<div class="flex flex-col md:flex-col lg:flex-row xl:flex-row justify-evenly w-full px-5">
 		<div class="flex flex-col text-left justify-start items-start lg:pr-52">
