@@ -64,6 +64,8 @@
 		"daisyui": "^4.12.10",
 		"devicon": "^2.16.0",
 		"graphql": "^16.9.0",
-		"graphql-tag": "^2.12.6"
+		"graphql-tag": "^2.12.6",
+		"jimp": "^0.22.12",
+		"sharp": "^0.33.4"
 	}
 }

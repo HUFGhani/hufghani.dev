@@ -27,14 +27,14 @@
 		url: ` https://${WEBSITE}/`,
 		title: `${pageTitle} - ${AUTHORNAME}`,
 		description: pageDescription,
-		// images: [
-		// 	{
-		// 		url: 'https://www.example.ie/og-image-02.jpg',
-		// 		width: 900,
-		// 		height: 800,
-		// 		alt: 'Og Image Alt Second',
-		// 	},
-		// ],
+		images: [
+			{
+				url: 'http://localhost:5173/og?title=hello world',
+				width: 900,
+				height: 800,
+				alt: 'Og Image Alt Second',
+			},
+		],
 		locale:"en-gb",
 		siteName: `https://${WEBSITE}/`,
 		type: ogType,
