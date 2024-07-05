@@ -1,7 +1,7 @@
 import { Certificate } from 'aws-cdk-lib/aws-certificatemanager'
 import * as route53 from 'aws-cdk-lib/aws-route53'
 import * as ssm from 'aws-cdk-lib/aws-ssm'
-import { StackContext, SvelteKitSite } from 'sst/constructs'
+import { StackContext, SvelteKitSite,Bucket } from 'sst/constructs'
 
 export function Website({ stack }: StackContext): void {
 	const domainName = 'hufghani.dev'
@@ -29,4 +29,13 @@ export function Website({ stack }: StackContext): void {
 	stack.addOutputs({
 		URL: site.customDomainUrl,
 	})
+
+	const bucket = new Bucket(stack,"hufghani-open-graph-image-bucket",{
+		cdk:{
+			bucket:{
+				bucketName:"hufghani.dev-open-graph-image-bucket"
+			}
+		}
+	})
+
 }
