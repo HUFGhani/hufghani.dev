@@ -70,7 +70,7 @@
 	 align-middle"
 >
 	<div class="mb-4 lg:mb-0 xl:mb-0">
-		<a href={setLogolink()}>
+		<a href={setLogolink()}  aria-label="Go to Homepage">
 			<Logo />
 		</a>
 	</div>
