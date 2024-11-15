@@ -49,6 +49,15 @@
 
 		setTheme(themes(randomNumber)?.toString()!)
 	}
+
+	const setLogolink = (): string =>{
+		if (process.env.NODE_ENV != 'development'){
+			return "https://hufghani.dev/"
+		}
+
+		return "http://localhost:5173"
+	}
+	
 </script>
 
 <div
@@ -61,7 +70,7 @@
 	 align-middle"
 >
 	<div class="mb-4 lg:mb-0 xl:mb-0">
-		<a href="/">
+		<a href={setLogolink()}>
 			<Logo />
 		</a>
 	</div>

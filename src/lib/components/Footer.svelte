@@ -17,7 +17,6 @@
 	>
 		<p
 			class="text-sm"
-			aria-label="© 2017 - {new Date().getFullYear()}, All right reserved {AUTHORNAME}"
 			data-testid="copyRight-year"
 		>
 			© 2017 - {new Date().getFullYear()}, All right reserved {AUTHORNAME}
