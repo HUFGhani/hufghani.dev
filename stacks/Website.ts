@@ -30,12 +30,12 @@ export function Website({ stack }: StackContext): void {
 		URL: site.customDomainUrl,
 	})
 
-	const bucket = new Bucket(stack,"hufghani-open-graph-image-bucket",{
-		cdk:{
-			bucket:{
-				bucketName:"hufghani.dev-open-graph-image-bucket"
-			}
-		}
-	})
+	// const bucket = new Bucket(stack,"hufghani-open-graph-image-bucket",{
+	// 	cdk:{
+	// 		bucket:{
+	// 			bucketName:"hufghani.dev-open-graph-image-bucket"
+	// 		}
+	// 	}
+	// })
 
 }
