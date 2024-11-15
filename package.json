@@ -11,7 +11,7 @@
 		"check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
 		"format": "prettier --write --plugin-search-dir=. .",
 		"cm": "cz",
-		"sst:deploy": "sst deploy --stage hamzaumarfarooqghani",
+		"sst:deploy": "sst deploy --stage production",
 		"sst:dev": "sst dev",
 		"test": "vitest run --coverage"
 	},
