@@ -77,7 +77,7 @@
 
 	<div class="flex flex-row md:pl-10 space-x-4 items-center justify-center text-base text-center">
 		{#each MENULINK as { link, title, isExternal, fullTitle }}
-			<div class="rounded-md p-2 text-center hover:bg-accent">
+			<div data-sveltekit-preload-data="hover" class="rounded-md p-2 text-center hover:bg-accent">
 				{#if isExternal}
 					<a href={link} aria-label={title} target="_blank" rel="noreferrer" class="w-12 h-12">
 						<abbr title={fullTitle} class="border-none cursor-default no-underline">
