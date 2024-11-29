@@ -9,7 +9,6 @@ const config = {
 	}),
 	kit: {
 		adapter: adapter({
-			skipBootstrap: true,
 			name: "hufghani-personal-website",
 			architecture: 'edge-unbundled',
 			runtime: 'NODE_18',
