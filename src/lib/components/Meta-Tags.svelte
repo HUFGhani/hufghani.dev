@@ -24,12 +24,12 @@
 	description={pageDescription}
 	canonical="https://{WEBSITE}/"
 	openGraph={{
-		url: ` https://${WEBSITE}/`,
+		url: `https://${WEBSITE}?title=${encodeURIComponent(pageTitle)}`,
 		title: `${pageTitle} - ${AUTHORNAME}`,
 		description: pageDescription,
 		images: [
 			{
-				url: 'http://localhost:5173/og?title=hello world',
+				url: `https://${WEBSITE}?title=${encodeURIComponent(pageTitle)}`,
 				width: 900,
 				height: 800,
 				alt: 'Og Image Alt Second',
