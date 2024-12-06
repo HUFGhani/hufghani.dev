@@ -29,7 +29,7 @@
 		description: pageDescription,
 		images: [
 			{
-				url: `https://${WEBSITE}?title=${encodeURIComponent(pageTitle)}`,
+				url: `https://og.${WEBSITE}?title=${encodeURIComponent(pageTitle)}`,
 				width: 900,
 				height: 800,
 				alt: 'Og Image Alt Second',
