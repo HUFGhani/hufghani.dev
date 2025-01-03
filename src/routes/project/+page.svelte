@@ -35,7 +35,6 @@
 	ogType='website'
 	pageTitle='Project'
 	pageDescription='The list of Project that I have worked on or working on'
-	
 />
 
 <Fade {visible}>

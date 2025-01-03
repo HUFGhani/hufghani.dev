@@ -24,15 +24,15 @@
 	description={pageDescription}
 	canonical="https://{WEBSITE}/"
 	openGraph={{
-		url: `https://${WEBSITE}?title=${encodeURIComponent(pageTitle)}`,
+		url: `https://${WEBSITE}?title=${encodeURIComponent(pageTitle)}&description=${encodeURIComponent(pageDescription)}`,
 		title: `${pageTitle} - ${AUTHORNAME}`,
 		description: pageDescription,
 		images: [
 			{
-				url: `https://og.${WEBSITE}?title=${encodeURIComponent(pageTitle)}`,
+				url: `https://og.${WEBSITE}?title=${encodeURIComponent(pageTitle)}&description=${encodeURIComponent(pageDescription)}`,
 				width: 900,
 				height: 800,
-				alt: 'Og Image Alt Second',
+				alt: `Og Image Alt - ${pageDescription}`,
 			},
 		],
 		locale:"en-gb",
