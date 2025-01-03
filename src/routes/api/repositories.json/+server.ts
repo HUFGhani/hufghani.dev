@@ -24,7 +24,6 @@ export const GET = async () => {
 		`
 
 		const { data } = await client.query({ query })
-		console.log(data)
 		return json(data)
 	} catch {
 		throw error(500, 'could not fetch post')

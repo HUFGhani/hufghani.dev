@@ -6,7 +6,6 @@
 
 	const selectRandomTheme = (): void => {
 		let randomNumber = Math.floor(Math.random() * 29) + 1
-		console.log('randomNumber', randomNumber)
 		const themes = (themeId: number) =>
 			({
 				1: 'light',

@@ -2,7 +2,6 @@
 	import Github from '$lib/icon/Github.svelte'
 	import Instagram from '$lib/icon/Instagram.svelte'
 	import Linkedin from '$lib/icon/Linkedin.svelte'
-	import Twitter from '$lib/icon/Twitter.svelte'
 	import { SOCIAL_LINKS } from '$lib/info'
 </script>
 
@@ -20,8 +19,6 @@
 					<Github cssClasses="w-7 h-7" />
 				{:else if title === 'Linkedin'}
 					<Linkedin cssClasses="w-7 h-7" />
-				{:else if title === 'Twitter'}
-					<Twitter cssClasses="w-7 h-7" />
 				{:else}
 					<Instagram cssClasses="w-7 h-7" />
 				{/if}

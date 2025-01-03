@@ -21,11 +21,6 @@ export const SOCIAL_LINKS: {
 	},
 	{
 		id: 3,
-		title: `Twitter`,
-		link: `https://twitter.com/the_ghani`,
-	},
-	{
-		id: 4,
 		title: `Instagram`,
 		link: `https://www.instagram.com/the.ghani/`,
 	},
