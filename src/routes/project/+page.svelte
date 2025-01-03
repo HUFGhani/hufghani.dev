@@ -20,20 +20,22 @@
 
 	const languageIcon = (programmingLanguage: String): string => {
 		if (programmingLanguage.toUpperCase() === 'Shell'.toUpperCase()) {
-			return `<img class="block m-auto w-7 h-7" src="img/devIcons/bash/bash-original.svg" alt="bash" title="bash" loading="lazy">`
+			return `<img class="block m-auto w-7 h-7" src="img/devIcons/bash/bash-original.svg" alt="bash" title="bash" loading="lazy" rel="preload">`
 		} else if (programmingLanguage.toUpperCase() === 'Objective-C'.toUpperCase()) {
-			return `<img class="block m-auto w-7 h-7" src="img/devIcons/objectivec/objectivec-plain.svg" alt="Objective C" title="Objective C" loading="lazy">`
+			return `<img class="block m-auto w-7 h-7" src="img/devIcons/objectivec/objectivec-plain.svg" alt="Objective C" title="Objective C" loading="lazy" rel="preload">`
 		} else if (programmingLanguage.toUpperCase() === 'tex'.toUpperCase()) {
-			return `<img class="block m-auto w-7 h-7" src="img/devIcons/latex/latex-original.svg" alt="latex" loading="lazy" title="latex">`
+			return `<img class="block m-auto w-7 h-7" src="img/devIcons/latex/latex-original.svg" alt="latex" loading="lazy" title="latex" rel="preload">`
 		} else {
-			return `<img class="block m-auto w-7 h-7" src="img/devIcons/${programmingLanguage.toLowerCase()}/${programmingLanguage.toLowerCase()}-original.svg" alt="${programmingLanguage}" title="${programmingLanguage}" loading="lazy">`
+			return `<img class="block m-auto w-7 h-7" src="img/devIcons/${programmingLanguage.toLowerCase()}/${programmingLanguage.toLowerCase()}-original.svg" alt="${programmingLanguage}" title="${programmingLanguage}" loading="lazy" rel="preload">`
 		}
 	}
 </script>
 
 <MetaTags
-	pageTitle={'Project'}
-	pageDescription={'The list of Project that I have worked on or working on'}
+	ogType='website'
+	pageTitle='Project'
+	pageDescription='The list of Project that I have worked on or working on'
+	
 />
 
 <Fade {visible}>
