@@ -7,6 +7,8 @@
 	import Footer from '../lib/components/Footer.svelte'
 	import NavBar from '../lib/components/NavBar.svelte'
 
+	const loadPaths: string[] = ['/', '/blog', '/project']
+
 	if (typeof window !== 'undefined') {
 		const theme = localStorage.getItem('theme')
 		if (theme != undefined && theme != '') {
@@ -19,7 +21,9 @@
 	}
 	onMount(() => {
 		if (!prefersReducedData()) {
-			preloadCode('/', '/blog', '/project')
+			loadPaths.map(path =>{
+				preloadCode(path)
+			})	
 		}
 	})
 </script>

@@ -11,7 +11,6 @@ describe(`<SocialMedia/>`, () => {
 		test.each([
 			{ socialMedia: 'Github', expected: 'https://github.com/HUFGhani' },
 			{ socialMedia: 'Linkedin', expected: 'https://www.linkedin.com/in/hamza-u-f-ghani/' },
-			{ socialMedia: 'Twitter', expected: 'https://twitter.com/the_ghani' },
 			{ socialMedia: 'Instagram', expected: 'https://www.instagram.com/the.ghani/' },
 		])(`should render the $socialMedia icon with url $expected `, ({ socialMedia, expected }) => {
 			const { getByLabelText } = render(SocialMedia)
@@ -21,7 +20,6 @@ describe(`<SocialMedia/>`, () => {
 		test.each([
 			{ socialMedia: 'Github', expected: 'Github' },
 			{ socialMedia: 'Linkedin', expected: 'Linkedin' },
-			{ socialMedia: 'Twitter', expected: 'Twitter' },
 			{ socialMedia: 'Instagram', expected: 'Instagram' },
 		])(
 			`should render the $socialMedia icon with $socialMedia aria-label`,
