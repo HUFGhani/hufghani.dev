@@ -12,7 +12,7 @@ const config = {
 			skipBootstrap: true,
 			name: "hufghani-personal-website",
 			architecture: 'edge-unbundled',
-			runtime: 'NODE_18',
+			runtime: 'NODE_LATEST',
 			cdn: true,
 			domain:{
 				fqdn: "hufghani.dev",
