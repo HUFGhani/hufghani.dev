@@ -12,7 +12,7 @@ jobs:
     runs-on: ${{matrix.os}}
     steps:
       - uses: actions/checkout@master
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@latest
         with:
           node-version: 22
           cache: 'npm'
@@ -36,7 +36,7 @@ jobs:
       - name: installing website dependencies
         run: npm i
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: aws-actions/configure-aws-credentials@latest
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -48,7 +48,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: deploy
     steps:
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@latest
       - name: Install Dependencies
         run: npm install -g @unlighthouse/cli puppeteer
       - name: Unlighthouse assertions and client
