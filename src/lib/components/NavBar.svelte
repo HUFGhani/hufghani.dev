@@ -1,11 +1,11 @@
 <script lang="ts">
-	import Random from '$lib/icon/Random.svelte'
-	import { MENULINK } from '$lib/info'
-	import { getTheme, setHTMLAttribute, setTheme } from '$lib/utlis'
-	import Logo from './Logo.svelte'
+	import { MENULINK } from '$lib/info';
+	import { getTheme, setHTMLAttribute, setTheme } from '$lib/utlis';
+	import Random from '../icon/Random.svelte';
+	import Logo from './Logo.svelte';
 
 	const selectRandomTheme = (): void => {
-		let randomNumber = Math.floor(Math.random() * 29) + 1
+		let randomNumber = Math.floor(Math.random() * 29) + 1;
 		const themes = (themeId: number) =>
 			({
 				1: 'light',
@@ -36,51 +36,51 @@
 				26: 'lemonade',
 				27: 'night',
 				28: 'coffee',
-				29: 'winter',
-			}[themeId])
+				29: 'winter'
+			})[themeId];
 
-		const theme = getTheme()
+		const theme = getTheme();
 		if (theme != undefined && theme != '') {
 			if (localStorage.getItem('theme') && getTheme() != '') {
-				setHTMLAttribute(theme)
+				setHTMLAttribute(theme);
 			}
 		}
 
-		setTheme(themes(randomNumber)?.toString()!)
-	}
+		setTheme(themes(randomNumber)?.toString()!);
+	};
 </script>
 
 <div
-	class="flex items-center
-	sm:flex-col md:flex-row lg:flex-row xl:flex-row
-	justify-center lg:justify-between xl:justify-between
-	flex-wrap w-full
-	sm:px-4 md:px-4 lg:px-8 xl:px-8
-	bg-transparent pb-4
-	 align-middle"
+	class="flex w-full
+	flex-wrap items-center justify-center bg-transparent
+	pb-4 align-middle sm:flex-col
+	sm:px-4 md:flex-row
+	md:px-4 lg:flex-row lg:justify-between lg:px-8
+	xl:flex-row xl:justify-between
+	 xl:px-8"
 >
 	<div class="mb-4 lg:mb-0 xl:mb-0">
-		<a href="/"  aria-label="Go to Homepage">
+		<a href="/" aria-label="Go to Homepage">
 			<Logo />
 		</a>
 	</div>
 
-	<div class="flex flex-row md:pl-10 space-x-4 items-center justify-center text-base text-center">
+	<div class="flex flex-row items-center justify-center space-x-4 text-center text-base md:pl-10">
 		{#each MENULINK as { link, title, isExternal, fullTitle }}
-			<div data-sveltekit-preload-data="hover" class="rounded-md p-2 text-center hover:bg-accent">
+			<div data-sveltekit-preload-data="hover" class="hover:bg-accent rounded-md p-2 text-center">
 				{#if isExternal}
-					<a href={link} aria-label={title} target="_blank" rel="noreferrer" class="w-12 h-12">
-						<abbr title={fullTitle} class="border-none cursor-default no-underline">
+					<a href={link} aria-label={title} target="_blank" rel="noreferrer" class="h-12 w-12">
+						<abbr title={fullTitle} class="cursor-default border-none no-underline">
 							{title}
 						</abbr>
 					</a>
 				{:else}
-					<a class="w-12 h-12" href={link} aria-label={title}>{title} </a>
+					<a class="h-12 w-12" href={link} aria-label={title}>{title} </a>
 				{/if}
 			</div>
 		{/each}
 		<button
-			class="rounded-md p-2 text-center hover:bg-accent"
+			class="hover:bg-accent rounded-md p-2 text-center"
 			aria-label="random theme selector"
 			on:click={selectRandomTheme}
 		>

@@ -1,27 +1,24 @@
 <script lang="ts">
-	import { onMount } from 'svelte'
-	import { AUTHORNAME } from '../info'
-	import Fade from './Fade.svelte'
-	import SocialMedia from './SocialMedia.svelte'
-	let visible = false
+	import { onMount } from 'svelte';
+	import { AUTHORNAME } from '../info';
+	import Fade from './Fade.svelte';
+	import SocialMedia from './SocialMedia.svelte';
+	let visible = $state(false);
 
 	onMount(() => {
-		visible = true
-	})
+		visible = true;
+	});
 </script>
 
 <Fade {visible}>
 	<footer
 		data-testid="footer"
-		class="mt-4 text-lg text-center w-full flex flex-col align-middle justify-center items-center content-center"
+		class="mt-4 flex w-full flex-col content-center items-center justify-center text-center align-middle text-lg"
 	>
-		<p
-			class="text-sm"
-			data-testid="copyRight-year"
-		>
+		<p class="text-sm" data-testid="copyRight-year">
 			© 2017 - {new Date().getFullYear()}, All right reserved {AUTHORNAME}
 		</p>
 		<SocialMedia />
-		<p class="text-sm pb-4">Built with SvelteKit · Hosted on S3 and distributed by CloudFront</p>
+		<p class="pb-4 text-sm">Built with SvelteKit · Hosted on S3 and distributed by CloudFront</p>
 	</footer>
 </Fade>

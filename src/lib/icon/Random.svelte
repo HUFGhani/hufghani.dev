@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let cssClasses: string | undefined
+	export let cssClasses: string | undefined;
 </script>
 
 <svg

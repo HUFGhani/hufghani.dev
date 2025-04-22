@@ -1,30 +1,31 @@
 <script lang="ts">
-	import Fade from '$lib/components/Fade.svelte'
-	import MetaTags from '$lib/components/Meta-Tags.svelte'
-	import { onMount } from 'svelte'
+	import Fade from '$lib/components/Fade.svelte';
+	import MetaTags from '$lib/components/Meta-Tags.svelte';
+	import { onMount } from 'svelte';
 
-	let visible = false
+	let visible = $state(false);
 
 	onMount(() => {
-		visible = true
-	})
+		visible = true;
+	});
 </script>
 
 <MetaTags
 	pageTitle={'Hello World'}
 	pageDescription={"My own little space on the internet, where I write about what I've learned from my day job."}
-	ogType="website"/>
+	ogType="website"
+/>
 <Fade {visible}>
-	<div class="flex flex-col md:flex-col lg:flex-row xl:flex-row justify-evenly w-full px-5">
-		<div class="flex flex-col text-left justify-start items-start lg:pr-52">
+	<div class="flex w-full flex-col justify-evenly px-5 md:flex-col lg:flex-row xl:flex-row">
+		<div class="flex flex-col items-start justify-start text-left lg:pr-52">
 			<h1 class="text-8xl font-bold">Hi, I'm Hamza;</h1>
-			<p class="pt-4 break-words lg:w-10/12 text-xl pb-5">
+			<p class="pt-4 pb-5 text-xl break-words lg:w-10/12">
 				A Father, Husband, Brother, Son and Software Engineer from Manchester, United Kingdom.
 			</p>
 		</div>
-		<div class="flex flex-col break-words lg:w-6/12 gap-10 text-lg prose">
+		<div class="prose flex flex-col gap-10 text-lg break-words lg:w-6/12">
 			<div>
-				<h1 class="underline underline-offset-8 text-xl">Professionally:</h1>
+				<h1 class="text-xl underline underline-offset-8">Professionally:</h1>
 				<p>
 					Software Engineer at <a href="https://Booking.com" target="_blank" rel="noreferrer"
 						>Booking.com</a
@@ -33,7 +34,7 @@
 				</p>
 			</div>
 			<div>
-				<h1 class="underline underline-offset-8 text-xl">Previously:</h1>
+				<h1 class="text-xl underline underline-offset-8">Previously:</h1>
 				<p>
 					Graduate Software Engineer at <a
 						href="https://Booking.com"
@@ -45,7 +46,7 @@
 				</p>
 			</div>
 			<div>
-				<h1 class="underline underline-offset-8 text-xl">Personally:</h1>
+				<h1 class="text-xl underline underline-offset-8">Personally:</h1>
 				<p>
 					Hobby Code; Husband; dad jokes with a dad bod; curious learner; coffee drinker/fanatic;
 					Photography; indoor climbing; you can tell I'm a Java developer with all the semicolons 😂
