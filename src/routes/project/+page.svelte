@@ -1,47 +1,49 @@
 <script lang="ts">
-	import Fade from '$lib/components/Fade.svelte'
-	import MetaTags from '$lib/components/Meta-Tags.svelte'
-	import { NON_PROJECT } from '$lib/info'
-	import { onMount } from 'svelte'
-	export let data
+	import Fade from '$lib/components/Fade.svelte';
+	import MetaTags from '$lib/components/Meta-Tags.svelte';
+	import { NON_PROJECT } from '$lib/info';
+	import { onMount } from 'svelte';
+	import type { PageData } from './$types';
 
-	const { repositories: repoNodes } = data.viewer
-	const { nodes: repos } = repoNodes
+	let { data }: { data: PageData } = $props();
 
-	let visible = false
+	const { repositories: repoNodes } = data.viewer;
+	const { nodes: repos } = repoNodes;
+
+	let visible = $state(false);
 
 	onMount(() => {
-		visible = true
-	})
+		visible = true;
+	});
 
 	const cleanProjetTitle = (title: string) => {
-		return title !== 'api.hufghani.dev' ? title.replace(/_|-|\./g, ' ') : title
-	}
+		return title !== 'api.hufghani.dev' ? title.replace(/_|-|\./g, ' ') : title;
+	};
 
 	const languageIcon = (programmingLanguage: String): string => {
 		if (programmingLanguage.toUpperCase() === 'Shell'.toUpperCase()) {
-			return `<img class="block m-auto w-7 h-7" src="img/devIcons/bash/bash-original.svg" alt="bash" title="bash" loading="lazy" rel="preload">`
+			return `<img class="block m-auto w-7 h-7" src="img/devIcons/bash/bash-original.svg" alt="bash" title="bash" loading="lazy" rel="preload">`;
 		} else if (programmingLanguage.toUpperCase() === 'Objective-C'.toUpperCase()) {
-			return `<img class="block m-auto w-7 h-7" src="img/devIcons/objectivec/objectivec-plain.svg" alt="Objective C" title="Objective C" loading="lazy" rel="preload">`
+			return `<img class="block m-auto w-7 h-7" src="img/devIcons/objectivec/objectivec-plain.svg" alt="Objective C" title="Objective C" loading="lazy" rel="preload">`;
 		} else if (programmingLanguage.toUpperCase() === 'tex'.toUpperCase()) {
-			return `<img class="block m-auto w-7 h-7" src="img/devIcons/latex/latex-original.svg" alt="latex" loading="lazy" title="latex" rel="preload">`
+			return `<img class="block m-auto w-7 h-7" src="img/devIcons/latex/latex-original.svg" alt="latex" loading="lazy" title="latex" rel="preload">`;
 		} else {
-			return `<img class="block m-auto w-7 h-7" src="img/devIcons/${programmingLanguage.toLowerCase()}/${programmingLanguage.toLowerCase()}-original.svg" alt="${programmingLanguage}" title="${programmingLanguage}" loading="lazy" rel="preload">`
+			return `<img class="block m-auto w-7 h-7" src="img/devIcons/${programmingLanguage.toLowerCase()}/${programmingLanguage.toLowerCase()}-original.svg" alt="${programmingLanguage}" title="${programmingLanguage}" loading="lazy" rel="preload">`;
 		}
-	}
+	};
 </script>
 
 <MetaTags
-	ogType='website'
-	pageTitle='Project'
-	pageDescription='The list of Project that I have worked on or working on'
+	ogType="website"
+	pageTitle="Project"
+	pageDescription="The list of Project that I have worked on or working on"
 />
 
 <Fade {visible}>
-	<div class="flex flex-col justify-left w-full px-5">
+	<div class="justify-left flex w-full flex-col px-5">
 		<h1 class="text-3xl font-bold">Project</h1>
 		<div class="pt-8 lg:px-10">
-			<table class="table table-fixed w-full text-center">
+			<table class="table w-full table-fixed text-center">
 				<thead>
 					<tr>
 						<th>Projects</th>
@@ -64,7 +66,7 @@
 											{repo.description}
 										{/if}
 									</td>
-									<td class="align-middle text-center">
+									<td class="text-center align-middle">
 										{#if repo.primaryLanguage != null || repo.primaryLanguage != undefined}
 											{@html languageIcon(repo.primaryLanguage['name'])}
 										{/if}

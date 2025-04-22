@@ -1,11 +1,11 @@
 <script lang="ts">
-	import Github from '$lib/icon/Github.svelte'
-	import Instagram from '$lib/icon/Instagram.svelte'
-	import Linkedin from '$lib/icon/Linkedin.svelte'
-	import { SOCIAL_LINKS } from '$lib/info'
+	import Github from '../icon/Github.svelte';
+	import Instagram from '../icon/Instagram.svelte';
+	import Linkedin from '../icon/Linkedin.svelte';
+	import { SOCIAL_LINKS } from '$lib/info';
 </script>
 
-<div class="items-center flex flex-row justify-center pt-4 pb-4">
+<div class="flex flex-row items-center justify-center pt-4 pb-4">
 	{#each SOCIAL_LINKS as { title, link }}
 		<div class="mr-2">
 			<a

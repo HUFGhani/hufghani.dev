@@ -1,21 +1,19 @@
 <script lang="ts">
-	import { AUTHORNAME, WEBSITE } from '$lib/info'
-	import { MetaTags } from 'svelte-meta-tags'
+	import { AUTHORNAME, WEBSITE } from '$lib/info';
+	import { MetaTags } from 'svelte-meta-tags';
 
-
- 	type ogTypes = "article" | "website"
+	type ogTypes = 'article' | 'website';
 	interface ogArticle {
-		publishedTime: string,
-		modifiedTime?: string,
-		section: string,
-		tags: [string],
+		publishedTime: string;
+		modifiedTime?: string;
+		section: string;
+		tags: [string];
 	}
 
-	export let pageTitle: string
-	export let pageDescription: string
-	export let ogType: ogTypes
-	export let OpenGraphArticle: ogArticle | undefined = undefined
-
+	export let pageTitle: string;
+	export let pageDescription: string;
+	export let ogType: ogTypes;
+	export let OpenGraphArticle: ogArticle | undefined = undefined;
 </script>
 
 <MetaTags
@@ -32,16 +30,15 @@
 				url: `https://og.${WEBSITE}?title=${encodeURIComponent(pageTitle)}&description=${encodeURIComponent(pageDescription)}`,
 				width: 900,
 				height: 800,
-				alt: `Og Image Alt - ${pageDescription}`,
-			},
+				alt: `Og Image Alt - ${pageDescription}`
+			}
 		],
-		locale:"en-gb",
+		locale: 'en-gb',
 		siteName: `https://${WEBSITE}/`,
 		type: ogType,
-		article:{
+		article: {
 			...OpenGraphArticle,
-			authors: [AUTHORNAME],
+			authors: [AUTHORNAME]
 		}
 	}}
-	
 />

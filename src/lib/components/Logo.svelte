@@ -4,7 +4,7 @@
 	viewBox="0 0 234.867 41"
 	fill="none"
 	xmlns="http://www.w3.org/2000/svg"
-	class="font-normal text-4xl"
+	class="text-4xl font-normal"
 	aria-label="Hamza U. F. Ghani"
 >
 	<g id="Signature">

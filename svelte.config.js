@@ -1,25 +1,25 @@
-import adapter from '@jill64/sveltekit-adapter-aws'
-import { sveltePreprocess } from 'svelte-preprocess'
+import adapter from '@jill64/sveltekit-adapter-aws';
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
+import { mdsvex } from 'mdsvex';
 
-/** @type {import('@sveltejs/kit').Config} */
 const config = {
-
-	preprocess: sveltePreprocess({
-		postcss: true,
-	}),
+	preprocess: [vitePreprocess(), mdsvex()],
 	kit: {
 		adapter: adapter({
-			skipBootstrap: true,
-			name: "hufghani-personal-website",
-			architecture: 'edge-unbundled',
+			skipBootstrap: false,
+			name: 'hufghani-personal-website',
+			architecture: 'edge-bundled',
 			runtime: 'NODE_LATEST',
 			cdn: true,
-			domain:{
-				fqdn: "hufghani.dev",
-				certificateArn: "arn:aws:acm:us-east-1:078423179649:certificate/47bc68da-40cf-461a-afbc-ba12d8464087"
+			memory:256,
+			domain: {
+				fqdn: 'hufghani.dev',
+				certificateArn:
+					'arn:aws:acm:us-east-1:078423179649:certificate/47bc68da-40cf-461a-afbc-ba12d8464087'
 			}
-		}),
+		})
 	},
-}
+	extensions: ['.svelte', '.svx']
+};
 
-export default config
+export default config;

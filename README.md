@@ -1,41 +1,86 @@
-# create-svelte
+# new.hufghani.dev
 
-Everything you need to build a Svelte project, powered by
-[`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+This repository contains the source code for a SvelteKit-based project. It is designed to be a modern, scalable, and maintainable web application.
 
-## Creating a project
+## Features
 
-If you're seeing this, you've probably already done this step. Congrats!
+- **SvelteKit**: A powerful framework for building web applications.
+- **GraphQL**: Integrated GraphQL support using `graphql`, `graphql-request`, and `graphql-tag`.
+- **UI Components**: Styled with `daisyui` for a consistent and responsive design.
+- **Meta Management**: Uses `svelte-meta-tags` for SEO and meta tag management.
+- **AWS Deployment**: Configured with `@jill64/sveltekit-adapter-aws` for seamless deployment to AWS.
+- **Development Tools**: Includes `eslint`, `prettier`, and `tailwindcss` plugins for linting and formatting.
 
-```bash
-# create a new project in the current directory
-npm init svelte
+## Prerequisites
 
-# create a new project in my-app
-npm init svelte my-app
-```
+Ensure you have the following installed:
 
-## Developing
+- Node.js (v16 or later)
+- npm (v8 or later)
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or
-`yarn`), start a development server:
+## Getting Started
 
-```bash
-npm run dev
+1. Clone the repository:
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+   ```bash
+   git clone https://github.com/your-username/new.hufghani.dev.git
+   cd new.hufghani.dev
+   ```
 
-## Building
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   `bash
+    npm run dev
+    `
+   The application will be available at http://localhost:5173.
 
-To create a production version of your app:
+## Building for Production
 
-```bash
+To create a production build:
+``bash
 npm run build
+
+````
+Preview the production build locally:
+
+## Testing
+
+This project uses vitest and playwright for testing.
+Run unit tests:
+```bash
+npm run test:unit
+````
+
+Run end-to-end tests:
+
+```bash
+npm run test:unit
 ```
 
-You can preview the production build with `npm run preview`.
+Run all tests:
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for
-> your target environment.
+```bash
+npm run test:unit
+```
+
+## Linting and Formatting
+
+Check for linting errors:
+
+Format the codebase:
+
+## Deployment
+
+The project is deployed to AWS using @jill64/sveltekit-adapter-aws. Deployment configurations can be found in svelte.config.js.
+
+## License
+
+This project is licensed under the MIT License. See the LICENSE file for details.
+
+## Acknowledgments
+
+Built with ❤️ using SvelteKit.
+Hosted on AWS S3 and distributed via CloudFront.
