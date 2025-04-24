@@ -9,8 +9,9 @@ const config = {
 			skipBootstrap: false,
 			name: 'hufghani-personal-website',
 			architecture: 'edge-bundled',
-			runtime: 'NODE_20',
+			runtime: 'NODE_LATEST',
 			cdn: true,
+			memory:256,
 			domain: {
 				fqdn: 'hufghani.dev',
 				certificateArn:
