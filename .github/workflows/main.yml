@@ -40,7 +40,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
       - name: deploying website and infrastructure
-        run: npm run build && cd ./build && npx cdk deploy --require-approval never
+        run: npm run build && npm run postbuild && cd ./build && npx cdk deploy --require-approval never
 
   unlighthouse:
     runs-on: ubuntu-latest
