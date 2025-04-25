@@ -1,3 +1,4 @@
+export const prerender = true;
 import { GET_USER_REPOS } from '$lib/queries';
 import type { RequestHandler } from './$types';
 
