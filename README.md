@@ -33,8 +33,8 @@ Ensure you have the following installed:
    ```
 3. Start the development server:
    `bash
- npm run dev
- `
+npm run dev
+`
    The application will be available at http://localhost:5173.
 
 ## Building for Production
