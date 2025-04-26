@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { MENULINK } from '$lib/config';
 	import { getTheme, setHTMLAttribute, setTheme } from '$lib/utlis';
-	import Random from '../icon/Random.svelte';
-	import Logo from './Logo.svelte';
+	import Random from '$lib/icon/Random.svelte';
+	import { Logo } from '$lib/components/Logo';
 
 	const selectRandomTheme = (): void => {
 		let randomNumber = Math.floor(Math.random() * 29) + 1;
@@ -59,28 +59,26 @@
 	xl:flex-row xl:justify-between
 	 xl:px-8"
 >
-
 	<div class="mb-4 lg:mb-0 xl:mb-0">
 		<a href="/" aria-label="Go to Homepage">
 			<Logo />
 		</a>
 	</div>
 
-
 	<div class="flex flex-row items-center justify-center space-x-4 text-center text-base md:pl-10">
 		{#each MENULINK as { link, title, isExternal, fullTitle }}
-		{#if title !== "Blog"}
-			<div data-sveltekit-preload-data="hover" class="hover:bg-accent rounded-md p-2 text-center">
-				{#if isExternal}
-					<a href={link} aria-label={title} target="_blank" rel="noreferrer" class="h-12 w-12">
-						<abbr title={fullTitle} class="cursor-default border-none no-underline">
-							{title}
-						</abbr>
-					</a>
-				{:else}
-					<a class="h-12 w-12" href={link} aria-label={title}>{title} </a>
-				{/if}
-			</div>
+			{#if title !== 'Blog'}
+				<div data-sveltekit-preload-data="hover" class="hover:bg-accent rounded-md p-2 text-center">
+					{#if isExternal}
+						<a href={link} aria-label={title} target="_blank" rel="noreferrer" class="h-12 w-12">
+							<abbr title={fullTitle} class="cursor-default border-none no-underline">
+								{title}
+							</abbr>
+						</a>
+					{:else}
+						<a class="h-12 w-12" href={link} aria-label={title}>{title} </a>
+					{/if}
+				</div>
 			{/if}
 		{/each}
 		<button

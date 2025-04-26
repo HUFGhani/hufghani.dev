@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { AUTHORNAME } from '../config';
-	import Fade from './Fade.svelte';
-	import SocialMedia from './SocialMedia.svelte';
+	import { AUTHORNAME } from '$lib/config';
+	import { Fade } from '$lib/components/Fade';
+	import { SocialMedia } from '$lib/components/SocialMedia';
 	let visible = $state(false);
 
 	onMount(() => {

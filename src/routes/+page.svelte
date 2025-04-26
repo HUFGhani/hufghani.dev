@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Fade from '$lib/components/Fade.svelte';
-	import MetaTags from '$lib/components/Meta-Tags.svelte';
+	import { Fade } from '$lib/components/Fade';
+	import { MetaTags } from '$lib/components/MetaTags';
 	import { onMount } from 'svelte';
 
 	let visible = $state(false);

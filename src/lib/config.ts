@@ -73,8 +73,6 @@ export const NON_PROJECT: string[] = [
 	'COMP66090 Masters Project'
 ];
 
-
-
-export const FeatureFlags: Record<string,boolean> = {
-	"navbar": false,
-}
+export const FeatureFlagsList: Record<string, boolean> = {
+	navbar: false
+};

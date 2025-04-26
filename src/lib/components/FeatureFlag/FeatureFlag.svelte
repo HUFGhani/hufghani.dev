@@ -1,15 +1,13 @@
 <script lang="ts">
-    import { FeatureFlags } from "$lib/config";
+	import { FeatureFlagsList } from '$lib/config';
 
-    let {flag, children} = $props();
+	let { flag, children } = $props();
 
-    const IsFeatureFlag =  (flag:string): boolean=>{
-
-        return FeatureFlags[flag] === true
-    }
-
+	const IsFeatureFlag = (flag: string): boolean => {
+		return FeatureFlagsList[flag] === true;
+	};
 </script>
 
 {#if IsFeatureFlag(flag)}
-    {@render children()}
+	{@render children()}
 {/if}

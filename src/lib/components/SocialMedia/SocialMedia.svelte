@@ -1,7 +1,7 @@
 <script lang="ts">
-	import Github from '../icon/Github.svelte';
-	import Instagram from '../icon/Instagram.svelte';
-	import Linkedin from '../icon/Linkedin.svelte';
+	import Github from '$lib/icon/Github.svelte';
+	import Instagram from '$lib/icon/Instagram.svelte';
+	import Linkedin from '$lib/icon/Linkedin.svelte';
 	import { SOCIAL_LINKS } from '$lib/config';
 </script>
 
