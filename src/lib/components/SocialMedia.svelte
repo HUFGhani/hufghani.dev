@@ -2,7 +2,7 @@
 	import Github from '../icon/Github.svelte';
 	import Instagram from '../icon/Instagram.svelte';
 	import Linkedin from '../icon/Linkedin.svelte';
-	import { SOCIAL_LINKS } from '$lib/info';
+	import { SOCIAL_LINKS } from '$lib/config';
 </script>
 
 <div class="flex flex-row items-center justify-center pt-4 pb-4">

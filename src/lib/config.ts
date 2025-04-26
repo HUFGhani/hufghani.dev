@@ -72,3 +72,9 @@ export const NON_PROJECT: string[] = [
 	'Curriculum Vitae',
 	'COMP66090 Masters Project'
 ];
+
+
+
+export const FeatureFlags: Record<string,boolean> = {
+	"navbar": false,
+}

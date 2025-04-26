@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { AUTHORNAME, WEBSITE } from '$lib/info';
+	import { AUTHORNAME, WEBSITE } from '$lib/config';
 	import { MetaTags } from 'svelte-meta-tags';
 
 	type ogTypes = 'article' | 'website';

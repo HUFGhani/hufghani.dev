@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Fade from '$lib/components/Fade.svelte';
 	import MetaTags from '$lib/components/Meta-Tags.svelte';
-	import { NON_PROJECT } from '$lib/info';
+	import { NON_PROJECT } from '$lib/config';
 	import { onMount } from 'svelte';
 	import type { PageData } from './$types';
 
