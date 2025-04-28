@@ -74,5 +74,5 @@ export const NON_PROJECT: string[] = [
 ];
 
 export const FeatureFlagsList: Record<string, boolean> = {
-	navbar: false
+	showLogo: false
 };
