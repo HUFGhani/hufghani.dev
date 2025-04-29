@@ -1,8 +1,8 @@
 import { render } from '@testing-library/svelte';
 import { getContext } from 'svelte';
 import { describe, expect, it, vi } from 'vitest';
-import FeatureFlagsProvider from './FeatureFlagsProvider.svelte';
 import MockChild from '../../mocks/MockChild.svelte';
+import FeatureFlagsProvider from './FeatureFlagsProvider.svelte';
 
 const flags = { featureA: true, featureB: false };
 
@@ -16,7 +16,7 @@ vi.mock('svelte', () => {
 	};
 });
 
-describe('FeatureFlagsProvider', () => {
+describe('<FeatureFlagsProvider/>', () => {
 	it('should provide feature flags via context', () => {
 		mockGetContext.mockReturnValue(flags);
 

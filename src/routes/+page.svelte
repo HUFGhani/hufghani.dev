@@ -25,7 +25,7 @@
 		</div>
 		<div class="prose flex flex-col gap-10 text-lg break-words lg:w-6/12">
 			<div>
-				<h1 class="text-xl underline underline-offset-8">Professionally:</h1>
+				<h2 class="text-xl underline underline-offset-8">Professionally:</h2>
 				<p>
 					Software Engineer at <a href="https://Booking.com" target="_blank" rel="noreferrer"
 						>Booking.com</a
@@ -34,7 +34,7 @@
 				</p>
 			</div>
 			<div>
-				<h1 class="text-xl underline underline-offset-8">Previously:</h1>
+				<h2 class="text-xl underline underline-offset-8">Previously:</h2>
 				<p>
 					Graduate Software Engineer at <a
 						href="https://Booking.com"
@@ -46,7 +46,7 @@
 				</p>
 			</div>
 			<div>
-				<h1 class="text-xl underline underline-offset-8">Personally:</h1>
+				<h2 class="text-xl underline underline-offset-8">Personally:</h2>
 				<p>
 					Hobby Code; Husband; dad jokes with a dad bod; curious learner; coffee drinker/fanatic;
 					Photography; indoor climbing; you can tell I'm a Java developer with all the semicolons 😂
