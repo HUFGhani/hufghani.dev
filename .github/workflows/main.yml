@@ -18,8 +18,8 @@ jobs:
           cache: 'npm'
       - name: installing dependencies
         run: npm ci
-      - name: running unit test
-        run: npm run test:unit
+      - name: running test
+        run: npm run test
 
   deploy:
     env:
