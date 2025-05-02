@@ -1,6 +1,7 @@
 export const setTheme = (theme: string): void => {
 	setHTMLAttribute(theme);
 	setLocalStorageForTheme();
+	setBrowserTheme();
 };
 
 export const getTheme = () => {
@@ -19,4 +20,14 @@ export const setHTMLAttribute = (theme: string): void => {
 
 export const prefersReducedData = (): boolean => {
 	return window.matchMedia(`not all and (prefers-reduced-data), (prefers-reduced-data)`).matches;
+};
+const setBrowserTheme = () => {
+	const themeColor = getComputedStyle(document.documentElement)
+		.getPropertyValue('--color-base-100')
+		.trim();
+	console.log('themeColor', themeColor);
+	const metaTag = document.querySelector('meta[name="theme-color"]');
+	if (metaTag && themeColor) {
+		metaTag.setAttribute('content', themeColor);
+	}
 };

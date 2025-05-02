@@ -4,7 +4,6 @@
 	import { Random } from '$lib/icon';
 	import { getTheme, setHTMLAttribute, setTheme } from '$lib/utlis';
 
-
 	const selectRandomTheme = (): void => {
 		let randomNumber = Math.floor(Math.random() * 29) + 1;
 		const themes = (themeId: number) =>

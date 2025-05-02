@@ -9,5 +9,4 @@ describe('<Logo/>', () => {
 		expect(svgElement).toBeInTheDocument();
 		expect(svgElement).toHaveAttribute('aria-label', 'Hamza U. F. Ghani');
 	});
-
 });
