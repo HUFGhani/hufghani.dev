@@ -5,7 +5,7 @@ import Page from './+page.svelte';
 
 describe('/+page.svelte', () => {
 	test('should render h1', () => {
-		const {getByRole}=render(Page);
+		const { getByRole } = render(Page);
 		expect(getByRole('heading', { level: 1 })).toBeInTheDocument();
 	});
 });

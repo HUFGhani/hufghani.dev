@@ -1,11 +1,9 @@
 <script lang="ts">
 	import { Logo } from '$lib/components/Logo';
 	import { MENULINK } from '$lib/config';
-	import { useFeatureFlags } from '$lib/hooks/useFeatureFlags';
 	import { Random } from '$lib/icon';
 	import { getTheme, setHTMLAttribute, setTheme } from '$lib/utlis';
 
-	const featureFlags = useFeatureFlags();
 
 	const selectRandomTheme = (): void => {
 		let randomNumber = Math.floor(Math.random() * 29) + 1;

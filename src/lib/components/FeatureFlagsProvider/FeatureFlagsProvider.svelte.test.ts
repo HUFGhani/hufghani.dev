@@ -1,5 +1,4 @@
 import { render } from '@testing-library/svelte';
-import { getContext } from 'svelte';
 import { describe, expect, it, vi } from 'vitest';
 import MockChild from '../../mocks/MockChild.svelte';
 import FeatureFlagsProvider from './FeatureFlagsProvider.svelte';
@@ -27,7 +26,7 @@ describe('<FeatureFlagsProvider/>', () => {
 			}
 		});
 
-		expect(getContext('featureFlags')).toMatchObject;
+		expect(mockGetContext('featureFlags')).toMatchObject;
 	});
 
 	it('should render children correctly', () => {
