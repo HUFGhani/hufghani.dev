@@ -14,5 +14,7 @@ jobs:
       - uses: actions/checkout@master
       - name: installing dependencies
         run: npm i
-      - name: running unit test
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+      - name: running test
         run: npm run test
