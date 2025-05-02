@@ -5,6 +5,9 @@ on:
 
 jobs:
   website-test:
+    env:
+      VITE_GRAPHQL_ENDPOINT: ${{ secrets.VITE_GRAPHQL_ENDPOINT }}
+      VITE_GITHUB_PERSONAL_ACCESS_TOKEN: ${{ secrets.VITE_GITHUB_PERSONAL_ACCESS_TOKEN }}
     name: 'unit Test'
     strategy:
       matrix:
