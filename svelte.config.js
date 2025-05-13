@@ -2,8 +2,11 @@ import adapter from '@jill64/sveltekit-adapter-aws';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import { mdsvex } from 'mdsvex';
 
+const mdsvexOptions = {
+	extensions: ['.md'],
+}
 const config = {
-	preprocess: [vitePreprocess(), mdsvex()],
+	preprocess: [vitePreprocess(), mdsvex(mdsvexOptions)],
 	kit: {
 		adapter: adapter({
 			skipBootstrap: false,
@@ -19,7 +22,7 @@ const config = {
 			}
 		})
 	},
-	extensions: ['.svelte', '.svx']
+	extensions: ['.svelte', '.svx','.md'],
 };
 
 export default config;
