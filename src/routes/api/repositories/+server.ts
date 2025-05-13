@@ -1,5 +1,6 @@
 export const prerender = true;
 import { GET_USER_REPOS } from '$lib/queries';
+import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 
 export const GET: RequestHandler = async () => {
@@ -14,15 +15,15 @@ export const GET: RequestHandler = async () => {
 				query: GET_USER_REPOS.loc?.source.body ?? ''
 			})
 		}).then((res) => res.json());
-
-		return new Response(JSON.stringify(data), {
-			headers: { 'Content-Type': 'application/json' }
-		});
+		if (data.length === 0) {
+			throw new Error('No data found');
+		}
+		return json(data, { status: 200, headers: { 'Content-Type': 'application/json' } });
 	} catch (error) {
 		console.error('Error loading repositories:', error);
-		return new Response(JSON.stringify({ error: 'Failed to fetch data' }), {
-			status: 500,
-			headers: { 'Content-Type': 'application/json' }
-		});
+		return json(
+			{ error: 'Failed to fetch data' },
+			{ status: 500, headers: { 'Content-Type': 'application/json' } }
+		);
 	}
 };

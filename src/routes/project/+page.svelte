@@ -20,7 +20,7 @@
 		return title !== 'api.hufghani.dev' ? title.replace(/_|-|\./g, ' ') : title;
 	};
 
-	const languageIcon = (programmingLanguage: String): string => {
+	const languageIcon = (programmingLanguage: string): string => {
 		if (programmingLanguage.toUpperCase() === 'Shell'.toUpperCase()) {
 			return `<img class="block m-auto w-7 h-7" src="img/devIcons/bash/bash-original.svg" alt="bash" title="bash" loading="lazy" rel="preload">`;
 		} else if (programmingLanguage.toUpperCase() === 'Objective-C'.toUpperCase()) {

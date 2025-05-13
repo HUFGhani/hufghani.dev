@@ -11,8 +11,8 @@
 </script>
 
 <MetaTags
-	pageTitle={'Hello World'}
-	pageDescription={"My own little space on the internet, where I write about what I've learned from my day job."}
+	pageTitle="Hello World"
+	pageDescription="My own little space on the internet, where I write about what I've learned from my day job."
 	ogType="website"
 />
 <Fade {visible}>

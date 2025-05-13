@@ -6,7 +6,7 @@ categories:
   - sveltekit
   - svelte
 published: true
-slug: Hello World 
+slug: Hello World
 ---
 
 ## Markdown
@@ -15,6 +15,6 @@ Hey friends! 👋
 
 ```ts
 function greet(name: string) {
-	console.log(`Hey ${name}! 👋`)
+	console.log(`Hey ${name}! 👋`);
 }
 ```
