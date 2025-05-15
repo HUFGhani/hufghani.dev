@@ -1,5 +1,5 @@
 export const prerender = true;
-import { type RequestHandler } from '@sveltejs/kit';
+import { json, type RequestHandler } from '@sveltejs/kit';
 
 interface PostMetadata {
 	title: string;
@@ -13,7 +13,7 @@ export const GET: RequestHandler = async () => {
 	try {
 		let posts: PostMetadata[] = [];
 
-		const paths = import.meta.glob('/src/posts/*.md', { eager: true }).m;
+		const paths = import.meta.glob('/src/posts/*.md', { eager: true }) as Record<string, unknown>;
 
 		for (const path in paths) {
 			const file = paths[path];
@@ -29,15 +29,18 @@ export const GET: RequestHandler = async () => {
 		posts = posts.sort(
 			(first, second) => new Date(second.date).getTime() - new Date(first.date).getTime()
 		);
-
-		return new Response(JSON.stringify(posts), {
+		if (posts.length === 0) {
+			throw new Error('No data found');
+		}
+		return json(posts, {
+			status: 200,
 			headers: { 'Content-Type': 'application/json' }
 		});
+
 	} catch (error) {
 		console.error('Error loading blog post list:', error);
-		return new Response(JSON.stringify({ error: 'Failed to fetch data' }), {
-			status: 500,
-			headers: { 'Content-Type': 'application/json' }
-		});
+		return json(
+			{ error: 'Failed to fetch data' },
+			{ status: 500, headers: { 'Content-Type': 'application/json' } })
 	}
 };
