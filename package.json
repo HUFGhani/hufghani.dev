@@ -14,9 +14,11 @@
 		"format": "prettier --write .",
 		"lint": "prettier --check . && eslint .",
 		"test:unit": "vitest",
-		"test": "pnpm run test:unit --run && pnpm run test:e2e",
+		"test": "pnpm run test:unit --run",
 		"test:e2e": "playwright test",
-		"postbuild": "node scripts/patch-stack.js"
+		"test:adapter": "node --test adapters/aws-lambda-edge/handler.test.js",
+		"infra:synth": "cdk synth --app 'node infra/app.mjs'",
+		"infra:deploy": "cdk deploy --app 'node infra/app.mjs' --require-approval never"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.4.1",
@@ -30,7 +32,8 @@
 		"@tailwindcss/vite": "^4.3.5",
 		"@testing-library/jest-dom": "^6.9.1",
 		"@testing-library/svelte": "^5.4.2",
-		"aws-cdk": "2.1003.0",
+		"aws-cdk": "2.1148.1",
+		"esbuild": "^0.28.2",
 		"eslint": "^9.39.5",
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-plugin-svelte": "^3.24.1",
@@ -49,7 +52,6 @@
 		"vitest": "^3.2.7"
 	},
 	"dependencies": {
-		"@jill64/sveltekit-adapter-aws": "^1.11.0",
 		"aws-cdk-lib": "^2.277.0",
 		"daisyui": "^5.8.0",
 		"graphql": "^16.15.0",

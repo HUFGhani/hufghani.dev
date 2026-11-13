@@ -26,6 +26,8 @@ jobs:
         run: pnpm exec playwright install --with-deps
       - name: running test
         run: pnpm run test
+      - name: building and testing Lambda@Edge adapter
+        run: pnpm run build && pnpm run test:adapter
       - name: Upload test report
         if: always()
         uses: actions/upload-artifact@v4.6.2

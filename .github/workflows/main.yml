@@ -26,6 +26,8 @@ jobs:
         run: pnpm exec playwright install --with-deps
       - name: running unit test
         run: pnpm run test
+      - name: building and testing Lambda@Edge adapter
+        run: pnpm run build && pnpm run test:adapter
       - name: Upload test report
         if: always()
         uses: actions/upload-artifact@v4.6.2
@@ -58,7 +60,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
       - name: deploying website and infrastructure
-        run: pnpm run build && pnpm run postbuild && cd ./build && ../node_modules/.bin/cdk deploy --require-approval never
+        run: pnpm run build && pnpm run infra:deploy
 
   unlighthouse:
     runs-on: ubuntu-latest

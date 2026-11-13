@@ -8,7 +8,7 @@ This repository contains the source code for a SvelteKit-based project. It is de
 - **GraphQL**: Integrated GraphQL support using `graphql`, `graphql-request`, and `graphql-tag`.
 - **UI Components**: Styled with `daisyui` for a consistent and responsive design.
 - **Meta Management**: Uses `svelte-meta-tags` for SEO and meta tag management.
-- **AWS Deployment**: Configured with `@jill64/sveltekit-adapter-aws` for seamless deployment to AWS.
+- **AWS Deployment**: The SvelteKit adapter builds Lambda@Edge and static assets; AWS infrastructure is defined in `infra/` with CDK.
 - **Development Tools**: Includes `eslint`, `prettier`, and `tailwindcss` plugins for linting and formatting.
 
 ## Prerequisites
@@ -74,7 +74,17 @@ Format the codebase:
 
 ## Deployment
 
-The project is deployed to AWS using @jill64/sveltekit-adapter-aws. Deployment configurations can be found in svelte.config.js.
+Build and deploy the app with:
+
+```bash
+pnpm run build
+pnpm run infra:deploy
+```
+
+The CDK application and CloudFront/Lambda@Edge/S3 resources are maintained in
+[`infra/`](./infra/). The repository-owned Lambda@Edge adapter is in
+[`adapters/aws-lambda-edge/`](./adapters/aws-lambda-edge/), and is selected in
+[`svelte.config.js`](./svelte.config.js).
 
 ## License
 
