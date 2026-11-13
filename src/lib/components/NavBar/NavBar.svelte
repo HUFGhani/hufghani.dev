@@ -13,10 +13,7 @@
 				href={`/${link}`}
 				aria-label={fullTitle ?? title}
 				class="transition-colors duration-200 hover:text-white"
-				{#if isExternal}
-					target="_blank"
-					rel="noreferrer"
-				{/if}
+				{...(isExternal ? { target: '_blank', rel: 'noreferrer' } : {})}
 			>
 				{title}
 			</a>
