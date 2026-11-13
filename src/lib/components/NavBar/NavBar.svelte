@@ -10,10 +10,13 @@
 	<nav aria-label="Main navigation" class="flex items-center gap-5 text-sm text-zinc-400 sm:gap-8">
 		{#each MENULINK as { link, title, isExternal, fullTitle }}
 			<a
-				href={isExternal ? `/${link}` : `/${link}`}
+				href={`/${link}`}
 				aria-label={fullTitle ?? title}
 				class="transition-colors duration-200 hover:text-white"
-				{...(isExternal ? { target: '_blank', rel: 'noreferrer' } : {})}
+				{#if isExternal}
+					target="_blank"
+					rel="noreferrer"
+				{/if}
 			>
 				{title}
 			</a>
