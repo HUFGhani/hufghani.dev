@@ -1,24 +1,19 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { AUTHORNAME } from '$lib/config';
-	import { Fade } from '$lib/components/Fade';
-	import { SocialMedia } from '$lib/components/SocialMedia';
-	let visible = $state(false);
-
-	onMount(() => {
-		visible = true;
-	});
+	import { AUTHORNAME, SOCIAL_LINKS } from '$lib/config';
 </script>
 
-<Fade {visible}>
-	<footer
-		data-testid="footer"
-		class="mt-4 flex w-full flex-col content-center items-center justify-center text-center align-middle text-lg"
-	>
-		<p class="text-sm" data-testid="copyRight-year">
-			© 2017 - {new Date().getFullYear()}, All right reserved {AUTHORNAME}
-		</p>
-		<SocialMedia />
-		<p class="pb-4 text-sm">Built with SvelteKit · Hosted on S3 and distributed by CloudFront</p>
-	</footer>
-</Fade>
+<footer data-testid="footer" class="flex flex-col gap-5 border-t border-white/10 py-8 text-sm text-zinc-500 sm:flex-row sm:items-center sm:justify-between">
+	<p data-testid="copyRight-year">© 2017–{new Date().getFullYear()} {AUTHORNAME}</p>
+	<nav aria-label="Social links" class="flex flex-wrap items-center gap-5">
+		{#each SOCIAL_LINKS as { title, link }}
+			<a
+				href={link}
+				target="_blank"
+				rel="noreferrer"
+				class="transition-colors hover:text-zinc-100"
+			>
+				{title}
+			</a>
+		{/each}
+	</nav>
+</footer>
