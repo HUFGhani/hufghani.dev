@@ -15,8 +15,8 @@ This repository contains the source code for a SvelteKit-based project. It is de
 
 Ensure you have the following installed:
 
-- Node.js (v16 or later)
-- npm (v8 or later)
+- Node.js (v22; see `.nvmrc`)
+- pnpm (v10)
 
 ## Getting Started
 
@@ -29,11 +29,11 @@ Ensure you have the following installed:
 
 2. Install dependencies:
    ```bash
-   npm install
+   pnpm install
    ```
 3. Start the development server:
    `bash
-npm run dev
+pnpm run dev
 `
    The application will be available at http://localhost:5173.
 
@@ -41,7 +41,7 @@ npm run dev
 
 To create a production build:
 ``bash
-npm run build
+pnpm run build
 
 ````
 Preview the production build locally:
@@ -51,19 +51,19 @@ Preview the production build locally:
 This project uses vitest and playwright for testing.
 Run unit tests:
 ```bash
-npm run test:unit
+pnpm run test:unit
 ````
 
 Run end-to-end tests:
 
 ```bash
-npm run test:unit
+pnpm run test:e2e
 ```
 
 Run all tests:
 
 ```bash
-npm run test:unit
+pnpm run test
 ```
 
 ## Linting and Formatting

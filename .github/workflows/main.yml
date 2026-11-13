@@ -15,16 +15,17 @@ jobs:
     runs-on: ${{matrix.os}}
     steps:
       - uses: actions/checkout@v4.2.2
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4.4.0
         with:
-          node-version: 22
-          cache: 'npm'
+          node-version-file: .nvmrc
+          cache: 'pnpm'
       - name: installing dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
       - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+        run: pnpm exec playwright install --with-deps
       - name: running unit test
-        run: npm run test
+        run: pnpm run test
       - name: Upload test report
         if: always()
         uses: actions/upload-artifact@v4.6.2
@@ -43,8 +44,13 @@ jobs:
     needs: [website-test]
     steps:
       - uses: actions/checkout@v4.2.2
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4.4.0
+        with:
+          node-version-file: .nvmrc
+          cache: 'pnpm'
       - name: installing website dependencies
-        run: npm i
+        run: pnpm install --frozen-lockfile
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4.1.0
         with:
@@ -52,7 +58,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
       - name: deploying website and infrastructure
-        run: npm run build && npm run postbuild && cd ./build && npx cdk deploy --require-approval never
+        run: pnpm run build && pnpm run postbuild && cd ./build && ../node_modules/.bin/cdk deploy --require-approval never
 
   unlighthouse:
     runs-on: ubuntu-latest

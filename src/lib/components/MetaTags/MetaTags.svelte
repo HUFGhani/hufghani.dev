@@ -7,7 +7,7 @@
 		publishedTime: string;
 		modifiedTime?: string;
 		section: string;
-		tags: [string];
+		tags: string[];
 	}
 
 	export let pageTitle: string;
