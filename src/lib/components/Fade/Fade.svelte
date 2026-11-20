@@ -3,7 +3,7 @@
 	export let visible: boolean = false;
 </script>
 
-{#if import.meta.env.Vitest}
+{#if import.meta.env.VITEST}
 	{#if visible}
 		<div in:fly={{ y: 200, duration: 2000 }}>
 			<slot />
