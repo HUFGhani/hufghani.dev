@@ -1,15 +1,19 @@
-import '@testing-library/jest-dom/vitest';
 import { render } from '@testing-library/svelte';
 import { describe, expect, it } from 'vitest';
 import Page from './+page.svelte';
 
 describe('homepage', () => {
-	it('renders the introduction and primary project link', () => {
+	it('renders the introduction, primary project link and SEO metadata', () => {
 		const { getByRole, getByText } = render(Page);
 
 		expect(getByRole('heading', { level: 1, name: /Hello, I'm Hamza/ })).toBeInTheDocument();
 		expect(getByText(/turning complex problems into clear, useful experiences/)).toBeInTheDocument();
 		expect(getByRole('link', { name: /Explore my work/ })).toHaveAttribute('href', '/project');
+		expect(document.title).toContain('Hamza Ghani');
+		expect(document.head.querySelector('link[rel="canonical"]')).toHaveAttribute(
+			'href',
+			'https://hufghani.dev/'
+		);
 	});
 
 	it('shows the main overview links and keeps writing hidden by default', () => {
