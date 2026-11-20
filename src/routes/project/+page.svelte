@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { Fade } from '$lib/components/Fade';
 	import { MetaTags } from '$lib/components/MetaTags';
-	import ProjectCard from '$lib/components/ProjectCard/ProjectCard.svelte';
-	import ProjectEmptyState from '$lib/components/ProjectEmptyState/ProjectEmptyState.svelte';
-	import ProjectPagination from '$lib/components/ProjectPagination/ProjectPagination.svelte';
-	import ProjectSearch from '$lib/components/ProjectSearch/ProjectSearch.svelte';
+	import { ProjectCard } from '$lib/components/ProjectCard';
+	import { ProjectEmptyState } from '$lib/components/ProjectEmptyState';
+	import { ProjectPagination } from '$lib/components/ProjectPagination';
+	import { ProjectSearch } from '$lib/components/ProjectSearch';
 	import { NON_PROJECT } from '$lib/config';
 	import { onMount } from 'svelte';
 	import type { PageData } from './$types';
