@@ -1,58 +1,70 @@
+name: Pull request checks
+
 on:
-  pull_request:
-    branches:
-      - 'master'
+	pull_request:
+		branches:
+			- 'master'
+
+concurrency:
+	group: ${{ github.workflow }}-${{ github.ref }}
+	cancel-in-progress: true
 
 jobs:
-  website-test:
-    env:
-      VITE_GRAPHQL_ENDPOINT: ${{ secrets.VITE_GRAPHQL_ENDPOINT }}
-      VITE_GITHUB_PERSONAL_ACCESS_TOKEN: ${{ secrets.VITE_GITHUB_PERSONAL_ACCESS_TOKEN }}
-    name: 'Unit, component and server tests'
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest]
-    runs-on: ${{matrix.os}}
-    steps:
-      - uses: actions/checkout@v4.2.2
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4.4.0
-        with:
-          node-version-file: .nvmrc
-          cache: 'pnpm'
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-      - name: Check Svelte and TypeScript
-        run: pnpm run check
-      - name: Run unit tests
-        run: pnpm run test
-      - name: Build and test Lambda@Edge adapter
-        run: pnpm run build && pnpm run test:adapter
+	website-test:
+		name: Unit, component and server tests
+		timeout-minutes: 25
+		strategy:
+			fail-fast: false
+			matrix:
+				os: [ubuntu-latest, macos-latest]
+		runs-on: ${{ matrix.os }}
+		env:
+			VITE_GRAPHQL_ENDPOINT: ${{ secrets.VITE_GRAPHQL_ENDPOINT }}
+			VITE_GITHUB_PERSONAL_ACCESS_TOKEN: ${{ secrets.VITE_GITHUB_PERSONAL_ACCESS_TOKEN }}
+		steps:
+			- uses: actions/checkout@v4.2.2
+			- uses: pnpm/action-setup@v4
+			- uses: actions/setup-node@v4.4.0
+				with:
+					node-version-file: .nvmrc
+					cache: pnpm
+			- name: Install dependencies
+				run: pnpm install --frozen-lockfile
+			- name: Check Svelte and TypeScript
+				run: pnpm run check
+			- name: Run unit tests
+				run: pnpm run test
+			- name: Build and test Lambda@Edge adapter
+				run: pnpm run build && pnpm run test:adapter
 
-  website-e2e:
-    needs: [website-test]
-    env:
-      VITE_GRAPHQL_ENDPOINT: ${{ secrets.VITE_GRAPHQL_ENDPOINT }}
-      VITE_GITHUB_PERSONAL_ACCESS_TOKEN: ${{ secrets.VITE_GITHUB_PERSONAL_ACCESS_TOKEN }}
-    name: 'Playwright end-to-end tests'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4.2.2
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4.4.0
-        with:
-          node-version-file: .nvmrc
-          cache: 'pnpm'
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-      - name: Install Playwright browsers
-        run: pnpm exec playwright install --with-deps
-      - name: Run Playwright tests
-        run: pnpm run test:e2e
-      - name: Upload Playwright report
-        if: always()
-        uses: actions/upload-artifact@v4.6.2
-        with:
-          name: playwright-report
-          path: playwright-report/
-          if-no-files-found: ignore
+	website-e2e:
+		name: Playwright end-to-end tests
+		timeout-minutes: 25
+		needs: [website-test]
+		runs-on: ubuntu-latest
+		env:
+			VITE_GRAPHQL_ENDPOINT: ${{ secrets.VITE_GRAPHQL_ENDPOINT }}
+			VITE_GITHUB_PERSONAL_ACCESS_TOKEN: ${{ secrets.VITE_GITHUB_PERSONAL_ACCESS_TOKEN }}
+		steps:
+			- uses: actions/checkout@v4.2.2
+			- uses: pnpm/action-setup@v4
+			- uses: actions/setup-node@v4.4.0
+				with:
+					node-version-file: .nvmrc
+					cache: pnpm
+			- name: Install dependencies
+				run: pnpm install --frozen-lockfile
+			- name: Install Playwright browsers
+				run: pnpm exec playwright install --with-deps
+			- name: Run Playwright tests
+				run: pnpm exec playwright test --forbid-only
+			- name: Upload Playwright diagnostics
+				if: always()
+				uses: actions/upload-artifact@v4.6.2
+				with:
+					name: playwright-diagnostics
+					path: |
+						playwright-report/
+					test-results/
+					if-no-files-found: ignore
+					retention-days: 7
