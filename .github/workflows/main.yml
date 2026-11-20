@@ -22,8 +22,6 @@ jobs:
           cache: 'pnpm'
       - name: installing dependencies
         run: pnpm install --frozen-lockfile
-      - name: Install Playwright Browsers
-        run: pnpm exec playwright install --with-deps
       - name: running unit test
         run: pnpm run test
       - name: building and testing Lambda@Edge adapter
