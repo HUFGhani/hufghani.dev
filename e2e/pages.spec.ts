@@ -144,6 +144,17 @@ test.describe('projects page', () => {
 		await expect(page).not.toHaveURL(/page=2/);
 	});
 
+	test('clears the search and restores all projects', async ({ page }) => {
+		const search = page.getByRole('searchbox', { name: 'Search projects' });
+		await search.fill('Project 2');
+		await expect(page.getByRole('heading', { level: 2, name: 'Project 2', exact: true })).toBeVisible();
+
+		await search.fill('');
+		await expect(page.getByRole('heading', { level: 2, name: 'Project 1', exact: true })).toBeVisible();
+		await expect(page.getByRole('button', { name: 'Next page' })).toBeVisible();
+		await expect.poll(() => new URL(page.url()).searchParams.get('q')).toBeNull();
+	});
+
 	test('restores filters and pagination from a directly opened URL', async ({ page }) => {
 		await page.goto('/project/?q=Project&page=2');
 
