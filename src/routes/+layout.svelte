@@ -9,9 +9,10 @@
 </script>
 
 <FeatureFlagsProvider flags={FeatureFlagsList}>
+	<a href="#main-content" class="btn btn-sm btn-primary fixed left-4 top-4 z-50 -translate-y-24 focus:translate-y-0">Skip to content</a>
 	<div class="mx-auto flex min-h-screen w-full max-w-6xl flex-col px-6 sm:px-8 lg:px-12">
 		<NavBar />
-		<main class="w-full flex-1 pb-24 pt-12 sm:pt-16 lg:pt-20">
+		<main id="main-content" tabindex="-1" class="w-full flex-1 pb-24 pt-12 sm:pt-16 lg:pt-20">
 			{@render children()}
 		</main>
 		<Footer />
