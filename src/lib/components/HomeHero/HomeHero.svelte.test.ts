@@ -8,7 +8,7 @@ describe('HomeHero', () => {
 
 		expect(getByRole('heading', { level: 1 })).toHaveTextContent("Hello, I'm Hamza.");
 		expect(getByRole('link', { name: /Explore my work/ })).toHaveAttribute('href', '/project');
-		expect(getByText('Software Engineer at')).toBeInTheDocument();
+		expect(getByText(/Software Engineer at/)).toBeInTheDocument();
 		expect(getByRole('link', { name: 'Booking.com' })).toHaveAttribute('href', 'https://www.booking.com/');
 	});
 });
