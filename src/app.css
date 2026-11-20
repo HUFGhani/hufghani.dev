@@ -85,37 +85,15 @@ button:focus-visible {
 }
 
 
-.hero-cta {
-	border: 1px solid var(--accent);
-	background: var(--accent);
-	font-weight: 600;
-	transition: transform 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
+/* Keep the site's semantic primary blue consistent across buttons, links and accents. */
+:root[data-theme='light'] {
+	--color-primary: #526fe5;
+	--color-primary-content: #ffffff;
 }
 
-:root[data-theme='light'] .hero-cta {
-	color: #ffffff;
-	box-shadow: 0 8px 24px color-mix(in srgb, var(--accent) 20%, transparent);
-}
-
-:root[data-theme='light'] .hero-cta:hover {
-	border-color: #405bd0;
-	background: #405bd0;
-	box-shadow: 0 10px 28px color-mix(in srgb, var(--accent) 28%, transparent);
-}
-
-:root[data-theme='dark'] .hero-cta {
-	color: #101318;
-	box-shadow: 0 8px 24px color-mix(in srgb, var(--accent) 20%, transparent);
-}
-
-:root[data-theme='dark'] .hero-cta:hover {
-	border-color: #a5b8ff;
-	background: #a5b8ff;
-	box-shadow: 0 10px 28px color-mix(in srgb, var(--accent) 28%, transparent);
-}
-
-.hero-cta:hover {
-	transform: translateY(-1px);
+:root[data-theme='dark'] {
+	--color-primary: #8ba5ff;
+	--color-primary-content: #101318;
 }
 
 @media (prefers-reduced-motion: reduce) {
