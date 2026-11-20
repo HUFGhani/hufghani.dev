@@ -1,6 +1,10 @@
 <script lang="ts">
 	import { Fade } from '$lib/components/Fade';
 	import { MetaTags } from '$lib/components/MetaTags';
+	import ProjectCard from '$lib/components/ProjectCard/ProjectCard.svelte';
+	import ProjectEmptyState from '$lib/components/ProjectEmptyState/ProjectEmptyState.svelte';
+	import ProjectPagination from '$lib/components/ProjectPagination/ProjectPagination.svelte';
+	import ProjectSearch from '$lib/components/ProjectSearch/ProjectSearch.svelte';
 	import { NON_PROJECT } from '$lib/config';
 	import { onMount } from 'svelte';
 	import type { PageData } from './$types';
@@ -24,9 +28,9 @@
 	});
 
 	const cleanProjectTitle = (title: string) =>
-		title === 'api.hufghani.dev' ? title : title.replace(/[_.-]/g, ' ').replace(/\s+/g, ' ').trim();
+		title === 'api.hufghani.dev' ? title : title.replace(/[_.-]/g, ' ').replace(/\\s+/g, ' ').trim();
 
-	const normalizeSearchText = (value: string) => value.trim().toLowerCase().replace(/\s+/g, ' ');
+	const normalizeSearchText = (value: string) => value.trim().toLowerCase().replace(/\\s+/g, ' ');
 
 	const languageIcons: Record<string, string> = {
 		c: 'c/c-original.svg',
@@ -79,8 +83,9 @@
 	);
 	const totalPages = $derived(Math.ceil(filteredProjects.length / pageSize));
 	const safePage = $derived(totalPages === 0 ? 1 : Math.min(currentPage, totalPages));
-	const paginatedProjects = $derived(filteredProjects.slice((safePage - 1) * pageSize, safePage * pageSize));
-	const pageNumbers = $derived(Array.from({ length: totalPages }, (_, index) => index + 1));
+	const paginatedProjects = $derived(
+		filteredProjects.slice((safePage - 1) * pageSize, safePage * pageSize)
+	);
 	const firstResult = $derived(filteredProjects.length === 0 ? 0 : (safePage - 1) * pageSize + 1);
 	const lastResult = $derived(Math.min(safePage * pageSize, filteredProjects.length));
 
@@ -111,13 +116,13 @@
 					A collection of side projects, experiments and open-source work. A little bit of everything—from useful tools to ideas explored in code.
 				</p>
 			</div>
-			<div class="w-full sm:max-w-xs">
-				<label for="project-search" class="sr-only">Search projects</label>
-				<div class="input input-bordered flex w-full items-center gap-3 rounded-xl">
-					<svg aria-hidden="true" class="h-4 w-4 shrink-0 text-[var(--muted)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
-					<input id="project-search" value={query} oninput={(event) => { query = event.currentTarget.value; currentPage = 1; }} placeholder="Find a project…" class="grow bg-transparent text-sm focus:outline-none" />
-				</div>
-			</div>
+			<ProjectSearch
+				value={query}
+				onChange={(value) => {
+					query = value;
+					currentPage = 1;
+				}}
+			/>
 		</div>
 
 		<div class="mb-5 flex items-center justify-between border-b border-[var(--line)] pb-4">
@@ -127,66 +132,21 @@
 
 		{#if filteredProjects.length}
 			<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-				{#each paginatedProjects as repo (repo.name)}
-					<a
-						href={repo.url}
-						target="_blank"
-						rel="noopener noreferrer"
-						class="card card-border group min-h-56 bg-base-200/30 transition-all duration-200 hover:-translate-y-1 hover:bg-base-200/60 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
-					>
-						<div class="card-body p-6"><div class="mb-7 flex items-start justify-between gap-4">
-							<div class="avatar placeholder"><div class="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
-								<svg aria-hidden="true" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M8 17l-5-5 5-5M16 7l5 5-5 5M14 4l-4 16"/></svg>
-							</div></div>
-							<svg aria-hidden="true" class="h-4 w-4 text-base-content/40 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17 17 7M8 7h9v9"/></svg>
-						</div>
-						<h2 class="card-title mb-3 text-lg font-semibold capitalize tracking-tight">{repo.title}</h2>
-						<p class="line-clamp-3 flex-1 text-sm leading-6 text-base-content/65">{repo.description || 'A personal project and exploration in software development.'}</p>
-						<div class="mt-6 flex items-center gap-2">
-							{#if repo.language}
-								<span class="badge badge-outline badge-sm gap-1.5">
-									{#if repo.languageIcon}
-										<img
-											src={`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${repo.languageIcon}`}
-											alt=""
-											aria-hidden="true"
-											class="h-3.5 w-3.5 object-contain"
-											loading="lazy"
-										/>
-									{:else}
-										<svg aria-hidden="true" class="h-3.5 w-3.5 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m8 17-5-5 5-5M16 7l5 5-5 5M14 4l-4 16"/></svg>
-									{/if}
-									{repo.language}
-								</span>
-							{:else}
-							<span class="badge badge-ghost badge-sm">Repository</span>
-						{/if}
-						</div></div>
-					</a>
+				{#each paginatedProjects as project (project.name)}
+					<ProjectCard {project} />
 				{/each}
 			</div>
 		{:else}
-			<div class="rounded-2xl border border-dashed border-[var(--line)] px-6 py-16 text-center">
-				<p class="text-lg font-medium">No projects found</p>
-				<p class="mt-2 text-sm text-[var(--muted)]">Try another search term.</p>
-			</div>
+			<ProjectEmptyState />
 		{/if}
 
-		{#if totalPages > 1}
-			<nav class="mt-10 flex flex-col items-center justify-between gap-4 sm:flex-row" aria-label="Project pagination">
-				<p class="text-sm text-[var(--muted)]">Showing {firstResult}–{lastResult} of {filteredProjects.length} projects</p>
-				<div class="join" aria-label="Pagination controls">
-					<button class="join-item btn btn-sm btn-ghost" type="button" aria-label="Previous page" disabled={safePage === 1} onclick={() => currentPage = Math.max(1, safePage - 1)}>
-						<svg aria-hidden="true" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
-					</button>
-					{#each pageNumbers as pageNumber (pageNumber)}
-						<button class="join-item btn btn-sm" class:btn-active={pageNumber === safePage} type="button" aria-label={`Page ${pageNumber}`} aria-current={pageNumber === safePage ? 'page' : undefined} onclick={() => currentPage = pageNumber}>{pageNumber}</button>
-					{/each}
-					<button class="join-item btn btn-sm btn-ghost" type="button" aria-label="Next page" disabled={safePage === totalPages} onclick={() => currentPage = Math.min(totalPages, safePage + 1)}>
-						<svg aria-hidden="true" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
-					</button>
-				</div>
-			</nav>
-		{/if}
+		<ProjectPagination
+			currentPage={safePage}
+			{totalPages}
+			{firstResult}
+			{lastResult}
+			totalResults={filteredProjects.length}
+			onPageChange={(page) => (currentPage = page)}
+		/>
 	</section>
 </Fade>
