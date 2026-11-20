@@ -20,6 +20,7 @@ describe('getRepositories', () => {
 	const fetchMock = vi.fn();
 
 	beforeEach(() => {
+		fetchMock.mockReset();
 		vi.stubEnv('VITE_GRAPHQL_ENDPOINT', endpoint);
 		vi.stubEnv('VITE_GITHUB_PERSONAL_ACCESS_TOKEN', token);
 		vi.stubGlobal('fetch', fetchMock);
@@ -48,7 +49,8 @@ describe('getRepositories', () => {
 
 		expect(response.status).toBe(200);
 		await expect(response.json()).resolves.toEqual(payload);
-		expect(fetchMock).toHaveBeenCalledExactlyOnceWith(endpoint, {
+		expect(fetchMock).toHaveBeenCalledTimes(1);
+		expect(fetchMock).toHaveBeenCalledWith(endpoint, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
