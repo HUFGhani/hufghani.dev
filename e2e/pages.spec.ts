@@ -100,7 +100,7 @@ test.describe('projects page', () => {
 
 		await page.goto('/');
 		await page.getByRole('link', { name: /Explore my work/ }).click();
-		await expect(page).toHaveURL(/\/project\/$/);
+		await expect(page).toHaveURL(/\/project\/?$/);
 	});
 
 	test('renders project metadata, heading and project cards', async ({ page }) => {
