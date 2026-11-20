@@ -42,6 +42,29 @@
 	color-scheme: dark;
 }
 
+.hero-cta {
+	border: 1px solid var(--accent);
+	background: var(--accent);
+	color: #101318;
+	font-weight: 600;
+	box-shadow: 0 8px 24px color-mix(in srgb, var(--accent) 20%, transparent);
+	transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+
+.hero-cta:hover {
+	transform: translateY(-1px);
+	background: color-mix(in srgb, var(--accent) 88%, white);
+	box-shadow: 0 10px 28px color-mix(in srgb, var(--accent) 28%, transparent);
+}
+
+:root[data-theme='light'] .hero-cta {
+	color: #ffffff;
+}
+
+:root[data-theme='dark'] .hero-cta {
+	color: #101318;
+}
+
 html {
 	min-width: 320px;
 	background: var(--page);
