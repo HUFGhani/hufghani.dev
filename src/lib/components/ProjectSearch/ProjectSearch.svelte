@@ -17,6 +17,10 @@
 		</svg>
 		<input
 			id="project-search"
+			type="search"
+			name="q"
+			autocomplete="off"
+			spellcheck="false"
 			value={value}
 			oninput={(event) => onChange(event.currentTarget.value)}
 			placeholder="Find a project…"
