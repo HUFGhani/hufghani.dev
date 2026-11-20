@@ -2,8 +2,6 @@ export const WEBSITE = 'hufghani.dev';
 
 export const AUTHORNAME = 'Hamza U. F. Ghani';
 
-export const SHROTAUTHORNAME = `Hamza Ghani`;
-
 export const SOCIAL_LINKS: {
 	id: number;
 	title: string;
@@ -30,7 +28,6 @@ export const MENULINK: {
 	title: string;
 	link: string;
 	isExternal: boolean;
-	abbr?: boolean;
 	fullTitle?: string;
 }[] = [
 	{
@@ -47,19 +44,15 @@ export const MENULINK: {
 		title: 'CV',
 		link: 'docs/Curriculum-Vitae.pdf',
 		isExternal: true,
-		abbr: true,
 		fullTitle: 'Curriculum Vitae'
 	}
 ];
-
-export const META_DATA = {
-	twitter: '@the_ghani'
-};
 
 export const NON_PROJECT: string[] = [
 	'hacknotts',
 	'anvil hack',
 	'old hufghani dev',
+	'hufghani dev',
 	'new hufghani dev',
 	'ddclient docker',
 	'HUFGHANI',
@@ -70,9 +63,18 @@ export const NON_PROJECT: string[] = [
 	'dotfiles',
 	'dotBash',
 	'Curriculum Vitae',
-	'COMP66090 Masters Project'
+	'COMP66090 Masters Project',
+	'Personal Website',
+	'Portfolio Website',
+	'Portfolio',
+	'Configuration',
+	'Configs',
+	'Learning',
+	'Tutorial',
+	'Tutorials',
+	'University Coursework'
 ];
 
 export const FeatureFlagsList: Record<string, boolean> = {
-	showLogo: false
+	showBlog: false
 };

@@ -13,16 +13,19 @@
 	export let pageTitle: string;
 	export let pageDescription: string;
 	export let ogType: ogTypes;
+	export let pagePath = '/';
 	export let OpenGraphArticle: ogArticle | undefined = undefined;
+
+	$: canonicalUrl = `https://${WEBSITE}${pagePath}`;
 </script>
 
 <MetaTags
 	title={pageTitle}
-	titleTemplate="%s - {AUTHORNAME}"
+	titleTemplate={`%s - ${AUTHORNAME}`}
 	description={pageDescription}
-	canonical="https://{WEBSITE}/"
+	canonical={canonicalUrl}
 	openGraph={{
-		url: `https://${WEBSITE}?title=${encodeURIComponent(pageTitle)}&description=${encodeURIComponent(pageDescription)}`,
+		url: canonicalUrl,
 		title: `${pageTitle} - ${AUTHORNAME}`,
 		description: pageDescription,
 		images: [
@@ -30,11 +33,11 @@
 				url: `https://og.${WEBSITE}?title=${encodeURIComponent(pageTitle)}&description=${encodeURIComponent(pageDescription)}`,
 				width: 900,
 				height: 800,
-				alt: `Og Image Alt - ${pageDescription}`
+				alt: `Open Graph image for ${pageTitle}`
 			}
 		],
 		locale: 'en-gb',
-		siteName: `https://${WEBSITE}/`,
+		siteName: WEBSITE,
 		type: ogType,
 		article: {
 			...OpenGraphArticle,

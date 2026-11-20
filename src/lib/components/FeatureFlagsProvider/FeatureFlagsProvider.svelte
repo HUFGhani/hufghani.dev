@@ -1,13 +1,20 @@
 <script lang="ts">
-	import { setContext } from 'svelte';
+	import { setContext, type Snippet } from 'svelte';
 
-	type FeatureFlags = {
-		[key: string]: boolean;
-	};
+	type FeatureFlags = Record<string, boolean>;
 
-	let { children, flags }: { children: any; flags: FeatureFlags } = $props();
+	let { children, flags }: { children: Snippet; flags: FeatureFlags } = $props();
+	const featureFlags = $state<FeatureFlags>({});
 
-	setContext('featureFlags', flags);
+	$effect(() => {
+		for (const name of Object.keys(featureFlags)) {
+			if (!(name in flags)) delete featureFlags[name];
+		}
+
+		Object.assign(featureFlags, flags);
+	});
+
+	setContext('featureFlags', featureFlags);
 </script>
 
 {@render children()}

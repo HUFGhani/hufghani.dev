@@ -1,13 +1,34 @@
 export const csr = true;
+
+const emptyViewer = {
+	repositories: {
+		nodes: []
+	}
+};
+
 export async function load({ fetch }) {
-	const res = await fetch('/api/repositories', {
-		method: 'GET',
-		headers: {
-			'Content-Type': 'application/json'
+	try {
+		const response = await fetch('/api/repositories', {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		});
+
+		if (!response.ok) {
+			throw new Error(`Repository request failed with status ${response.status}`);
 		}
-	});
-	const {
-		data: { viewer }
-	} = await res.json();
-	return { viewer };
+
+		const payload = await response.json();
+		const viewer = payload?.data?.viewer;
+
+		if (!Array.isArray(viewer?.repositories?.nodes)) {
+			throw new Error('Repository response did not contain a repository list');
+		}
+
+		return { viewer, loadError: false };
+	} catch (error) {
+		console.error('Unable to load projects:', error);
+		return { viewer: emptyViewer, loadError: true };
+	}
 }
