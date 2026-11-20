@@ -45,6 +45,20 @@ const repositoryResponse = {
 	}
 };
 
+const emptyRepositoryResponse = {
+	data: { viewer: { repositories: { nodes: [] } } }
+};
+
+const mockRepositories = async (page, response = repositoryResponse, status = 200) => {
+	await page.route('**/api/repositories', async (route) => {
+		await route.fulfill({
+			status,
+			contentType: 'application/json',
+			body: JSON.stringify(response)
+		});
+	});
+};
+
 test.describe('homepage', () => {
 	test('shows the introduction, metadata and primary navigation', async ({ page }) => {
 		await page.goto('/');
@@ -90,41 +104,74 @@ test.describe('homepage', () => {
 
 test.describe('projects page', () => {
 	test.beforeEach(async ({ page }) => {
-		await page.route('**/api/repositories', async (route) => {
-			await route.fulfill({
-				status: 200,
-				contentType: 'application/json',
-				body: JSON.stringify(repositoryResponse)
-			});
-		});
-
+		await mockRepositories(page);
 		await page.goto('/');
 		await page.getByRole('link', { name: /Explore my work/ }).click();
-		await expect(page).toHaveURL(/\/project\/?$/);
+		await expect(page).toHaveURL(/\\/project\\/?$/);
 	});
 
-	test('renders project metadata, heading and project cards', async ({ page }) => {
+	test('renders project metadata, accessible search and project cards', async ({ page }) => {
 		await expect(page).toHaveTitle(/Projects/);
 		await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
 			'href',
 			'https://hufghani.dev/project/'
 		);
 		await expect(page.getByRole('heading', { level: 1, name: 'Projects.' })).toBeVisible();
-		await expect(page.getByRole('textbox', { name: 'Search projects' })).toBeVisible();
+		await expect(page.getByRole('searchbox', { name: 'Search projects' })).toBeVisible();
 		await expect(page.getByRole('heading', { level: 2, name: 'Project 1', exact: true })).toBeVisible();
 		await expect(page.getByRole('heading', { level: 2, name: 'Project 9', exact: true })).toBeVisible();
 		await expect(page.getByRole('heading', { level: 2, name: 'Project 10', exact: true })).toHaveCount(0);
 	});
 
 	test('filters projects and reflects the search in the URL', async ({ page }) => {
-		const search = page.getByRole('textbox', { name: 'Search projects' });
-
+		const search = page.getByRole('searchbox', { name: 'Search projects' });
 		await search.fill('Project 2');
 
 		await expect(page.getByRole('heading', { level: 2, name: 'Project 2', exact: true })).toBeVisible();
 		await expect(page.getByRole('heading', { level: 2, name: 'Project 1', exact: true })).toHaveCount(0);
-		// URLSearchParams serializes spaces as "+"; accept either valid URL encoding.
-		await expect(page).toHaveURL(/q=Project(?:\+|%20)2/);
+		// URLSearchParams serializes spaces as +; accept either valid URL encoding.
+		await expect(page).toHaveURL(/q=Project(?:\\+|%20)2/);
+	});
+
+	test('resets to the first page when searching from page two', async ({ page }) => {
+		await page.getByRole('button', { name: 'Next page' }).click();
+		await expect(page.getByRole('heading', { level: 2, name: 'Project 10', exact: true })).toBeVisible();
+
+		await page.getByRole('searchbox', { name: 'Search projects' }).fill('Project 1');
+		await expect(page.getByRole('heading', { level: 2, name: 'Project 1', exact: true })).toBeVisible();
+		await expect(page.getByRole('heading', { level: 2, name: 'Project 10', exact: true })).toHaveCount(0);
+		await expect(page).toHaveURL(/q=Project(?:\\+|%20)1/);
+		await expect(page).not.toHaveURL(/page=2/);
+	});
+
+	test('restores filters and pagination from a directly opened URL', async ({ page }) => {
+		await page.goto('/project/?q=Project&page=2');
+
+		await expect(page.getByRole('searchbox', { name: 'Search projects' })).toHaveValue('Project');
+		await expect(page.getByRole('heading', { level: 2, name: 'Project 10', exact: true })).toBeVisible();
+		await expect(page.getByRole('button', { name: 'Page 2' })).toHaveAttribute('aria-current', 'page');
+	});
+
+	test('supports browser back and forward for pagination', async ({ page }) => {
+		await page.getByRole('button', { name: 'Next page' }).click();
+		await expect(page.getByRole('heading', { level: 2, name: 'Project 10', exact: true })).toBeVisible();
+		await expect(page).toHaveURL(/page=2/);
+
+		await page.goBack();
+		await expect(page.getByRole('heading', { level: 2, name: 'Project 1', exact: true })).toBeVisible();
+		await expect(page).not.toHaveURL(/page=2/);
+
+		await page.goForward();
+		await expect(page.getByRole('heading', { level: 2, name: 'Project 10', exact: true })).toBeVisible();
+	});
+
+	test('exposes accessible pagination and keyboard focus', async ({ page }) => {
+		const pagination = page.getByRole('navigation', { name: 'Project pagination' });
+		await expect(pagination).toBeVisible();
+		await expect(pagination.getByRole('button', { name: 'Previous page' })).toBeDisabled();
+		await expect(pagination.getByRole('button', { name: 'Page 1' })).toHaveAttribute('aria-current', 'page');
+		await page.keyboard.press('Tab');
+		await expect(page.getByRole('searchbox', { name: 'Search projects' })).toBeFocused();
 	});
 
 	test('paginates projects and updates the page query parameter', async ({ page }) => {
@@ -140,10 +187,22 @@ test.describe('projects page', () => {
 	});
 
 	test('shows an empty state when the search has no matches', async ({ page }) => {
-		await page.getByRole('textbox', { name: 'Search projects' }).fill('no matching project');
-
-		await expect(page.getByText('No projects found')).toBeVisible();
+		await page.getByRole('searchbox', { name: 'Search projects' }).fill('no matching project');
+		await expect(page.getByRole('status')).toContainText('No projects found');
 		await expect(page.getByRole('button', { name: 'Next page' })).toHaveCount(0);
+	});
+
+	test('shows a useful message when the API returns no projects', async ({ page }) => {
+		await mockRepositories(page, emptyRepositoryResponse);
+		await page.goto('/project/');
+		await expect(page.getByRole('status')).toContainText('No projects found');
+	});
+
+	test('shows a recoverable message when the repository API fails', async ({ page }) => {
+		await mockRepositories(page, {}, 500);
+		await page.goto('/project/');
+		await expect(page.getByRole('status')).toContainText('Unable to load projects');
+		await expect(page.getByRole('status')).toContainText('Please refresh the page to try again.');
 	});
 
 	test('does not display archived, template or excluded repositories', async ({ page }) => {
