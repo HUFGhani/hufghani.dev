@@ -19,7 +19,7 @@
 			Software engineer · Manchester, UK
 		</p>
 		<h1 class="text-5xl leading-[1.08] font-semibold tracking-[-0.055em] sm:text-6xl lg:text-7xl">
-			Hello, I'm Hamza<span class="text-primary">.</span>
+			Hello, I'm Hamza<span class="text-[var(--color-primary)]">.</span>
 		</h1>
 		<p class="mt-8 max-w-2xl text-lg leading-8 text-base-content/65 sm:text-xl sm:leading-9">
 			I’m a software engineer who enjoys turning complex problems into clear, useful experiences. I work across the stack, keep learning, and like sharing what I discover along the way.
