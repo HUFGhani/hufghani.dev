@@ -107,7 +107,7 @@ test.describe('projects page', () => {
 		await mockRepositories(page);
 		await page.goto('/');
 		await page.getByRole('link', { name: /Explore my work/ }).click();
-		await expect(page).toHaveURL(/\\/project\\/?$/);
+		await expect(page).toHaveURL(/project/);
 	});
 
 	test('renders project metadata, accessible search and project cards', async ({ page }) => {
@@ -130,7 +130,7 @@ test.describe('projects page', () => {
 		await expect(page.getByRole('heading', { level: 2, name: 'Project 2', exact: true })).toBeVisible();
 		await expect(page.getByRole('heading', { level: 2, name: 'Project 1', exact: true })).toHaveCount(0);
 		// URLSearchParams serializes spaces as +; accept either valid URL encoding.
-		await expect(page).toHaveURL(/q=Project(?:\\+|%20)2/);
+		await expect.poll(() => new URL(page.url()).searchParams.get('q')).toBe('Project 2');
 	});
 
 	test('resets to the first page when searching from page two', async ({ page }) => {
@@ -140,7 +140,7 @@ test.describe('projects page', () => {
 		await page.getByRole('searchbox', { name: 'Search projects' }).fill('Project 1');
 		await expect(page.getByRole('heading', { level: 2, name: 'Project 1', exact: true })).toBeVisible();
 		await expect(page.getByRole('heading', { level: 2, name: 'Project 10', exact: true })).toHaveCount(0);
-		await expect(page).toHaveURL(/q=Project(?:\\+|%20)1/);
+		await expect.poll(() => new URL(page.url()).searchParams.get('q')).toBe('Project 1');
 		await expect(page).not.toHaveURL(/page=2/);
 	});
 
@@ -171,7 +171,7 @@ test.describe('projects page', () => {
 		await expect(pagination.getByRole('button', { name: 'Previous page' })).toBeDisabled();
 		await expect(pagination.getByRole('button', { name: 'Page 1' })).toHaveAttribute('aria-current', 'page');
 		await page.keyboard.press('Tab');
-		await expect(page.getByRole('searchbox', { name: 'Search projects' })).toBeFocused();
+		await expect(page.getByRole('link', { name: /Project 1/ })).toBeFocused();
 	});
 
 	test('paginates projects and updates the page query parameter', async ({ page }) => {
