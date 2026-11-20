@@ -18,21 +18,21 @@ const graphqlQuery =
 
 describe('getRepositories', () => {
 	const fetchMock = vi.fn();
-	const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
 
 	beforeEach(() => {
 		vi.stubEnv('VITE_GRAPHQL_ENDPOINT', endpoint);
 		vi.stubEnv('VITE_GITHUB_PERSONAL_ACCESS_TOKEN', token);
 		vi.stubGlobal('fetch', fetchMock);
+		vi.spyOn(console, 'error').mockImplementation(() => {});
 	});
 
 	afterEach(() => {
 		vi.unstubAllEnvs();
 		vi.unstubAllGlobals();
-		vi.clearAllMocks();
+		vi.restoreAllMocks();
 	});
 
-	it('fetches repositories from GitHub and returns the response', async () => {
+	it('sends the GraphQL query with the GitHub token and returns repository data', async () => {
 		const payload = {
 			data: {
 				viewer: {
@@ -48,7 +48,7 @@ describe('getRepositories', () => {
 
 		expect(response.status).toBe(200);
 		await expect(response.json()).resolves.toEqual(payload);
-		expect(fetchMock).toHaveBeenCalledWith(endpoint, {
+		expect(fetchMock).toHaveBeenCalledExactlyOnceWith(endpoint, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -64,9 +64,27 @@ describe('getRepositories', () => {
 		const response = await getRepositories();
 
 		expect(response.status).toBe(500);
-		await expect(response.json()).resolves.toEqual({
-			error: 'Failed to fetch data'
-		});
+		await expect(response.json()).resolves.toEqual({ error: 'Failed to fetch data' });
+	});
+
+	it('returns a server error when GitHub returns GraphQL errors', async () => {
+		fetchMock.mockResolvedValueOnce(
+			new Response(JSON.stringify({ errors: [{ message: 'Unauthorised' }] }))
+		);
+
+		const response = await getRepositories();
+
+		expect(response.status).toBe(500);
+		await expect(response.json()).resolves.toEqual({ error: 'Failed to fetch data' });
+	});
+
+	it('returns a server error when GitHub responds with a non-success status', async () => {
+		fetchMock.mockResolvedValueOnce(new Response('Unavailable', { status: 503 }));
+
+		const response = await getRepositories();
+
+		expect(response.status).toBe(500);
+		await expect(response.json()).resolves.toEqual({ error: 'Failed to fetch data' });
 	});
 
 	it('returns a server error when the GitHub request fails', async () => {
@@ -75,27 +93,15 @@ describe('getRepositories', () => {
 		const response = await getRepositories();
 
 		expect(response.status).toBe(500);
-		await expect(response.json()).resolves.toEqual({
-			error: 'Failed to fetch data'
-		});
+		await expect(response.json()).resolves.toEqual({ error: 'Failed to fetch data' });
 	});
 
 	it('returns a server error when GitHub returns invalid JSON', async () => {
-		fetchMock.mockResolvedValueOnce(
-			new Response('not-json', {
-				headers: { 'Content-Type': 'application/json' }
-			})
-		);
+		fetchMock.mockResolvedValueOnce(new Response('not-json'));
 
 		const response = await getRepositories();
 
 		expect(response.status).toBe(500);
-		await expect(response.json()).resolves.toEqual({
-			error: 'Failed to fetch data'
-		});
-	});
-
-	afterEach(() => {
-		consoleError.mockClear();
+		await expect(response.json()).resolves.toEqual({ error: 'Failed to fetch data' });
 	});
 });
