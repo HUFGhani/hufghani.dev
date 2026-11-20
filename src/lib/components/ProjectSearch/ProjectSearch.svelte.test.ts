@@ -8,7 +8,7 @@ describe('ProjectSearch', () => {
 			props: { value: 'typescript', onChange: vi.fn() }
 		});
 
-		expect(getByRole('textbox', { name: 'Search projects' })).toHaveValue('typescript');
+		expect(getByRole('searchbox', { name: 'Search projects' })).toHaveValue('typescript');
 	});
 
 	it('passes the updated search value to the change callback', async () => {
@@ -17,7 +17,7 @@ describe('ProjectSearch', () => {
 			props: { value: '', onChange }
 		});
 
-		await fireEvent.input(getByRole('textbox', { name: 'Search projects' }), {
+		await fireEvent.input(getByRole('searchbox', { name: 'Search projects' }), {
 			target: { value: 'svelte' }
 		});
 
