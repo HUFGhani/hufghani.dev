@@ -55,7 +55,7 @@
 	<div class="mt-9 grid gap-4 md:grid-cols-3">
 		<a href={resolve('/project')} class="card card-border bg-base-200/20 transition duration-200 hover:-translate-y-1 hover:bg-base-200/50">
 			<div class="card-body">
-				<p class="text-xs uppercase tracking-[0.18em] text-base-content/50">01 / Work</p>
+				<p class="text-xs uppercase tracking-[0.18em] text-base-content/50">Work</p>
 				<h3 class="card-title mt-5">Projects <span class="text-primary transition group-hover:translate-x-1">↗</span></h3>
 				<p class="text-sm leading-6 text-base-content/65">Things I’ve built, experiments, and open-source contributions.</p>
 			</div>
@@ -63,7 +63,7 @@
 		{#if featureFlags?.showBlog === true}
 		<a href={resolve('/blog' as never)} class="card card-border bg-base-200/20 transition duration-200 hover:-translate-y-1 hover:bg-base-200/50">
 			<div class="card-body">
-				<p class="text-xs uppercase tracking-[0.18em] text-base-content/50">02 / Notes</p>
+				<p class="text-xs uppercase tracking-[0.18em] text-base-content/50">Notes</p>
 				<h3 class="card-title mt-5">Writing <span class="text-primary">↗</span></h3>
 				<p class="text-sm leading-6 text-base-content/65">Notes and lessons from software engineering and the things I explore.</p>
 			</div>
@@ -71,7 +71,7 @@
 		{/if}
 		<a href={resolve('/docs/Curriculum-Vitae.pdf' as never)} target="_blank" rel="noreferrer" class="card card-border bg-base-200/20 transition duration-200 hover:-translate-y-1 hover:bg-base-200/50">
 			<div class="card-body">
-				<p class="text-xs uppercase tracking-[0.18em] text-base-content/50">{featureFlags?.showBlog === true ? '03' : '02'} / Background</p>
+				<p class="text-xs uppercase tracking-[0.18em] text-base-content/50">Background</p>
 				<h3 class="card-title mt-5">Experience <span class="text-primary">↗</span></h3>
 				<p class="text-sm leading-6 text-base-content/65">My professional background, roles and experience.</p>
 			</div>
