@@ -25,7 +25,7 @@
 			I’m a software engineer who enjoys turning complex problems into clear, useful experiences. I work across the stack, keep learning, and like sharing what I discover along the way.
 		</p>
 		<div class="mt-10 flex flex-wrap items-center gap-4">
-			<a href={resolve('/project')} class="btn hero-cta rounded-full">Explore my work <span aria-hidden="true">↗</span></a>
+			<a href={resolve('/project')} class="btn btn-primary rounded-full">Explore my work <span aria-hidden="true">↗</span></a>
 		</div>
 	</div>
 
