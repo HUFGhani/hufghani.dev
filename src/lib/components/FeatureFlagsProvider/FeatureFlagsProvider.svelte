@@ -7,9 +7,11 @@
 	const featureFlags = $state<FeatureFlags>({});
 
 	$effect(() => {
-		for (const [name, enabled] of Object.entries(flags)) {
-			featureFlags[name] = enabled;
+		for (const name of Object.keys(featureFlags)) {
+			if (!(name in flags)) delete featureFlags[name];
 		}
+
+		Object.assign(featureFlags, flags);
 	});
 
 	setContext('featureFlags', featureFlags);
