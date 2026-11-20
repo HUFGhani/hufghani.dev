@@ -70,7 +70,7 @@
 		{/if}
 		<a href="/docs/Curriculum-Vitae.pdf" target="_blank" rel="noreferrer" class="card card-border bg-base-200/20 transition duration-200 hover:-translate-y-1 hover:bg-base-200/50">
 			<div class="card-body">
-				<p class="text-xs uppercase tracking-[0.18em] text-base-content/50">03 / Background</p>
+				<p class="text-xs uppercase tracking-[0.18em] text-base-content/50">{featureFlags?.showBlog === true ? '03' : '02'} / Background</p>
 				<h3 class="card-title mt-5">Experience <span class="text-primary">↗</span></h3>
 				<p class="text-sm leading-6 text-base-content/65">My professional background, roles and experience.</p>
 			</div>
