@@ -8,11 +8,19 @@
 	let { data }: { data: PageData } = $props();
 	const { nodes: repos } = data.viewer.repositories;
 
+	const pageSize = 9;
 	let visible = $state(false);
 	let query = $state('');
+	let currentPage = $state(1);
+	let urlReady = $state(false);
 
 	onMount(() => {
+		const params = new URLSearchParams(window.location.search);
+		query = params.get('q') ?? '';
+		const requestedPage = Number(params.get('page'));
+		currentPage = Number.isInteger(requestedPage) && requestedPage > 0 ? requestedPage : 1;
 		visible = true;
+		urlReady = true;
 	});
 
 	const cleanProjectTitle = (title: string) =>
@@ -51,11 +59,27 @@
 
 	const filteredProjects = $derived(
 		projects.filter((repo) => {
-			const searchable = `${repo.name} ${cleanProjectTitle(repo.name)} ${repo.description ?? ''} ${repo.primaryLanguage?.name ?? ''}`;
+			const searchable = `${repo.name} ${cleanProjectTitle(repo.name)} ${repo.description ?? ''} ${getProjectLanguage(repo.name, repo.primaryLanguage?.name) ?? ''}`;
 			const normalizedSearch = query.trim().toLowerCase().replace(/\s+/g, ' ');
 			return searchable.toLowerCase().replace(/\s+/g, ' ').includes(normalizedSearch);
 		})
 	);
+	const totalPages = $derived(Math.ceil(filteredProjects.length / pageSize));
+	const safePage = $derived(totalPages === 0 ? 1 : Math.min(currentPage, totalPages));
+	const paginatedProjects = $derived(filteredProjects.slice((safePage - 1) * pageSize, safePage * pageSize));
+	const pageNumbers = $derived(Array.from({ length: totalPages }, (_, index) => index + 1));
+	const firstResult = $derived(filteredProjects.length === 0 ? 0 : (safePage - 1) * pageSize + 1);
+	const lastResult = $derived(Math.min(safePage * pageSize, filteredProjects.length));
+
+	$effect(() => {
+		if (!urlReady) return;
+		const url = new URL(window.location.href);
+		if (query.trim()) url.searchParams.set('q', query.trim());
+		else url.searchParams.delete('q');
+		if (safePage > 1) url.searchParams.set('page', String(safePage));
+		else url.searchParams.delete('page');
+		window.history.replaceState(window.history.state, '', url);
+	});
 </script>
 
 <MetaTags
@@ -78,7 +102,7 @@
 				<label for="project-search" class="sr-only">Search projects</label>
 				<div class="input input-bordered flex w-full items-center gap-3 rounded-xl">
 					<svg aria-hidden="true" class="h-4 w-4 shrink-0 text-[var(--muted)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
-					<input id="project-search" bind:value={query} placeholder="Find a project…" class="grow bg-transparent text-sm focus:outline-none" />
+					<input id="project-search" value={query} oninput={(event) => { query = event.currentTarget.value; currentPage = 1; }} placeholder="Find a project…" class="grow bg-transparent text-sm focus:outline-none" />
 				</div>
 			</div>
 		</div>
@@ -90,7 +114,7 @@
 
 		{#if filteredProjects.length}
 			<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-				{#each filteredProjects as repo (repo.name)}
+				{#each paginatedProjects as repo (repo.name)}
 					<a
 						href={repo.url}
 						target="_blank"
@@ -133,6 +157,23 @@
 				<p class="text-lg font-medium">No projects found</p>
 				<p class="mt-2 text-sm text-[var(--muted)]">Try another search term.</p>
 			</div>
+		{/if}
+
+		{#if totalPages > 1}
+			<nav class="mt-10 flex flex-col items-center justify-between gap-4 sm:flex-row" aria-label="Project pagination">
+				<p class="text-sm text-[var(--muted)]">Showing {firstResult}–{lastResult} of {filteredProjects.length} projects</p>
+				<div class="join" aria-label="Pagination controls">
+					<button class="join-item btn btn-sm btn-ghost" type="button" aria-label="Previous page" disabled={safePage === 1} onclick={() => currentPage = Math.max(1, safePage - 1)}>
+						<svg aria-hidden="true" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+					</button>
+					{#each pageNumbers as pageNumber (pageNumber)}
+						<button class="join-item btn btn-sm" class:btn-active={pageNumber === safePage} type="button" aria-label={`Page ${pageNumber}`} aria-current={pageNumber === safePage ? 'page' : undefined} onclick={() => currentPage = pageNumber}>{pageNumber}</button>
+					{/each}
+					<button class="join-item btn btn-sm btn-ghost" type="button" aria-label="Next page" disabled={safePage === totalPages} onclick={() => currentPage = Math.min(totalPages, safePage + 1)}>
+						<svg aria-hidden="true" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+					</button>
+				</div>
+			</nav>
 		{/if}
 	</section>
 </Fade>
