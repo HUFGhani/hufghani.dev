@@ -20,8 +20,10 @@
 
 {#if totalPages > 1}
 	<nav class="mt-10 flex flex-col items-center justify-between gap-4 sm:flex-row" aria-label="Project pagination">
-		<p class="text-sm text-[var(--muted)]">Showing {firstResult}–{lastResult} of {totalResults} projects</p>
-		<div class="join" aria-label="Pagination controls">
+		<p class="text-sm text-[var(--muted)]" aria-live="polite" aria-atomic="true">
+			Showing {firstResult}–{lastResult} of {totalResults} projects
+		</p>
+		<div class="join">
 			<button
 				class="join-item btn btn-sm btn-ghost"
 				type="button"
