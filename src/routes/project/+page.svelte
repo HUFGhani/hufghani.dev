@@ -101,6 +101,7 @@
 </script>
 
 <MetaTags
+	pagePath="/project/"
 	ogType="website"
 	pageTitle="Projects"
 	pageDescription="Selected projects, experiments and open-source work by Hamza Ghani."
