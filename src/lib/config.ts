@@ -70,7 +70,16 @@ export const NON_PROJECT: string[] = [
 	'dotfiles',
 	'dotBash',
 	'Curriculum Vitae',
-	'COMP66090 Masters Project'
+	'COMP66090 Masters Project',
+	'Personal Website',
+	'Portfolio Website',
+	'Portfolio',
+	'Configuration',
+	'Configs',
+	'Learning',
+	'Tutorial',
+	'Tutorials',
+	'University Coursework'
 ];
 
 export const FeatureFlagsList: Record<string, boolean> = {
