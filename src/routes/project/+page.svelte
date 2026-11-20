@@ -48,9 +48,9 @@
 			</div>
 			<div class="w-full sm:max-w-xs">
 				<label for="project-search" class="sr-only">Search projects</label>
-				<div class="flex items-center gap-3 rounded-xl border border-[var(--line)] bg-[var(--surface)] px-4 py-3 transition-colors focus-within:border-[var(--accent)]">
+				<div class="input input-bordered flex w-full items-center gap-3 rounded-xl">
 					<svg aria-hidden="true" class="h-4 w-4 shrink-0 text-[var(--muted)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
-					<input id="project-search" bind:value={query} placeholder="Find a project…" class="w-full border-0 bg-transparent p-0 text-sm text-[var(--text)] placeholder:text-[var(--subtle)] focus:outline-none focus:ring-0" />
+					<input id="project-search" bind:value={query} placeholder="Find a project…" class="grow bg-transparent text-sm focus:outline-none" />
 				</div>
 			</div>
 		</div>
@@ -67,26 +67,26 @@
 						href={repo.url}
 						target="_blank"
 						rel="noopener noreferrer"
-						class="group flex min-h-56 flex-col rounded-2xl border border-[var(--line)] bg-[var(--surface)] p-6 transition-all duration-200 hover:-translate-y-1 hover:border-[rgba(139,165,255,0.45)] hover:bg-[var(--surface-raised)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]"
+						class="card card-border group min-h-56 bg-base-200/30 transition-all duration-200 hover:-translate-y-1 hover:bg-base-200/60 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
 					>
-						<div class="mb-7 flex items-start justify-between gap-4">
-							<div class="flex h-10 w-10 items-center justify-center rounded-xl border border-[var(--line)] bg-[var(--surface-raised)] text-[var(--accent)]">
+						<div class="card-body p-6"><div class="mb-7 flex items-start justify-between gap-4">
+							<div class="avatar placeholder"><div class="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
 								<svg aria-hidden="true" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M8 17l-5-5 5-5M16 7l5 5-5 5M14 4l-4 16"/></svg>
 							</div>
-							<svg aria-hidden="true" class="h-4 w-4 text-[var(--subtle)] transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17 17 7M8 7h9v9"/></svg>
+							<svg aria-hidden="true" class="h-4 w-4 text-base-content/40 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17 17 7M8 7h9v9"/></svg>
 						</div>
-						<h2 class="mb-3 text-lg font-semibold capitalize tracking-tight text-[var(--text)]">{cleanProjectTitle(repo.name)}</h2>
-						<p class="line-clamp-3 flex-1 text-sm leading-6 text-[var(--muted)]">{repo.description || 'A personal project and exploration in software development.'}</p>
+						<h2 class="card-title mb-3 text-lg font-semibold capitalize tracking-tight">{cleanProjectTitle(repo.name)}</h2>
+						<p class="line-clamp-3 flex-1 text-sm leading-6 text-base-content/65">{repo.description || 'A personal project and exploration in software development.'}</p>
 						<div class="mt-6 flex items-center gap-2">
 							{#if repo.primaryLanguage?.name}
-								<span class="inline-flex items-center gap-2 rounded-full border border-[var(--line)] px-3 py-1 text-xs text-[var(--muted)]">
-									<span class="h-1.5 w-1.5 rounded-full bg-[var(--accent)]"></span>
+								<span class="badge badge-outline badge-sm">
+									<span class="h-1.5 w-1.5 rounded-full bg-primary"></span>
 									{repo.primaryLanguage.name}
 								</span>
 							{:else}
-							<span class="text-xs text-[var(--subtle)]">Repository</span>
+							<span class="badge badge-ghost badge-sm">Repository</span>
 						{/if}
-						</div>
+						</div></div>
 					</a>
 				{/each}
 			</div>
