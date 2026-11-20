@@ -20,6 +20,7 @@
 
 	let { data }: { data: PageData } = $props();
 	const repos = $derived(data.viewer.repositories.nodes as Repository[]);
+	const loadError = $derived(data.loadError ?? false);
 
 	const pageSize = 9;
 	let visible = $state(false);
@@ -27,13 +28,20 @@
 	let currentPage = $state(1);
 	let urlReady = $state(false);
 
-	onMount(() => {
+	const readUrlState = () => {
 		const params = new URLSearchParams(window.location.search);
 		query = params.get('q') ?? '';
 		const requestedPage = Number(params.get('page'));
 		currentPage = Number.isInteger(requestedPage) && requestedPage > 0 ? requestedPage : 1;
+	};
+
+	onMount(() => {
+		readUrlState();
 		visible = true;
 		urlReady = true;
+
+		window.addEventListener('popstate', readUrlState);
+		return () => window.removeEventListener('popstate', readUrlState);
 	});
 
 	const cleanProjectTitle = (title: string) =>
@@ -100,6 +108,14 @@
 	const firstResult = $derived(filteredProjects.length === 0 ? 0 : (safePage - 1) * pageSize + 1);
 	const lastResult = $derived(Math.min(safePage * pageSize, filteredProjects.length));
 
+	const changePage = (page: number) => {
+		currentPage = page;
+		const url = new URL(window.location.href);
+		if (page > 1) url.searchParams.set('page', String(page));
+		else url.searchParams.delete('page');
+		window.history.pushState(window.history.state, '', url);
+	};
+
 	$effect(() => {
 		if (!urlReady) return;
 		const url = new URL(window.location.href);
@@ -138,12 +154,19 @@
 		</div>
 
 		<div class="mb-5 flex items-center justify-between border-b border-[var(--line)] pb-4">
-			<p class="text-sm text-[var(--muted)]">{filteredProjects.length} <span class="text-[var(--subtle)]">projects</span></p>
+			<p class="text-sm text-[var(--muted)]" aria-live="polite" aria-atomic="true">
+				{filteredProjects.length} <span class="text-[var(--subtle)]">projects</span>
+			</p>
 			<p class="hidden text-xs tracking-wide text-[var(--subtle)] sm:block">OPEN SOURCE & PERSONAL WORK</p>
 		</div>
 
-		{#if filteredProjects.length}
-			<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+		{#if loadError}
+			<ProjectEmptyState
+				title="Unable to load projects"
+				description="Please refresh the page to try again."
+			/>
+		{:else if filteredProjects.length}
+			<div id="project-results" class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
 				{#each paginatedProjects as project (project.name)}
 					<ProjectCard {project} />
 				{/each}
@@ -158,7 +181,7 @@
 			{firstResult}
 			{lastResult}
 			totalResults={filteredProjects.length}
-			onPageChange={(page) => (currentPage = page)}
+			onPageChange={changePage}
 		/>
 	</section>
 </Fade>
