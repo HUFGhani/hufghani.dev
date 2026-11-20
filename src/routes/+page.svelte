@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import { MetaTags } from '$lib/components/MetaTags';
-	import HomeContact from '$lib/components/HomeContact/HomeContact.svelte';
-	import HomeHero from '$lib/components/HomeHero/HomeHero.svelte';
-	import HomeOverview from '$lib/components/HomeOverview/HomeOverview.svelte';
+	import { HomeContact } from '$lib/components/HomeContact';
+	import { HomeHero } from '$lib/components/HomeHero';
+	import { HomeOverview } from '$lib/components/HomeOverview';
 
 	const featureFlags = getContext<Record<string, boolean>>('featureFlags');
 </script>
