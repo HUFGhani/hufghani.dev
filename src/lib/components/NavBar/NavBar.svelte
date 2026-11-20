@@ -35,7 +35,7 @@
 			<a
 				href={resolve(`/${item.link}` as never)}
 				aria-label={item.fullTitle ?? item.title}
-				class="transition-colors duration-200 hover:text-white"
+				class="transition-colors duration-200 hover:text-base-content"
 				{...(item.isExternal ? { target: '_blank', rel: 'noreferrer' } : {})}
 			>
 				{item.title}
