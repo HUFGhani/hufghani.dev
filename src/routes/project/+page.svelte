@@ -16,7 +16,7 @@
 	});
 
 	const cleanProjectTitle = (title: string) =>
-		title !== 'api.hufghani.dev' ? title.replace(/[_\\-.]/g, ' ').replace(/\s+/g, ' ').trim() : title;
+		title === 'api.hufghani.dev' ? title : title.replace(/[_.-]/g, ' ').replace(/\s+/g, ' ').trim();
 
 	const excludedProjects = new Set(NON_PROJECT.map((name) => name.toLowerCase().trim()));
 
