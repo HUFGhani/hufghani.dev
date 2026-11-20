@@ -4,8 +4,9 @@
 	type FeatureFlags = Record<string, boolean>;
 
 	let { children, flags }: { children: Snippet; flags: FeatureFlags } = $props();
+	const featureFlags = $state(flags);
 
-	setContext('featureFlags', flags);
+	setContext('featureFlags', featureFlags);
 </script>
 
 {@render children()}
