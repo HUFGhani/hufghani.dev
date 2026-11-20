@@ -83,16 +83,6 @@ button:focus-visible {
 	--tw-prose-quotes: var(--muted);
 }
 
-/* Keep the site's semantic primary blue consistent across buttons, links and accents. */
-:root[data-theme='light'] {
-	--color-primary: #526fe5;
-	--color-primary-content: #ffffff;
-}
-
-:root[data-theme='dark'] {
-	--color-primary: #8ba5ff;
-	--color-primary-content: #101318;
-}
 
 @media (prefers-reduced-motion: reduce) {
 	*,
