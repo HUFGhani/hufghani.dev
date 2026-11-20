@@ -39,6 +39,8 @@
 	};
 
 	const getLanguageIcon = (language: string) => languageIcons[language.toLowerCase()];
+	const getProjectLanguage = (repoName: string, language?: string | null) =>
+		repoName.toLowerCase() === 'museum of transport greater manchester' ? 'Java' : language;
 
 	const excludedProjects = new Set(NON_PROJECT.map((name) => name.toLowerCase().trim()));
 
@@ -103,11 +105,11 @@
 						<h2 class="card-title mb-3 text-lg font-semibold capitalize tracking-tight">{cleanProjectTitle(repo.name)}</h2>
 						<p class="line-clamp-3 flex-1 text-sm leading-6 text-base-content/65">{repo.description || 'A personal project and exploration in software development.'}</p>
 						<div class="mt-6 flex items-center gap-2">
-							{#if repo.primaryLanguage?.name}
+							{#if getProjectLanguage(repo.name, repo.primaryLanguage?.name)}
 								<span class="badge badge-outline badge-sm gap-1.5">
-									{#if getLanguageIcon(repo.primaryLanguage.name)}
+									{#if getLanguageIcon(getProjectLanguage(repo.name, repo.primaryLanguage?.name)!)}
 										<img
-											src={`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${getLanguageIcon(repo.primaryLanguage.name)}`}
+											src={`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${getLanguageIcon(getProjectLanguage(repo.name, repo.primaryLanguage?.name)!)}`}
 											alt=""
 											aria-hidden="true"
 											class="h-3.5 w-3.5 object-contain"
@@ -116,7 +118,7 @@
 									{:else}
 										<svg aria-hidden="true" class="h-3.5 w-3.5 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m8 17-5-5 5-5M16 7l5 5-5 5M14 4l-4 16"/></svg>
 									{/if}
-									{repo.primaryLanguage.name}
+									{getProjectLanguage(repo.name, repo.primaryLanguage?.name)}
 								</span>
 							{:else}
 							<span class="badge badge-ghost badge-sm">Repository</span>
