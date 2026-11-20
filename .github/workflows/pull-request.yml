@@ -8,7 +8,7 @@ jobs:
     env:
       VITE_GRAPHQL_ENDPOINT: ${{ secrets.VITE_GRAPHQL_ENDPOINT }}
       VITE_GITHUB_PERSONAL_ACCESS_TOKEN: ${{ secrets.VITE_GITHUB_PERSONAL_ACCESS_TOKEN }}
-    name: 'unit Test'
+    name: 'Unit, component and server tests'
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
@@ -20,11 +20,13 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: 'pnpm'
-      - name: installing dependencies
+      - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      - name: running test
+      - name: Check Svelte and TypeScript
+        run: pnpm run check
+      - name: Run unit tests
         run: pnpm run test
-      - name: building and testing Lambda@Edge adapter
+      - name: Build and test Lambda@Edge adapter
         run: pnpm run build && pnpm run test:adapter
 
   website-e2e:
