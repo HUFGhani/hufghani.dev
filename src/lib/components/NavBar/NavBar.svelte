@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { getContext, onMount } from 'svelte';
-	import { resolve } from '$app/paths';
 	import { MENULINK } from '$lib/config';
 
 	const featureFlags = getContext<Record<string, boolean>>('featureFlags');
@@ -28,14 +27,14 @@
 </script>
 
 <header class="flex w-full items-center justify-between border-b border-base-content/10 py-6">
-	<a href={resolve('/')} aria-label="hufghani.dev home" class="text-sm font-semibold tracking-tight text-base-content transition-colors hover:opacity-75">
+	<a href="/" aria-label="hufghani.dev home" class="text-sm font-semibold tracking-tight text-base-content transition-colors hover:opacity-75">
 		hufghani<span class="text-primary">.</span>dev
 	</a>
 
 	<nav aria-label="Main navigation" class="flex items-center gap-4 text-sm text-base-content/70 sm:gap-7">
 		{#each menuLinks as item}
 			<a
-				href={resolve(`/${item.link}` as never)}
+				href={`/${item.link}`}
 				aria-label={item.fullTitle ?? item.title}
 				class="transition-colors duration-200 hover:text-base-content"
 				{...(item.isExternal ? { target: '_blank', rel: 'noreferrer' } : {})}
