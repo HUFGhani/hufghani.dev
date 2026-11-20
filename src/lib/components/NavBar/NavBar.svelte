@@ -22,7 +22,6 @@
 				class="transition-colors duration-200 hover:text-white"
 				{...(item.isExternal ? { target: '_blank', rel: 'noreferrer' } : {})}
 			>
-				<span aria-hidden="true" class="mr-1.5 font-mono text-xs text-zinc-600">{String(index + 1).padStart(2, '0')}</span>
 				{item.title}
 			</a>
 		{/each}
