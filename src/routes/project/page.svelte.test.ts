@@ -58,21 +58,23 @@ describe('projects page', () => {
 
 		expect(getByRole('heading', { level: 1, name: /Projects/ })).toBeInTheDocument();
 		expect(getByRole('textbox', { name: 'Search projects' })).toBeInTheDocument();
-		await waitFor(() => expect(getByTextSafe('Project 1')).toBeInTheDocument());
+		await waitFor(() =>
+			expect(getByRole('heading', { level: 2, name: 'Project 1' })).toBeInTheDocument()
+		);
 	});
 
 	it('shows projects in pages of nine and navigates to the next page', async () => {
 		const { getByRole, queryByRole } = renderProjectsPage();
 
-		await waitFor(() => expect(getByRole('link', { name: /Project 1/ })).toBeInTheDocument());
-		expect(getByRole('link', { name: /Project 9/ })).toBeInTheDocument();
-		expect(queryByRole('link', { name: /Project 10/ })).not.toBeInTheDocument();
+		await waitFor(() => expect(getByRole('heading', { level: 2, name: 'Project 1' })).toBeInTheDocument());
+		expect(getByRole('heading', { level: 2, name: 'Project 9' })).toBeInTheDocument();
+		expect(queryByRole('heading', { level: 2, name: 'Project 10' })).not.toBeInTheDocument();
 
 		fireEvent.click(getByRole('button', { name: 'Next page' }));
 
 		await waitFor(() => {
-			expect(getByRole('link', { name: /Project 10/ })).toBeInTheDocument();
-			expect(queryByRole('link', { name: /Project 1/ })).not.toBeInTheDocument();
+			expect(getByRole('heading', { level: 2, name: 'Project 10' })).toBeInTheDocument();
+			expect(queryByRole('heading', { level: 2, name: 'Project 1' })).not.toBeInTheDocument();
 		});
 		expect(window.location.search).toContain('page=2');
 	});
@@ -85,7 +87,7 @@ describe('projects page', () => {
 		await fireEvent.input(search, { target: { value: 'Project 2' } });
 
 		await waitFor(() => {
-			expect(getByRole('link', { name: /Project 2/ })).toBeInTheDocument();
+			expect(getByRole('heading', { level: 2, name: 'Project 2' })).toBeInTheDocument();
 			expect(queryByRole('link', { name: /Project 1/ })).not.toBeInTheDocument();
 		});
 		expect(window.location.search).toContain('q=Project');
@@ -107,8 +109,8 @@ describe('projects page', () => {
 		const { queryByRole } = renderProjectsPage();
 
 		await waitFor(() => expect(queryByRole('link', { name: /Project 1/ })).toBeInTheDocument());
-		expect(queryByRole('link', { name: /Archived Project/ })).not.toBeInTheDocument();
-		expect(queryByRole('link', { name: /Template Project/ })).not.toBeInTheDocument();
-		expect(queryByRole('link', { name: /hufghani dev/ })).not.toBeInTheDocument();
+		expect(queryByRole('heading', { level: 2, name: 'Archived Project' })).not.toBeInTheDocument();
+		expect(queryByRole('heading', { level: 2, name: 'Template Project' })).not.toBeInTheDocument();
+		expect(queryByRole('heading', { level: 2, name: 'hufghani dev' })).not.toBeInTheDocument();
 	});
 });
