@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
+	import { resolve } from '$app/paths';
 	import { MetaTags } from '$lib/components/MetaTags';
 
 	const featureFlags = getContext<Record<string, boolean>>('featureFlags');
@@ -24,7 +25,7 @@
 			I’m a software engineer who enjoys turning complex problems into clear, useful experiences. I work across the stack, keep learning, and like sharing what I discover along the way.
 		</p>
 		<div class="mt-10 flex flex-wrap items-center gap-4">
-			<a href="/project" class="btn btn-primary rounded-full">Explore my work <span aria-hidden="true">↗</span></a>
+			<a href={resolve('/project')} class="btn btn-primary rounded-full">Explore my work <span aria-hidden="true">↗</span></a>
 		</div>
 	</div>
 
@@ -52,7 +53,7 @@
 	</div>
 
 	<div class="mt-9 grid gap-4 md:grid-cols-3">
-		<a href="/project" class="card card-border bg-base-200/20 transition duration-200 hover:-translate-y-1 hover:bg-base-200/50">
+		<a href={resolve('/project')} class="card card-border bg-base-200/20 transition duration-200 hover:-translate-y-1 hover:bg-base-200/50">
 			<div class="card-body">
 				<p class="text-xs uppercase tracking-[0.18em] text-base-content/50">01 / Work</p>
 				<h3 class="card-title mt-5">Projects <span class="text-primary transition group-hover:translate-x-1">↗</span></h3>
@@ -60,7 +61,7 @@
 			</div>
 		</a>
 		{#if featureFlags?.showBlog === true}
-		<a href="/blog" class="card card-border bg-base-200/20 transition duration-200 hover:-translate-y-1 hover:bg-base-200/50">
+		<a href={resolve('/blog' as never)} class="card card-border bg-base-200/20 transition duration-200 hover:-translate-y-1 hover:bg-base-200/50">
 			<div class="card-body">
 				<p class="text-xs uppercase tracking-[0.18em] text-base-content/50">02 / Notes</p>
 				<h3 class="card-title mt-5">Writing <span class="text-primary">↗</span></h3>
@@ -68,7 +69,7 @@
 			</div>
 		</a>
 		{/if}
-		<a href="/docs/Curriculum-Vitae.pdf" target="_blank" rel="noreferrer" class="card card-border bg-base-200/20 transition duration-200 hover:-translate-y-1 hover:bg-base-200/50">
+		<a href={resolve('/docs/Curriculum-Vitae.pdf' as never)} target="_blank" rel="noreferrer" class="card card-border bg-base-200/20 transition duration-200 hover:-translate-y-1 hover:bg-base-200/50">
 			<div class="card-body">
 				<p class="text-xs uppercase tracking-[0.18em] text-base-content/50">{featureFlags?.showBlog === true ? '03' : '02'} / Background</p>
 				<h3 class="card-title mt-5">Experience <span class="text-primary">↗</span></h3>
