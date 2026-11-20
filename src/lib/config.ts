@@ -60,6 +60,7 @@ export const NON_PROJECT: string[] = [
 	'hacknotts',
 	'anvil hack',
 	'old hufghani dev',
+	'hufghani dev',
 	'new hufghani dev',
 	'ddclient docker',
 	'HUFGHANI',
