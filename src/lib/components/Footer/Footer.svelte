@@ -2,7 +2,7 @@
 	import { AUTHORNAME, SOCIAL_LINKS } from '$lib/config';
 </script>
 
-<footer data-testid="footer" class="flex flex-col gap-5 border-t border-white/10 py-8 text-sm text-zinc-500 sm:flex-row sm:items-center sm:justify-between">
+<footer data-testid="footer" class="flex flex-col gap-5 border-t border-base-content/10 py-8 text-sm text-base-content/60 sm:flex-row sm:items-center sm:justify-between">
 	<p data-testid="copyRight-year">© 2017–{new Date().getFullYear()} {AUTHORNAME}</p>
 	<nav aria-label="Social links" class="flex flex-wrap items-center gap-5">
 		{#each SOCIAL_LINKS as { title, link }}
@@ -10,7 +10,7 @@
 				href={link}
 				target="_blank"
 				rel="noreferrer"
-				class="transition-colors hover:text-zinc-100"
+				class="transition-colors hover:text-base-content"
 			>
 				{title}
 			</a>
