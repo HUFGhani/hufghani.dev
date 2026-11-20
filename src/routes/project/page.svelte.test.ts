@@ -91,6 +91,22 @@ describe('projects page', () => {
 		expect(window.location.search).not.toContain('page=');
 	});
 
+	it('clears the search and restores the full project list', async () => {
+		const { getByRole } = renderProjectsPage();
+		const search = getByRole('searchbox', { name: 'Search projects' });
+		await fireEvent.input(search, { target: { value: 'Project 2' } });
+		await waitFor(() => expect(getByRole('heading', { level: 2, name: 'Project 2' })).toBeInTheDocument());
+
+		await fireEvent.input(search, { target: { value: '' } });
+
+		await waitFor(() => {
+			expect(search).toHaveValue('');
+			expect(getByRole('heading', { level: 2, name: 'Project 1' })).toBeInTheDocument();
+			expect(getByRole('button', { name: 'Next page' })).toBeInTheDocument();
+		});
+		expect(window.location.search).not.toContain('q=');
+	});
+
 	it('restores the search and page from the URL on mount', async () => {
 		window.history.replaceState({}, '', '/project/?q=Project&page=2');
 		const { getByRole, queryByRole } = renderProjectsPage();
