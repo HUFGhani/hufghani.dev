@@ -72,7 +72,7 @@
 						<div class="card-body p-6"><div class="mb-7 flex items-start justify-between gap-4">
 							<div class="avatar placeholder"><div class="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
 								<svg aria-hidden="true" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M8 17l-5-5 5-5M16 7l5 5-5 5M14 4l-4 16"/></svg>
-							</div>
+							</div></div>
 							<svg aria-hidden="true" class="h-4 w-4 text-base-content/40 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17 17 7M8 7h9v9"/></svg>
 						</div>
 						<h2 class="card-title mb-3 text-lg font-semibold capitalize tracking-tight">{cleanProjectTitle(repo.name)}</h2>
