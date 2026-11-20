@@ -22,20 +22,13 @@ jobs:
           cache: 'pnpm'
       - name: installing dependencies
         run: pnpm install --frozen-lockfile
-      - name: Install Playwright Browsers
-        run: pnpm exec playwright install --with-deps
       - name: running test
         run: pnpm run test
       - name: building and testing Lambda@Edge adapter
         run: pnpm run build && pnpm run test:adapter
-      - name: Upload test report
-        if: always()
-        uses: actions/upload-artifact@v4.6.2
-        with:
-          name: playwright-report
-          path: playwright-report/
 
   website-e2e:
+    needs: [website-test]
     env:
       VITE_GRAPHQL_ENDPOINT: ${{ secrets.VITE_GRAPHQL_ENDPOINT }}
       VITE_GITHUB_PERSONAL_ACCESS_TOKEN: ${{ secrets.VITE_GITHUB_PERSONAL_ACCESS_TOKEN }}
