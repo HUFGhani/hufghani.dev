@@ -26,43 +26,56 @@
 	const cleanProjectTitle = (title: string) =>
 		title === 'api.hufghani.dev' ? title : title.replace(/[_.-]/g, ' ').replace(/\s+/g, ' ').trim();
 
+	const normalizeSearchText = (value: string) => value.trim().toLowerCase().replace(/\s+/g, ' ');
+
 	const languageIcons: Record<string, string> = {
-		'c': 'c/c-original.svg',
+		c: 'c/c-original.svg',
 		'c++': 'cplusplus/cplusplus-original.svg',
 		'c#': 'csharp/csharp-original.svg',
-		'css': 'css3/css3-original.svg',
-		'dart': 'dart/dart-original.svg',
-		'go': 'go/go-original.svg',
-		'html': 'html5/html5-original.svg',
-		'java': 'java/java-original.svg',
-		'javascript': 'javascript/javascript-original.svg',
-		'kotlin': 'kotlin/kotlin-original.svg',
-		'php': 'php/php-original.svg',
-		'python': 'python/python-original.svg',
-		'ruby': 'ruby/ruby-original.svg',
-		'rust': 'rust/rust-original.svg',
-		'shell': 'bash/bash-original.svg',
-		'swift': 'swift/swift-original.svg',
-		'typescript': 'typescript/typescript-original.svg'
+		css: 'css3/css3-original.svg',
+		dart: 'dart/dart-original.svg',
+		go: 'go/go-original.svg',
+		html: 'html5/html5-original.svg',
+		java: 'java/java-original.svg',
+		javascript: 'javascript/javascript-original.svg',
+		kotlin: 'kotlin/kotlin-original.svg',
+		php: 'php/php-original.svg',
+		python: 'python/python-original.svg',
+		ruby: 'ruby/ruby-original.svg',
+		rust: 'rust/rust-original.svg',
+		shell: 'bash/bash-original.svg',
+		swift: 'swift/swift-original.svg',
+		typescript: 'typescript/typescript-original.svg'
 	};
 
-	const getLanguageIcon = (language: string) => languageIcons[language.toLowerCase()];
-	const getProjectLanguage = (repoName: string, language?: string | null) =>
-		repoName.toLowerCase() === 'museum of transport greater manchester' ? 'Java' : language;
+	const excludedProjects = new Set(NON_PROJECT.map(normalizeSearchText));
 
-	const excludedProjects = new Set(NON_PROJECT.map((name) => name.toLowerCase().trim()));
-
-	const projects = repos.filter((repo) => {
-		const normalizedName = cleanProjectTitle(repo.name).toLowerCase().trim();
-		return !repo.isArchived && !repo.isTemplate && !excludedProjects.has(normalizedName);
-	});
-
-	const filteredProjects = $derived(
-		projects.filter((repo) => {
-			const searchable = `${repo.name} ${cleanProjectTitle(repo.name)} ${repo.description ?? ''} ${getProjectLanguage(repo.name, repo.primaryLanguage?.name) ?? ''}`;
-			const normalizedSearch = query.trim().toLowerCase().replace(/\s+/g, ' ');
-			return searchable.toLowerCase().replace(/\s+/g, ' ').includes(normalizedSearch);
+	const projects = repos
+		.filter((repo) => {
+			const normalizedName = normalizeSearchText(cleanProjectTitle(repo.name));
+			return !repo.isArchived && !repo.isTemplate && !excludedProjects.has(normalizedName);
 		})
+		.map((repo) => {
+			const title = cleanProjectTitle(repo.name);
+			const language =
+				repo.name.toLowerCase() === 'museum of transport greater manchester'
+					? 'Java'
+					: (repo.primaryLanguage?.name ?? null);
+
+			return {
+				...repo,
+				title,
+				language,
+				languageIcon: language ? languageIcons[language.toLowerCase()] : undefined,
+				searchText: normalizeSearchText(
+					`${repo.name} ${title} ${repo.description ?? ''} ${language ?? ''}`
+				)
+			};
+		});
+
+	const normalizedQuery = $derived(normalizeSearchText(query));
+	const filteredProjects = $derived(
+		projects.filter((project) => project.searchText.includes(normalizedQuery))
 	);
 	const totalPages = $derived(Math.ceil(filteredProjects.length / pageSize));
 	const safePage = $derived(totalPages === 0 ? 1 : Math.min(currentPage, totalPages));
@@ -127,14 +140,14 @@
 							</div></div>
 							<svg aria-hidden="true" class="h-4 w-4 text-base-content/40 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17 17 7M8 7h9v9"/></svg>
 						</div>
-						<h2 class="card-title mb-3 text-lg font-semibold capitalize tracking-tight">{cleanProjectTitle(repo.name)}</h2>
+						<h2 class="card-title mb-3 text-lg font-semibold capitalize tracking-tight">{repo.title}</h2>
 						<p class="line-clamp-3 flex-1 text-sm leading-6 text-base-content/65">{repo.description || 'A personal project and exploration in software development.'}</p>
 						<div class="mt-6 flex items-center gap-2">
-							{#if getProjectLanguage(repo.name, repo.primaryLanguage?.name)}
+							{#if repo.language}
 								<span class="badge badge-outline badge-sm gap-1.5">
-									{#if getLanguageIcon(getProjectLanguage(repo.name, repo.primaryLanguage?.name)!)}
+									{#if repo.languageIcon}
 										<img
-											src={`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${getLanguageIcon(getProjectLanguage(repo.name, repo.primaryLanguage?.name)!)}`}
+											src={`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${repo.languageIcon}`}
 											alt=""
 											aria-hidden="true"
 											class="h-3.5 w-3.5 object-contain"
@@ -143,7 +156,7 @@
 									{:else}
 										<svg aria-hidden="true" class="h-3.5 w-3.5 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m8 17-5-5 5-5M16 7l5 5-5 5M14 4l-4 16"/></svg>
 									{/if}
-									{getProjectLanguage(repo.name, repo.primaryLanguage?.name)}
+									{repo.language}
 								</span>
 							{:else}
 							<span class="badge badge-ghost badge-sm">Repository</span>
