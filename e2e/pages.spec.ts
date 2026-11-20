@@ -46,10 +46,14 @@ const repositoryResponse = {
 };
 
 test.describe('homepage', () => {
-	test('shows the introduction and primary navigation', async ({ page }) => {
+	test('shows the introduction, metadata and primary navigation', async ({ page }) => {
 		await page.goto('/');
 
 		await expect(page).toHaveTitle(/Hamza Ghani/);
+		await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+			'href',
+			'https://hufghani.dev/'
+		);
 		await expect(page.getByRole('heading', { level: 1, name: /Hello, I'm Hamza/ })).toBeVisible();
 		await expect(page.getByRole('link', { name: /Explore my work/ })).toHaveAttribute(
 			'href',
@@ -62,11 +66,25 @@ test.describe('homepage', () => {
 		await page.goto('/');
 
 		await expect(page.getByRole('link', { name: /Writing/ })).toHaveCount(0);
+		await expect(page.getByRole('link', { name: /Blog/ })).toHaveCount(0);
 		await expect(page.getByRole('link', { name: /Projects/ })).toHaveAttribute('href', '/project');
 		await expect(page.getByRole('link', { name: /Experience/ })).toHaveAttribute(
 			'href',
 			'/docs/Curriculum-Vitae.pdf'
 		);
+	});
+
+	test('switches between light and dark themes and remembers the selection', async ({ page }) => {
+		await page.goto('/');
+
+		await page.getByRole('button', { name: 'Switch to light mode' }).click();
+		await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+
+		await page.reload();
+		await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+
+		await page.getByRole('button', { name: 'Switch to dark mode' }).click();
+		await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
 	});
 });
 
@@ -87,6 +105,10 @@ test.describe('projects page', () => {
 
 	test('renders project metadata, heading and project cards', async ({ page }) => {
 		await expect(page).toHaveTitle(/Projects/);
+		await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+			'href',
+			'https://hufghani.dev/project/'
+		);
 		await expect(page.getByRole('heading', { level: 1, name: 'Projects.' })).toBeVisible();
 		await expect(page.getByRole('textbox', { name: 'Search projects' })).toBeVisible();
 		await expect(page.getByRole('heading', { level: 2, name: 'Project 1' })).toBeVisible();
