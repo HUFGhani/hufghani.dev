@@ -51,8 +51,9 @@
 
 	const filteredProjects = $derived(
 		projects.filter((repo) => {
-			const searchable = `${cleanProjectTitle(repo.name)} ${repo.description ?? ''} ${repo.primaryLanguage?.name ?? ''}`;
-			return searchable.toLowerCase().includes(query.trim().toLowerCase());
+			const searchable = `${repo.name} ${cleanProjectTitle(repo.name)} ${repo.description ?? ''} ${repo.primaryLanguage?.name ?? ''}`;
+			const normalizedSearch = query.trim().toLowerCase().replace(/\s+/g, ' ');
+			return searchable.toLowerCase().replace(/\s+/g, ' ').includes(normalizedSearch);
 		})
 	);
 </script>
