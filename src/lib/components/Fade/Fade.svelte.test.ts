@@ -1,23 +1,21 @@
-import { render, waitFor } from '@testing-library/svelte';
+import { render } from '@testing-library/svelte';
 import { describe, expect, it } from 'vitest';
-import Fade from './Fade.svelte';
+import FadeTestHost from './FadeTestHost.svelte';
 
 describe('Fade', () => {
 	it('does not render its content while hidden in tests', () => {
-		const { queryByText } = render(Fade, {
-			props: { visible: false },
-			slots: { default: 'Fading content' }
+		const { queryByText } = render(FadeTestHost, {
+			props: { visible: false }
 		});
 
 		expect(queryByText('Fading content')).not.toBeInTheDocument();
 	});
 
-	it('renders its content when visible', async () => {
-		const { getByText } = render(Fade, {
-			props: { visible: true },
-			slots: { default: 'Fading content' }
+	it('renders its content when visible', () => {
+		const { getByText } = render(FadeTestHost, {
+			props: { visible: true }
 		});
 
-		await waitFor(() => expect(getByText('Fading content')).toBeInTheDocument());
+		expect(getByText('Fading content')).toBeInTheDocument();
 	});
 });
