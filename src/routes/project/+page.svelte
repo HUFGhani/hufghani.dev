@@ -16,11 +16,14 @@
 	});
 
 	const cleanProjectTitle = (title: string) =>
-		title !== 'api.hufghani.dev' ? title.replace(/_|-|\\./g, ' ') : title;
+		title !== 'api.hufghani.dev' ? title.replace(/[_-.]/g, ' ').replace(/\\s+/g, ' ').trim() : title;
 
-	const projects = repos.filter(
-		(repo) => !repo.isArchived && !repo.isTemplate && !NON_PROJECT.includes(cleanProjectTitle(repo.name))
-	);
+	const excludedProjects = new Set(NON_PROJECT.map((name) => name.toLowerCase().trim()));
+
+	const projects = repos.filter((repo) => {
+		const normalizedName = cleanProjectTitle(repo.name).toLowerCase().trim();
+		return !repo.isArchived && !repo.isTemplate && !excludedProjects.has(normalizedName);
+	});
 
 	const filteredProjects = $derived(
 		projects.filter((repo) => {
