@@ -111,9 +111,9 @@ test.describe('projects page', () => {
 		);
 		await expect(page.getByRole('heading', { level: 1, name: 'Projects.' })).toBeVisible();
 		await expect(page.getByRole('textbox', { name: 'Search projects' })).toBeVisible();
-		await expect(page.getByRole('heading', { level: 2, name: 'Project 1' })).toBeVisible();
-		await expect(page.getByRole('heading', { level: 2, name: 'Project 9' })).toBeVisible();
-		await expect(page.getByRole('heading', { level: 2, name: 'Project 10' })).toHaveCount(0);
+		await expect(page.getByRole('heading', { level: 2, name: 'Project 1', exact: true })).toBeVisible();
+		await expect(page.getByRole('heading', { level: 2, name: 'Project 9', exact: true })).toBeVisible();
+		await expect(page.getByRole('heading', { level: 2, name: 'Project 10', exact: true })).toHaveCount(0);
 	});
 
 	test('filters projects and reflects the search in the URL', async ({ page }) => {
@@ -121,20 +121,21 @@ test.describe('projects page', () => {
 
 		await search.fill('Project 2');
 
-		await expect(page.getByRole('heading', { level: 2, name: 'Project 2' })).toBeVisible();
-		await expect(page.getByRole('heading', { level: 2, name: 'Project 1' })).toHaveCount(0);
-		await expect(page).toHaveURL(/q=Project%202/);
+		await expect(page.getByRole('heading', { level: 2, name: 'Project 2', exact: true })).toBeVisible();
+		await expect(page.getByRole('heading', { level: 2, name: 'Project 1', exact: true })).toHaveCount(0);
+		// URLSearchParams serializes spaces as "+"; accept either valid URL encoding.
+		await expect(page).toHaveURL(/q=Project(?:\+|%20)2/);
 	});
 
 	test('paginates projects and updates the page query parameter', async ({ page }) => {
 		await page.getByRole('button', { name: 'Next page' }).click();
 
-		await expect(page.getByRole('heading', { level: 2, name: 'Project 10' })).toBeVisible();
-		await expect(page.getByRole('heading', { level: 2, name: 'Project 1' })).toHaveCount(0);
+		await expect(page.getByRole('heading', { level: 2, name: 'Project 10', exact: true })).toBeVisible();
+		await expect(page.getByRole('heading', { level: 2, name: 'Project 1', exact: true })).toHaveCount(0);
 		await expect(page).toHaveURL(/page=2/);
 
 		await page.getByRole('button', { name: 'Previous page' }).click();
-		await expect(page.getByRole('heading', { level: 2, name: 'Project 1' })).toBeVisible();
+		await expect(page.getByRole('heading', { level: 2, name: 'Project 1', exact: true })).toBeVisible();
 		await expect(page).not.toHaveURL(/page=2/);
 	});
 
