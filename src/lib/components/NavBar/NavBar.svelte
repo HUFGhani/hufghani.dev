@@ -4,14 +4,13 @@
 	import { MENULINK } from '$lib/config';
 
 	const featureFlags = getContext<Record<string, boolean>>('featureFlags');
+	let theme = $state<'light' | 'dark'>('dark');
 	const menuLinks = $derived(
 		MENULINK.filter(({ title }) => title.toLowerCase() !== 'blog' || featureFlags?.showBlog === true)
 	);
 	const themeActionLabel = $derived(
 		theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'
 	);
-
-	let theme = $state<'light' | 'dark'>('dark');
 
 	onMount(() => {
 		const savedTheme = localStorage.getItem('theme');
