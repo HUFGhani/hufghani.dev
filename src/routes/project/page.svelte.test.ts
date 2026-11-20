@@ -83,12 +83,12 @@ describe('projects page', () => {
 		const { getByRole, queryByRole } = renderProjectsPage();
 		const search = getByRole('textbox', { name: 'Search projects' });
 
-		await waitFor(() => expect(getByRole('link', { name: /Project 1/ })).toBeInTheDocument());
+		await waitFor(() => expect(getByRole('heading', { level: 2, name: 'Project 1' })).toBeInTheDocument());
 		await fireEvent.input(search, { target: { value: 'Project 2' } });
 
 		await waitFor(() => {
 			expect(getByRole('heading', { level: 2, name: 'Project 2' })).toBeInTheDocument();
-			expect(queryByRole('link', { name: /Project 1/ })).not.toBeInTheDocument();
+			expect(queryByRole('heading', { level: 2, name: 'Project 1' })).not.toBeInTheDocument();
 		});
 		expect(window.location.search).toContain('q=Project');
 	});
