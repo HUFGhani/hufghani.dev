@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test, type Page } from '@playwright/test';
 
 const repositories = Array.from({ length: 11 }, (_, index) => ({
 	name: `Project ${index + 1}`,
@@ -49,7 +49,7 @@ const emptyRepositoryResponse = {
 	data: { viewer: { repositories: { nodes: [] } } }
 };
 
-const mockRepositories = async (page, response = repositoryResponse, status = 200) => {
+const mockRepositories = async (page: Page, response: unknown = repositoryResponse, status = 200) => {
 	await page.route('**/api/repositories', async (route) => {
 		await route.fulfill({
 			status,
