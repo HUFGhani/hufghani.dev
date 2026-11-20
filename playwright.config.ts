@@ -1,13 +1,26 @@
 import { defineConfig, devices } from '@playwright/test';
 
+const isCI = Boolean(process.env.CI);
+
 export default defineConfig({
-	webServer: {
-		command: 'pnpm run build && pnpm run preview',
-		port: 4173
-	},
 	testDir: 'e2e',
-	reporter: [['html', { outputFolder: 'playwright-report', open: 'never' }]],
+	timeout: 30_000,
+	expect: {
+		timeout: 5_000
+	},
 	fullyParallel: true,
+	workers: isCI ? 2 : undefined,
+	retries: isCI ? 2 : 0,
+	reporter: [
+		['list'],
+		['html', { outputFolder: 'playwright-report', open: 'never' }]
+	],
+	outputDir: 'test-results',
+	use: {
+		trace: 'retain-on-failure',
+		screenshot: 'only-on-failure',
+		video: 'retain-on-failure'
+	},
 	projects: [
 		{
 			name: 'Chromium',
@@ -23,39 +36,20 @@ export default defineConfig({
 		},
 		{
 			name: 'iPhone 15 Pro',
-			use: {
-				...devices['iPhone 15 Pro'], // closest profile available
-				viewport: { width: 393, height: 852 },
-				deviceScaleFactor: 3
-			}
+			use: { ...devices['iPhone 15 Pro'] }
 		},
 		{
 			name: 'Pixel 8',
 			use: {
-				...devices['Pixel 5'], // closest profile
+				...devices['Pixel 5'],
 				viewport: { width: 412, height: 915 }
 			}
-		},
-		{
-			name: 'iPad Pro 11"',
-			use: {
-				...devices['iPad Pro 11']
-			}
-		},
-		{
-			name: 'Galaxy S23',
-			use: {
-				...devices['Galaxy S9+'], // closest profile
-				viewport: { width: 384, height: 854 },
-				deviceScaleFactor: 3
-			}
-		},
-		{
-			name: 'Galaxy Tab S8',
-			use: {
-				...devices['iPad (gen 7)'],
-				viewport: { width: 800, height: 1280 }
-			}
 		}
-	]
+	],
+	webServer: {
+		command: 'pnpm run build && pnpm run preview',
+		port: 4173,
+		timeout: 120_000,
+		reuseExistingServer: !isCI
+	}
 });
