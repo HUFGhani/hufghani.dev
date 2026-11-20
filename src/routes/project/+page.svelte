@@ -18,6 +18,28 @@
 	const cleanProjectTitle = (title: string) =>
 		title === 'api.hufghani.dev' ? title : title.replace(/[_.-]/g, ' ').replace(/\s+/g, ' ').trim();
 
+	const languageIcons: Record<string, string> = {
+		'c': 'c/c-original.svg',
+		'c++': 'cplusplus/cplusplus-original.svg',
+		'c#': 'csharp/csharp-original.svg',
+		'css': 'css3/css3-original.svg',
+		'dart': 'dart/dart-original.svg',
+		'go': 'go/go-original.svg',
+		'html': 'html5/html5-original.svg',
+		'java': 'java/java-original.svg',
+		'javascript': 'javascript/javascript-original.svg',
+		'kotlin': 'kotlin/kotlin-original.svg',
+		'php': 'php/php-original.svg',
+		'python': 'python/python-original.svg',
+		'ruby': 'ruby/ruby-original.svg',
+		'rust': 'rust/rust-original.svg',
+		'shell': 'bash/bash-original.svg',
+		'swift': 'swift/swift-original.svg',
+		'typescript': 'typescript/typescript-original.svg'
+	};
+
+	const getLanguageIcon = (language: string) => languageIcons[language.toLowerCase()];
+
 	const excludedProjects = new Set(NON_PROJECT.map((name) => name.toLowerCase().trim()));
 
 	const projects = repos.filter((repo) => {
@@ -82,8 +104,18 @@
 						<p class="line-clamp-3 flex-1 text-sm leading-6 text-base-content/65">{repo.description || 'A personal project and exploration in software development.'}</p>
 						<div class="mt-6 flex items-center gap-2">
 							{#if repo.primaryLanguage?.name}
-								<span class="badge badge-outline badge-sm">
-									<span class="h-1.5 w-1.5 rounded-full bg-primary"></span>
+								<span class="badge badge-outline badge-sm gap-1.5">
+									{#if getLanguageIcon(repo.primaryLanguage.name)}
+										<img
+											src={`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${getLanguageIcon(repo.primaryLanguage.name)}`}
+											alt=""
+											aria-hidden="true"
+											class="h-3.5 w-3.5 object-contain"
+											loading="lazy"
+										/>
+									{:else}
+										<svg aria-hidden="true" class="h-3.5 w-3.5 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m8 17-5-5 5-5M16 7l5 5-5 5M14 4l-4 16"/></svg>
+									{/if}
 									{repo.primaryLanguage.name}
 								</span>
 							{:else}
