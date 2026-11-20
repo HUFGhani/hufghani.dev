@@ -105,8 +105,8 @@
 	<section class="mx-auto w-full max-w-6xl px-5 pb-20 pt-8 sm:px-8 lg:px-10">
 		<div class="mb-12 flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
 			<div class="max-w-2xl">
-				<p class="mb-4 text-sm font-medium tracking-[0.18em] text-[var(--accent)] uppercase">Things I've built</p>
-				<h1 class="text-4xl font-semibold tracking-tight sm:text-5xl">Projects<span class="text-[var(--accent)]">.</span></h1>
+				<p class="mb-4 text-sm font-medium tracking-[0.18em] text-primary uppercase">Things I've built</p>
+				<h1 class="text-4xl font-semibold tracking-tight sm:text-5xl">Projects<span class="text-primary">.</span></h1>
 				<p class="mt-5 max-w-xl text-base leading-7 text-[var(--muted)] sm:text-lg">
 					A collection of side projects, experiments and open-source work. A little bit of everything—from useful tools to ideas explored in code.
 				</p>
@@ -138,7 +138,7 @@
 							<div class="avatar placeholder"><div class="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
 								<svg aria-hidden="true" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M8 17l-5-5 5-5M16 7l5 5-5 5M14 4l-4 16"/></svg>
 							</div></div>
-							<svg aria-hidden="true" class="h-4 w-4 text-base-content/40 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17 17 7M8 7h9v9"/></svg>
+							<svg aria-hidden="true" class="h-4 w-4 text-base-content/40 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17 17 7M8 7h9v9"/></svg>
 						</div>
 						<h2 class="card-title mb-3 text-lg font-semibold capitalize tracking-tight">{repo.title}</h2>
 						<p class="line-clamp-3 flex-1 text-sm leading-6 text-base-content/65">{repo.description || 'A personal project and exploration in software development.'}</p>
