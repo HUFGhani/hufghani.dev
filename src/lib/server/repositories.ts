@@ -3,7 +3,7 @@ import { GET_USER_REPOS } from '$lib/queries';
 
 export async function getRepositories(): Promise<Response> {
 	try {
-		const data = await fetch(import.meta.env.VITE_GRAPHQL_ENDPOINT, {
+		const response = await fetch(import.meta.env.VITE_GRAPHQL_ENDPOINT, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -12,10 +12,16 @@ export async function getRepositories(): Promise<Response> {
 			body: JSON.stringify({
 				query: GET_USER_REPOS.loc?.source.body ?? ''
 			})
-		}).then((response) => response.json());
+		});
 
-		if (Array.isArray(data) && data.length === 0) {
-			throw new Error('No data found');
+		if (!response.ok) {
+			throw new Error(`GitHub API request failed with status ${response.status}`);
+		}
+
+		const data = await response.json();
+
+		if ((Array.isArray(data) && data.length === 0) || data.errors?.length) {
+			throw new Error('GitHub returned an unsuccessful GraphQL response');
 		}
 
 		return json(data, { status: 200 });
