@@ -9,8 +9,17 @@
 	import { onMount } from 'svelte';
 	import type { PageData } from './$types';
 
+	interface Repository {
+		name: string;
+		url: string;
+		description?: string | null;
+		isArchived: boolean;
+		isTemplate: boolean;
+		primaryLanguage?: { name: string } | null;
+	}
+
 	let { data }: { data: PageData } = $props();
-	const { nodes: repos } = data.viewer.repositories;
+	const repos = $derived(data.viewer.repositories.nodes as Repository[]);
 
 	const pageSize = 9;
 	let visible = $state(false);
@@ -54,28 +63,30 @@
 
 	const excludedProjects = new Set(NON_PROJECT.map(normalizeSearchText));
 
-	const projects = repos
-		.filter((repo) => {
-			const normalizedName = normalizeSearchText(cleanProjectTitle(repo.name));
-			return !repo.isArchived && !repo.isTemplate && !excludedProjects.has(normalizedName);
-		})
-		.map((repo) => {
-			const title = cleanProjectTitle(repo.name);
-			const language =
-				repo.name.toLowerCase() === 'museum of transport greater manchester'
-					? 'Java'
-					: (repo.primaryLanguage?.name ?? null);
+	const projects = $derived(
+		repos
+			.filter((repo) => {
+				const normalizedName = normalizeSearchText(cleanProjectTitle(repo.name));
+				return !repo.isArchived && !repo.isTemplate && !excludedProjects.has(normalizedName);
+			})
+			.map((repo) => {
+				const title = cleanProjectTitle(repo.name);
+				const language =
+					repo.name.toLowerCase() === 'museum of transport greater manchester'
+						? 'Java'
+						: (repo.primaryLanguage?.name ?? null);
 
-			return {
-				...repo,
-				title,
-				language,
-				languageIcon: language ? languageIcons[language.toLowerCase()] : undefined,
-				searchText: normalizeSearchText(
-					`${repo.name} ${title} ${repo.description ?? ''} ${language ?? ''}`
-				)
-			};
-		});
+				return {
+					...repo,
+					title,
+					language,
+					languageIcon: language ? languageIcons[language.toLowerCase()] : undefined,
+					searchText: normalizeSearchText(
+						`${repo.name} ${title} ${repo.description ?? ''} ${language ?? ''}`
+					)
+				};
+			})
+	);
 
 	const normalizedQuery = $derived(normalizeSearchText(query));
 	const filteredProjects = $derived(
