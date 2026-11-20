@@ -1,11 +1,9 @@
 <script lang="ts">
-	import { setContext } from 'svelte';
+	import { setContext, type Snippet } from 'svelte';
 
-	type FeatureFlags = {
-		[key: string]: boolean;
-	};
+	type FeatureFlags = Record<string, boolean>;
 
-	let { children, flags }: { children: any; flags: FeatureFlags } = $props();
+	let { children, flags }: { children: Snippet; flags: FeatureFlags } = $props();
 
 	setContext('featureFlags', flags);
 </script>
