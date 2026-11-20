@@ -1,4 +1,3 @@
-import '@testing-library/jest-dom/vitest';
 import { fireEvent, render, waitFor } from '@testing-library/svelte';
 import { beforeEach, describe, expect, it } from 'vitest';
 import Page from './+page.svelte';
@@ -53,13 +52,18 @@ describe('projects page', () => {
 		window.history.replaceState({}, '', '/project/');
 	});
 
-	it('renders the page introduction and search field', async () => {
+	it('renders the page introduction, search field and SEO title', async () => {
 		const { getByRole } = renderProjectsPage();
 
 		expect(getByRole('heading', { level: 1, name: /Projects/ })).toBeInTheDocument();
 		expect(getByRole('textbox', { name: 'Search projects' })).toBeInTheDocument();
 		await waitFor(() =>
 			expect(getByRole('heading', { level: 2, name: 'Project 1' })).toBeInTheDocument()
+		);
+		expect(document.title).toContain('Projects');
+		expect(document.head.querySelector('link[rel="canonical"]')).toHaveAttribute(
+			'href',
+			'https://hufghani.dev/project/'
 		);
 	});
 
@@ -72,7 +76,7 @@ describe('projects page', () => {
 		expect(getByRole('heading', { level: 2, name: 'Project 9' })).toBeInTheDocument();
 		expect(queryByRole('heading', { level: 2, name: 'Project 10' })).not.toBeInTheDocument();
 
-		fireEvent.click(getByRole('button', { name: 'Next page' }));
+		await fireEvent.click(getByRole('button', { name: 'Next page' }));
 
 		await waitFor(() => {
 			expect(getByRole('heading', { level: 2, name: 'Project 10' })).toBeInTheDocument();
@@ -81,11 +85,13 @@ describe('projects page', () => {
 		expect(window.location.search).toContain('page=2');
 	});
 
-	it('filters projects from the search input and updates the URL', async () => {
+	it('filters projects and updates the URL when the search changes', async () => {
 		const { getByRole, queryByRole } = renderProjectsPage();
 		const search = getByRole('textbox', { name: 'Search projects' });
 
-		await waitFor(() => expect(getByRole('heading', { level: 2, name: 'Project 1' })).toBeInTheDocument());
+		await waitFor(() =>
+			expect(getByRole('heading', { level: 2, name: 'Project 1' })).toBeInTheDocument()
+		);
 		await fireEvent.input(search, { target: { value: 'Project 2' } });
 
 		await waitFor(() => {
@@ -93,9 +99,21 @@ describe('projects page', () => {
 			expect(queryByRole('heading', { level: 2, name: 'Project 1' })).not.toBeInTheDocument();
 		});
 		expect(window.location.search).toContain('q=Project');
+		expect(window.location.search).not.toContain('page=');
 	});
 
-	it('shows the empty state when no projects match', async () => {
+	it('restores the search and page from the URL on mount', async () => {
+		window.history.replaceState({}, '', '/project/?q=Project&page=2');
+		const { getByRole, queryByRole } = renderProjectsPage();
+
+		await waitFor(() => {
+			expect(getByRole('textbox', { name: 'Search projects' })).toHaveValue('Project');
+			expect(getByRole('heading', { level: 2, name: 'Project 10' })).toBeInTheDocument();
+		});
+		expect(queryByRole('heading', { level: 2, name: 'Project 1' })).not.toBeInTheDocument();
+	});
+
+	it('shows an empty state when no projects match', async () => {
 		const { getByRole, getByText } = renderProjectsPage();
 		const search = getByRole('textbox', { name: 'Search projects' });
 
@@ -105,7 +123,7 @@ describe('projects page', () => {
 		await fireEvent.input(search, { target: { value: 'no matching project' } });
 
 		await waitFor(() => {
-			expect(getByText(/No projects found/i)).toBeInTheDocument();
+			expect(getByText('No projects found')).toBeInTheDocument();
 		});
 	});
 
