@@ -1,5 +1,8 @@
 <script lang="ts">
+	import { getContext } from 'svelte';
 	import { MetaTags } from '$lib/components/MetaTags';
+
+	const featureFlags = getContext<Record<string, boolean>>('featureFlags');
 </script>
 
 <MetaTags
@@ -22,7 +25,6 @@
 		</p>
 		<div class="mt-10 flex flex-wrap items-center gap-4">
 			<a href="/project" class="btn btn-primary rounded-full">Explore my work <span aria-hidden="true">↗</span></a>
-			<a href="/blog" class="btn btn-ghost rounded-full text-base-content/65">Read the blog <span aria-hidden="true">↗</span></a>
 		</div>
 	</div>
 
@@ -57,6 +59,7 @@
 				<p class="text-sm leading-6 text-base-content/65">Things I’ve built, experiments, and open-source contributions.</p>
 			</div>
 		</a>
+		{#if featureFlags?.showBlog === true}
 		<a href="/blog" class="card card-border bg-base-200/20 transition duration-200 hover:-translate-y-1 hover:bg-base-200/50">
 			<div class="card-body">
 				<p class="text-xs uppercase tracking-[0.18em] text-base-content/50">02 / Notes</p>
@@ -64,6 +67,7 @@
 				<p class="text-sm leading-6 text-base-content/65">Notes and lessons from software engineering and the things I explore.</p>
 			</div>
 		</a>
+		{/if}
 		<a href="/docs/Curriculum-Vitae.pdf" target="_blank" rel="noreferrer" class="card card-border bg-base-200/20 transition duration-200 hover:-translate-y-1 hover:bg-base-200/50">
 			<div class="card-body">
 				<p class="text-xs uppercase tracking-[0.18em] text-base-content/50">03 / Background</p>
