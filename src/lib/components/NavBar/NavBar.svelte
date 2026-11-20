@@ -1,5 +1,9 @@
 <script lang="ts">
+	import { getContext } from 'svelte';
 	import { MENULINK } from '$lib/config';
+
+	const featureFlags = getContext<Record<string, boolean>>('featureFlags');
+	const menuLinks = $derived(MENULINK.filter(({ title }) => title.toLowerCase() !== 'blog' || featureFlags?.showBlog === true));
 </script>
 
 <header class="flex w-full items-center justify-between border-b border-white/10 py-6">
@@ -8,7 +12,7 @@
 	</a>
 
 	<nav aria-label="Main navigation" class="flex items-center gap-5 text-sm text-zinc-400 sm:gap-8">
-		{#each MENULINK as { link, title, isExternal, fullTitle }}
+		{#each menuLinks as { link, title, isExternal, fullTitle }}
 			<a
 				href={`/${link}`}
 				aria-label={fullTitle ?? title}
