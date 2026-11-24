@@ -137,10 +137,10 @@ test.describe('projects page', () => {
 		await page.getByRole('button', { name: 'Next page' }).click();
 		await expect(page.getByRole('heading', { level: 2, name: 'Project 10', exact: true })).toBeVisible();
 
-		await page.getByRole('searchbox', { name: 'Search projects' }).fill('Project 1');
-		await expect(page.getByRole('heading', { level: 2, name: 'Project 1', exact: true })).toBeVisible();
+		await page.getByRole('searchbox', { name: 'Search projects' }).fill('Project 2');
+		await expect(page.getByRole('heading', { level: 2, name: 'Project 2', exact: true })).toBeVisible();
 		await expect(page.getByRole('heading', { level: 2, name: 'Project 10', exact: true })).toHaveCount(0);
-		await expect.poll(() => new URL(page.url()).searchParams.get('q')).toBe('Project 1');
+		await expect.poll(() => new URL(page.url()).searchParams.get('q')).toBe('Project 2');
 		await expect(page).not.toHaveURL(/page=2/);
 	});
 
@@ -181,8 +181,9 @@ test.describe('projects page', () => {
 		await expect(pagination).toBeVisible();
 		await expect(pagination.getByRole('button', { name: 'Previous page' })).toBeDisabled();
 		await expect(pagination.getByRole('button', { name: 'Page 1' })).toHaveAttribute('aria-current', 'page');
+		await page.getByRole('searchbox', { name: 'Search projects' }).focus();
 		await page.keyboard.press('Tab');
-		await expect(page.getByRole('link', { name: /Project 1/ })).toBeFocused();
+		await expect(page.locator('a[href="https://github.com/HUFGhani/project-1"]')).toBeFocused();
 	});
 
 	test('paginates projects and updates the page query parameter', async ({ page }) => {
@@ -204,12 +205,14 @@ test.describe('projects page', () => {
 	});
 
 	test('shows a useful message when the API returns no projects', async ({ page }) => {
+		await page.unroute('**/api/repositories');
 		await mockRepositories(page, emptyRepositoryResponse);
 		await page.goto('/project/');
 		await expect(page.getByRole('status')).toContainText('No projects found');
 	});
 
 	test('shows a recoverable message when the repository API fails', async ({ page }) => {
+		await page.unroute('**/api/repositories');
 		await mockRepositories(page, {}, 500);
 		await page.goto('/project/');
 		await expect(page.getByRole('status')).toContainText('Unable to load projects');
