@@ -105,9 +105,7 @@ test.describe('homepage', () => {
 test.describe('projects page', () => {
 	test.beforeEach(async ({ page }) => {
 		await mockRepositories(page);
-		await page.goto('/');
-		await page.getByRole('link', { name: /Explore my work/ }).click();
-		await expect(page).toHaveURL(/project/);
+		await page.goto('/project/');
 	});
 
 	test('renders project metadata, accessible search and project cards', async ({ page }) => {
