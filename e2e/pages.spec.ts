@@ -84,8 +84,18 @@ test.describe('homepage', () => {
 		await expect(page.getByRole('link', { name: /Projects/ })).toHaveAttribute('href', '/project');
 		await expect(page.getByRole('link', { name: /Experience/ })).toHaveAttribute(
 			'href',
-			'/docs/Curriculum-Vitae.pdf'
+			'/experience'
 		);
+	});
+
+	test('shows the privacy-conscious professional experience page', async ({ page }) => {
+		await page.goto('/experience');
+
+		await expect(page).toHaveTitle(/Professional Experience/);
+		await expect(page.getByRole('heading', { level: 1, name: 'Hamza Ghani.' })).toBeVisible();
+		await expect(page.getByRole('heading', { name: 'Professional experience' })).toBeVisible();
+		await expect(page.getByRole('button', { name: 'Print / Save as PDF' })).toBeVisible();
+		await expect(page.getByText(/husband|father|dad|Manchester, UK/i)).toHaveCount(0);
 	});
 
 	test('switches between light and dark themes and remembers the selection', async ({ page }) => {
