@@ -10,6 +10,6 @@ describe('HomeHero', () => {
 		expect(getByText(/frontend engineering, reliable systems/)).toBeInTheDocument();
 		expect(getByRole('link', { name: /Explore my work/ })).toHaveAttribute('href', '/project');
 		expect(getByRole('link', { name: /Professional experience/ })).toHaveAttribute('href', '/experience');
-		expect(queryByText(/husband|dad|Manchester|Booking\\.com/i)).not.toBeInTheDocument();
+		expect(queryByText(/husband|dad|Manchester|Booking[.]com/i)).not.toBeInTheDocument();
 	});
 });
