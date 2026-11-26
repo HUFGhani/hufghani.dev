@@ -1,6 +1,6 @@
 export const WEBSITE = 'hufghani.dev';
 
-export const AUTHORNAME = 'Hamza U. F. Ghani';
+export const AUTHORNAME = 'Hamza Ghani';
 
 export const SOCIAL_LINKS: {
 	id: number;
@@ -9,18 +9,13 @@ export const SOCIAL_LINKS: {
 }[] = [
 	{
 		id: 1,
-		title: 'Github',
+		title: 'GitHub',
 		link: 'https://github.com/HUFGhani'
 	},
 	{
 		id: 2,
-		title: `Linkedin`,
-		link: `https://www.linkedin.com/in/hamza-u-f-ghani/`
-	},
-	{
-		id: 3,
-		title: `Instagram`,
-		link: `https://www.instagram.com/the.ghani/`
+		title: 'LinkedIn',
+		link: 'https://www.linkedin.com/in/hamza-u-f-ghani/'
 	}
 ];
 
@@ -41,10 +36,10 @@ export const MENULINK: {
 		isExternal: false
 	},
 	{
-		title: 'CV',
-		link: 'docs/Curriculum-Vitae.pdf',
-		isExternal: true,
-		fullTitle: 'Curriculum Vitae'
+		title: 'Experience',
+		link: 'experience',
+		isExternal: false,
+		fullTitle: 'Professional experience'
 	}
 ];
 
