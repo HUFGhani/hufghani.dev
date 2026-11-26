@@ -10,7 +10,7 @@
 
 <MetaTags
 	pageTitle="Hamza Ghani — Software Engineer"
-	pageDescription="Hamza Ghani is a software engineer based in Manchester, building thoughtful digital experiences and sharing what he learns along the way."
+	pageDescription="Software engineer focused on frontend engineering, reliable systems and thoughtful digital experiences."
 	ogType="website"
 />
 
