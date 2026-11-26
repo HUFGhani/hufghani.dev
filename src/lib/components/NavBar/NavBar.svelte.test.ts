@@ -14,9 +14,9 @@ describe('NavBar', () => {
 		expect(getByRole('link', { name: 'hufghani.dev home' })).toBeInTheDocument();
 		expect(getByRole('navigation', { name: 'Main navigation' })).toBeInTheDocument();
 		expect(getByRole('link', { name: 'Project' })).toHaveAttribute('href', '/project');
-		expect(getByRole('link', { name: 'Curriculum Vitae' })).toHaveAttribute(
+		expect(getByRole('link', { name: 'Professional experience' })).toHaveAttribute(
 			'href',
-			'/docs/Curriculum-Vitae.pdf'
+			'/experience'
 		);
 		expect(queryByRole('link', { name: 'Blog' })).not.toBeInTheDocument();
 		expect(getByRole('button', { name: 'Switch to light mode' })).toBeInTheDocument();
