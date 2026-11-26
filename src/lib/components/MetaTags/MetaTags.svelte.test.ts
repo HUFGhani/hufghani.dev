@@ -16,7 +16,7 @@ describe('MetaTags', () => {
 			}
 		});
 
-		expect(document.title).toBe('Test Page - Hamza U. F. Ghani');
+		expect(document.title).toBe('Test Page - Hamza Ghani');
 		expect(document.head.querySelector('meta[name="description"]')).toHaveAttribute(
 			'content',
 			'This is a test description.'
@@ -47,7 +47,7 @@ describe('MetaTags', () => {
 		);
 		expect(document.head.querySelector('meta[property="og:title"]')).toHaveAttribute(
 			'content',
-			'Projects - Hamza U. F. Ghani'
+			'Projects - Hamza Ghani'
 		);
 	});
 
