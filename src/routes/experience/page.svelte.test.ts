@@ -8,7 +8,7 @@ describe('experience page', () => {
 
 		expect(getByRole('heading', { level: 1, name: 'Hamza Ghani.' })).toBeInTheDocument();
 		expect(getByRole('heading', { name: 'Professional experience' })).toBeInTheDocument();
-		expect(getByText(/Software Engineer · Booking\\.com/)).toBeInTheDocument();
+		expect(getByText(/Software Engineer · Booking[.]com/)).toBeInTheDocument();
 		expect(getByRole('button', { name: 'Print / Save as PDF' })).toBeInTheDocument();
 		expect(queryByText(/husband|father|dad|Manchester, UK|@/i)).not.toBeInTheDocument();
 		expect(document.title).toContain('Professional Experience');
