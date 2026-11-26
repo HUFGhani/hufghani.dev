@@ -82,7 +82,7 @@ test.describe('homepage', () => {
 		await expect(page.getByRole('link', { name: /Writing/ })).toHaveCount(0);
 		await expect(page.getByRole('link', { name: /Blog/ })).toHaveCount(0);
 		await expect(page.getByRole('link', { name: /Projects/ })).toHaveAttribute('href', '/project');
-		await expect(page.getByRole('link', { name: /Experience/ })).toHaveAttribute(
+		await expect(page.locator('main').getByRole('link', { name: /Experience/ })).toHaveAttribute(
 			'href',
 			'/experience'
 		);
