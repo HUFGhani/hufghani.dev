@@ -9,21 +9,20 @@ describe('Footer', () => {
 		expect(getByRole('contentinfo')).toBeInTheDocument();
 	});
 
-	it('displays the current copyright year and author', () => {
+	it('displays the current copyright year and professional author name', () => {
 		const { getByText } = render(Footer);
 		const currentYear = new Date().getFullYear();
 
-		expect(getByText(`© 2017–${currentYear} Hamza U. F. Ghani`)).toBeInTheDocument();
+		expect(getByText(\`© 2017–\${currentYear} Hamza Ghani\`)).toBeInTheDocument();
 	});
 
-	it('renders the configured social links with safe external-link attributes', () => {
-		const { getByRole } = render(Footer);
+	it('renders only professional social links with safe external-link attributes', () => {
+		const { getByRole, queryByRole } = render(Footer);
 		const socialNavigation = getByRole('navigation', { name: 'Social links' });
 
 		for (const [label, url] of [
-			['Github', 'https://github.com/HUFGhani'],
-			['Linkedin', 'https://www.linkedin.com/in/hamza-u-f-ghani/'],
-			['Instagram', 'https://www.instagram.com/the.ghani/']
+			['GitHub', 'https://github.com/HUFGhani'],
+			['LinkedIn', 'https://www.linkedin.com/in/hamza-u-f-ghani/']
 		]) {
 			const link = getByRole('link', { name: label });
 
@@ -32,5 +31,7 @@ describe('Footer', () => {
 			expect(link).toHaveAttribute('target', '_blank');
 			expect(link).toHaveAttribute('rel', 'noreferrer');
 		}
+
+		expect(queryByRole('link', { name: 'Instagram' })).not.toBeInTheDocument();
 	});
 });
