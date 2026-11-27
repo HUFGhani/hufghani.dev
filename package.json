@@ -55,7 +55,6 @@
 		"aws-cdk-lib": "^2.277.0",
 		"daisyui": "^5.8.0",
 		"graphql": "^16.15.0",
-		"graphql-request": "^7.4.0",
 		"graphql-tag": "^2.12.7",
 		"svelte-meta-tags": "^4.7.0"
 	}
