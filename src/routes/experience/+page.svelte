@@ -29,34 +29,51 @@
 		</p>
 	</section>
 
-	<section aria-labelledby="skills-heading" class="mb-10">
-		<h2 id="skills-heading" class="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-primary">Core skills</h2>
-		<div class="grid gap-4 sm:grid-cols-2">
-			<div class="rounded-xl border border-base-content/10 p-4">
-				<h3 class="mb-2 text-sm font-semibold">Frontend</h3>
-				<p class="text-sm leading-6 text-base-content/70">TypeScript, JavaScript, React, Svelte, HTML, CSS, component architecture and micro-frontends.</p>
+	<section aria-labelledby="skills-heading" class="mb-12">
+		<h2 id="skills-heading" class="mb-5 text-xs font-semibold uppercase tracking-[0.18em] text-primary">Core skills</h2>
+		<div class="space-y-5">
+			<div>
+				<h3 class="mb-3 text-sm font-semibold">Frontend</h3>
+				<div class="flex flex-wrap gap-2">
+					{#each ['TypeScript', 'JavaScript', 'React', 'Svelte', 'HTML', 'CSS', 'Micro-frontends'] as skill}
+						<span class="rounded-full border border-base-content/10 bg-base-200/50 px-3 py-1.5 text-xs font-medium text-base-content/80">{skill}</span>
+					{/each}
+				</div>
 			</div>
-			<div class="rounded-xl border border-base-content/10 p-4">
-				<h3 class="mb-2 text-sm font-semibold">Backend & APIs</h3>
-				<p class="text-sm leading-6 text-base-content/70">Node.js, Java, REST APIs, GraphQL and Spring Boot.</p>
+			<div>
+				<h3 class="mb-3 text-sm font-semibold">Backend & APIs</h3>
+				<div class="flex flex-wrap gap-2">
+					{#each ['Node.js', 'Java', 'Spring Boot', 'REST APIs', 'GraphQL', 'Kafka'] as skill}
+						<span class="rounded-full border border-base-content/10 bg-base-200/50 px-3 py-1.5 text-xs font-medium text-base-content/80">{skill}</span>
+					{/each}
+				</div>
 			</div>
-			<div class="rounded-xl border border-base-content/10 p-4">
-				<h3 class="mb-2 text-sm font-semibold">Cloud & delivery</h3>
-				<p class="text-sm leading-6 text-base-content/70">AWS, AWS CDK, Lambda, S3, CloudFront and CI/CD.</p>
+			<div>
+				<h3 class="mb-3 text-sm font-semibold">Cloud & delivery</h3>
+				<div class="flex flex-wrap gap-2">
+					{#each ['AWS', 'AWS CDK', 'Lambda', 'S3', 'CloudFront', 'CI/CD'] as skill}
+						<span class="rounded-full border border-base-content/10 bg-base-200/50 px-3 py-1.5 text-xs font-medium text-base-content/80">{skill}</span>
+					{/each}
+				</div>
 			</div>
-			<div class="rounded-xl border border-base-content/10 p-4">
-				<h3 class="mb-2 text-sm font-semibold">Engineering quality</h3>
-				<p class="text-sm leading-6 text-base-content/70">Vitest, Playwright, contract testing, automated testing, observability and code review.</p>
+			<div>
+				<h3 class="mb-3 text-sm font-semibold">Testing & quality</h3>
+				<div class="flex flex-wrap gap-2">
+					{#each ['Vitest', 'Playwright', 'Contract testing', 'Observability', 'Code review'] as skill}
+						<span class="rounded-full border border-base-content/10 bg-base-200/50 px-3 py-1.5 text-xs font-medium text-base-content/80">{skill}</span>
+					{/each}
+				</div>
 			</div>
 		</div>
 	</section>
 
-	<section aria-labelledby="experience-heading" class="mb-10">
-		<h2 id="experience-heading" class="mb-5 text-xs font-semibold uppercase tracking-[0.18em] text-primary">Professional experience</h2>
-		<div class="space-y-7">
-			<div class="border-l-2 border-primary/40 pl-5">
+	<section aria-labelledby="experience-heading" class="mb-12">
+		<h2 id="experience-heading" class="mb-6 text-xs font-semibold uppercase tracking-[0.18em] text-primary">Professional experience</h2>
+		<div class="relative space-y-9 before:absolute before:bottom-2 before:left-[7px] before:top-2 before:w-px before:bg-base-content/15">
+			<div class="relative pl-8">
+				<span aria-hidden="true" class="absolute left-0 top-1.5 size-4 rounded-full border-[3px] border-primary bg-base-100"></span>
 				<div class="flex flex-col justify-between gap-1 sm:flex-row sm:items-baseline">
-					<h3 class="font-semibold">Software Engineer · Booking.com</h3>
+					<h3 class="font-semibold">Software Engineer <span class="text-base-content/50">· Booking.com</span></h3>
 					<p class="text-xs text-base-content/50">October 2020 – Present</p>
 				</div>
 				<ul class="mt-3 list-disc space-y-2 pl-5 text-sm leading-6 text-base-content/75">
@@ -66,9 +83,10 @@
 					<li>Collaborate with product and engineering partners, share technical knowledge and support the development of other engineers.</li>
 				</ul>
 			</div>
-			<div class="border-l-2 border-base-content/15 pl-5">
+			<div class="relative pl-8">
+				<span aria-hidden="true" class="absolute left-0 top-1.5 size-4 rounded-full border-[3px] border-base-content/30 bg-base-100"></span>
 				<div class="flex flex-col justify-between gap-1 sm:flex-row sm:items-baseline">
-					<h3 class="font-semibold">Graduate Software Engineer · Booking.com</h3>
+					<h3 class="font-semibold">Graduate Software Engineer <span class="text-base-content/50">· Booking.com</span></h3>
 					<p class="text-xs text-base-content/50">September 2018 – October 2020</p>
 				</div>
 				<ul class="mt-3 list-disc space-y-2 pl-5 text-sm leading-6 text-base-content/75">
@@ -77,9 +95,10 @@
 					<li>Contributed in collaborative Agile teams using pairing, code review and continuous improvement.</li>
 				</ul>
 			</div>
-			<div class="border-l-2 border-base-content/15 pl-5">
+			<div class="relative pl-8">
+				<span aria-hidden="true" class="absolute left-0 top-1.5 size-4 rounded-full border-[3px] border-base-content/30 bg-base-100"></span>
 				<div class="flex flex-col justify-between gap-1 sm:flex-row sm:items-baseline">
-					<h3 class="font-semibold">Junior Software Developer · Team Netsol</h3>
+					<h3 class="font-semibold">Junior Software Developer <span class="text-base-content/50">· Team Netsol</span></h3>
 					<p class="text-xs text-base-content/50">July 2015 – August 2018</p>
 				</div>
 				<ul class="mt-3 list-disc space-y-2 pl-5 text-sm leading-6 text-base-content/75">
