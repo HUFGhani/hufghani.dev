@@ -20,7 +20,7 @@ describe('experience page', () => {
 	it('shows technology tags as static labels and keeps all experience visible', () => {
 		const { getByText, queryByRole, getByRole } = render(Page);
 
-		expect(getByText('Technology map')).toBeInTheDocument();
+		expect(getByRole('heading', { name: 'Technical Skills' })).toBeInTheDocument();
 		expect(getByText('TypeScript').tagName).toBe('SPAN');
 		expect(queryByRole('button', { name: 'TypeScript' })).not.toBeInTheDocument();
 		expect(getByRole('heading', { name: 'Software Engineer · Booking.com' })).toBeInTheDocument();
