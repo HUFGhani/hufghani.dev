@@ -108,12 +108,12 @@ test.describe('homepage', () => {
 		expect(navigationElement).not.toBeNull();
 
 		await page.getByRole('link', { name: 'Project' }).click();
-		await expect(page).toHaveURL(/\\/project\\/?$/);
+		await expect(page).toHaveURL(/\/project\/?$/);
 		await expect(page.getByRole('heading', { level: 1, name: 'Projects.' })).toBeVisible();
 		await expect.poll(() => navigationElement!.evaluate((element) => element.isConnected)).toBe(true);
 
 		await page.getByRole('link', { name: 'Experience' }).click();
-		await expect(page).toHaveURL(/\\/experience\\/?$/);
+		await expect(page).toHaveURL(/\/experience\/?$/);
 		await expect(page.getByRole('heading', { name: 'Technical Skills' })).toBeVisible();
 		await expect.poll(() => navigationElement!.evaluate((element) => element.isConnected)).toBe(true);
 	});
