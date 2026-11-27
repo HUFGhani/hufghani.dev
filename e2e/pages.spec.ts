@@ -50,7 +50,7 @@ const emptyRepositoryResponse = {
 };
 
 const mockRepositories = async (page: Page, response: unknown = repositoryResponse, status = 200) => {
-	await page.route('**/api/repositories', async (route) => {
+	await page.route('**/api/repositories**', async (route) => {
 		await route.fulfill({
 			status,
 			contentType: 'application/json',
@@ -107,7 +107,7 @@ test.describe('homepage', () => {
 
 		expect(navigationElement).not.toBeNull();
 
-		await page.getByRole('link', { name: 'Project' }).click();
+		await page.getByRole('link', { name: 'Project', exact: true }).click();
 		await expect(page).toHaveURL(/\/project\/?$/);
 		await expect(page.getByRole('heading', { level: 1, name: 'Projects.' })).toBeVisible();
 		await expect.poll(() => navigationElement!.evaluate((element) => element.isConnected)).toBe(true);
@@ -233,14 +233,14 @@ test.describe('projects page', () => {
 	});
 
 	test('shows a useful message when the API returns no projects', async ({ page }) => {
-		await page.unroute('**/api/repositories');
+		await page.unroute('**/api/repositories**');
 		await mockRepositories(page, emptyRepositoryResponse);
 		await page.goto('/project/');
 		await expect(page.getByRole('status')).toContainText('No projects found');
 	});
 
 	test('shows a recoverable message when the repository API fails', async ({ page }) => {
-		await page.unroute('**/api/repositories');
+		await page.unroute('**/api/repositories**');
 		await mockRepositories(page, {}, 500);
 		await page.goto('/project/');
 		await expect(page.getByRole('status')).toContainText('Unable to load projects');
