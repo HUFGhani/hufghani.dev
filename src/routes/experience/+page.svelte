@@ -3,10 +3,10 @@
 
 
 	const skillGroups = [
-		{ name: 'Frontend', skills: ['TypeScript', 'JavaScript', 'React', 'Svelte', 'HTML', 'CSS', 'Micro-frontends'], pillClass: 'border-sky-500/25 bg-sky-500/[0.06] text-sky-700 hover:border-sky-500/50 hover:bg-sky-500/10 dark:text-sky-200', activeClass: 'border-sky-500 bg-sky-500 text-white shadow-sm' },
-		{ name: 'Backend & APIs', skills: ['Node.js', 'Java', 'Spring Boot', 'REST APIs', 'GraphQL', 'Kafka'], pillClass: 'border-violet-500/25 bg-violet-500/[0.06] text-violet-700 hover:border-violet-500/50 hover:bg-violet-500/10 dark:text-violet-200', activeClass: 'border-violet-500 bg-violet-600 text-white shadow-sm' },
-		{ name: 'Cloud & delivery', skills: ['AWS', 'AWS CDK', 'Lambda', 'S3', 'CloudFront', 'CI/CD'], pillClass: 'border-emerald-500/25 bg-emerald-500/[0.06] text-emerald-700 hover:border-emerald-500/50 hover:bg-emerald-500/10 dark:text-emerald-200', activeClass: 'border-emerald-600 bg-emerald-600 text-white shadow-sm' },
-		{ name: 'Testing & quality', skills: ['Vitest', 'Playwright', 'Contract testing', 'Observability', 'Code review'], pillClass: 'border-amber-500/25 bg-amber-500/[0.06] text-amber-700 hover:border-amber-500/50 hover:bg-amber-500/10 dark:text-amber-200', activeClass: 'border-amber-500 bg-amber-500 text-white shadow-sm' }
+		{ name: 'Frontend', skills: ['TypeScript', 'JavaScript', 'React', 'Svelte', 'HTML', 'CSS', 'Micro-frontends'], pillClass: 'border-sky-500/25 bg-sky-500/[0.06] text-base-content', activeClass: 'border-sky-500 bg-sky-500 text-white shadow-sm' },
+		{ name: 'Backend & APIs', skills: ['Node.js', 'Java', 'Spring Boot', 'REST APIs', 'GraphQL', 'Kafka'], pillClass: 'border-violet-500/25 bg-violet-500/[0.06] text-base-content', activeClass: 'border-violet-500 bg-violet-600 text-white shadow-sm' },
+		{ name: 'Cloud & delivery', skills: ['AWS', 'AWS CDK', 'Lambda', 'S3', 'CloudFront', 'CI/CD'], pillClass: 'border-emerald-500/25 bg-emerald-500/[0.06] text-base-content', activeClass: 'border-emerald-600 bg-emerald-600 text-white shadow-sm' },
+		{ name: 'Testing & quality', skills: ['Vitest', 'Playwright', 'Contract testing', 'Observability', 'Code review'], pillClass: 'border-amber-500/25 bg-amber-500/[0.06] text-base-content', activeClass: 'border-amber-500 bg-amber-500 text-white shadow-sm' }
 	];
 
 </script>
