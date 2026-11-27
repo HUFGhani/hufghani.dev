@@ -19,7 +19,6 @@
 				`opacity: ${t}; transform: translate3d(0, ${(1 - t) * 10}px, 0);`
 		};
 	}
-
 </script>
 
 <FeatureFlagsProvider flags={FeatureFlagsList}>
@@ -27,7 +26,7 @@
 	<div class="mx-auto flex min-h-screen w-full max-w-6xl flex-col px-6 sm:px-8 lg:px-12">
 		<NavBar />
 		<main id="main-content" tabindex="-1" class="w-full flex-1 pb-24 pt-12 sm:pt-16 lg:pt-20">
-			{#key $page.url.pathname}
+			{#key page.url.pathname}
 				<div transition:pageTransition={{ duration: 280 }}>
 					{@render children()}
 				</div>
