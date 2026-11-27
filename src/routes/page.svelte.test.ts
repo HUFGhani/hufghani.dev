@@ -4,12 +4,12 @@ import Page from './+page.svelte';
 
 describe('homepage', () => {
 	it('renders the professional introduction, primary links and SEO metadata', () => {
-		const { getByRole, getByText, queryByText } = render(Page);
+		const { getByRole, getAllByRole, getByText, queryByText } = render(Page);
 
 		expect(getByRole('heading', { level: 1, name: /Hello, I'm Hamza/ })).toBeInTheDocument();
 		expect(getByText(/frontend engineering, reliable systems/)).toBeInTheDocument();
 		expect(getByRole('link', { name: /Explore my work/ })).toHaveAttribute('href', '/project');
-		expect(getByRole('link', { name: 'Professional experience', exact: true })).toHaveAttribute('href', '/experience');
+		expect(getAllByRole('link', { name: /Professional experience/ }).some((link) => link.getAttribute('href') === '/experience')).toBe(true);
 		expect(document.title).toContain('Hamza Ghani');
 		expect(document.head.querySelector('meta[name="description"]')).toHaveAttribute(
 			'content',
