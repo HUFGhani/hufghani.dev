@@ -1,4 +1,4 @@
-import { fireEvent, render, waitFor } from '@testing-library/svelte';
+import { render } from '@testing-library/svelte';
 import { describe, expect, it } from 'vitest';
 import Page from './+page.svelte';
 
@@ -17,24 +17,15 @@ describe('experience page', () => {
 		);
 	});
 
-	it('connects technology selections to relevant experience', async () => {
-		const { getByRole, getAllByTestId } = render(Page);
-		const typescript = getByRole('button', { name: 'TypeScript' });
+	it('shows technology tags as static labels and keeps all experience visible', () => {
+		const { getByText, queryByRole, getByRole } = render(Page);
 
-		await fireEvent.click(typescript);
-
-		await waitFor(() => {
-			expect(typescript).toHaveAttribute('aria-pressed', 'true');
-			expect(getAllByTestId('experience-entry')[0]).not.toHaveClass('opacity-35');
-			expect(getAllByTestId('experience-entry')[2]).toHaveClass('opacity-35');
-		});
-
-		await fireEvent.click(getByRole('button', { name: /Clear filter/ }));
-
-		await waitFor(() => {
-			expect(typescript).toHaveAttribute('aria-pressed', 'false');
-			expect(getAllByTestId('experience-entry')[2]).not.toHaveClass('opacity-35');
-		});
+		expect(getByText('Technology map')).toBeInTheDocument();
+		expect(getByText('TypeScript').tagName).toBe('SPAN');
+		expect(queryByRole('button', { name: 'TypeScript' })).not.toBeInTheDocument();
+		expect(getByRole('heading', { name: 'Software Engineer · Booking.com' })).toBeInTheDocument();
+		expect(getByRole('heading', { name: 'Graduate Software Engineer · Booking.com' })).toBeInTheDocument();
+		expect(getByRole('heading', { name: 'Junior Software Developer · Team Netsol' })).toBeInTheDocument();
 	});
 
 	it('provides professional profile links', () => {
