@@ -13,7 +13,7 @@ describe('Footer', () => {
 		const { getByText } = render(Footer);
 		const currentYear = new Date().getFullYear();
 
-		expect(getByText(\`© 2017–\${currentYear} Hamza Ghani\`)).toBeInTheDocument();
+		expect(getByText(`© 2017–${currentYear} Hamza Ghani`)).toBeInTheDocument();
 	});
 
 	it('renders only professional social links with safe external-link attributes', () => {
