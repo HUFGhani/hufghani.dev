@@ -47,7 +47,7 @@ export default defineConfig({
 		}
 	],
 	webServer: {
-		command: 'pnpm run build && pnpm run preview',
+		command: 'VITE_E2E_TESTING=true pnpm run build && pnpm run preview',
 		port: 4173,
 		timeout: 120_000,
 		reuseExistingServer: !isCI
