@@ -1,96 +1,55 @@
-# new.hufghani.dev
+# hufghani.dev
 
-This repository contains the source code for a SvelteKit-based project. It is designed to be a modern, scalable, and maintainable web application.
+The source code for [hufghani.dev](https://hufghani.dev), a personal portfolio built with SvelteKit, Svelte 5 and TypeScript.
 
-## Features
+## Stack
 
-- **SvelteKit**: A powerful framework for building web applications.
-- **GraphQL**: Integrated GraphQL support using `graphql`, `graphql-request`, and `graphql-tag`.
-- **UI Components**: Styled with `daisyui` for a consistent and responsive design.
-- **Meta Management**: Uses `svelte-meta-tags` for SEO and meta tag management.
-- **AWS Deployment**: The SvelteKit adapter builds Lambda@Edge and static assets; AWS infrastructure is defined in `infra/` with CDK.
-- **Development Tools**: Includes `eslint`, `prettier`, and `tailwindcss` plugins for linting and formatting.
+- **SvelteKit** — application framework and routing
+- **Tailwind CSS 4 and DaisyUI** — styling and UI primitives
+- **GraphQL** — GitHub repository data
+- **Vitest and Testing Library** — unit and component tests
+- **Playwright** — end-to-end tests
+- **AWS CDK** — S3, CloudFront and Lambda@Edge deployment
 
-## Prerequisites
+## Requirements
 
-Ensure you have the following installed:
+- Node.js 22 (see `.nvmrc`)
+- pnpm 10 (see `package.json`)
 
-- Node.js (v22; see `.nvmrc`)
-- pnpm (v10)
+## Getting started
 
-## Getting Started
-
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/your-username/new.hufghani.dev.git
-   cd new.hufghani.dev
-   ```
-
-2. Install dependencies:
-   ```bash
-   pnpm install
-   ```
-3. Start the development server:
-   `bash
-pnpm run dev
-`
-   The application will be available at http://localhost:5173.
-
-## Building for Production
-
-To create a production build:
-``bash
-pnpm run build
-
-````
-Preview the production build locally:
-
-## Testing
-
-This project uses vitest and playwright for testing.
-Run unit tests:
-```bash
-pnpm run test:unit
-````
-
-Run end-to-end tests:
-
-```bash
-pnpm run test:e2e
+```sh
+pnpm install
+pnpm dev
 ```
 
-Run all tests:
+The development server is available at http://localhost:5173.
 
-```bash
-pnpm run test
+## Validation
+
+```sh
+pnpm check
+pnpm lint
+pnpm test
+pnpm test:e2e
+pnpm test:adapter
 ```
 
-## Linting and Formatting
+## Production build
 
-Check for linting errors:
-
-Format the codebase:
-
-## Deployment
-
-Build and deploy the app with:
-
-```bash
-pnpm run build
-pnpm run infra:deploy
+```sh
+pnpm build
+pnpm preview
 ```
 
-The CDK application and CloudFront/Lambda@Edge/S3 resources are maintained in
-[`infra/`](./infra/). The repository-owned Lambda@Edge adapter is in
-[`adapters/aws-lambda-edge/`](./adapters/aws-lambda-edge/), and is selected in
-[`svelte.config.js`](./svelte.config.js).
+## AWS deployment
 
-## License
+Build the application before synthesizing or deploying the infrastructure:
 
-This project is licensed under the MIT License. See the LICENSE file for details.
+```sh
+pnpm build
+pnpm infra:synth
+pnpm infra:deploy
+```
 
-## Acknowledgments
-
-Built with ❤️ using SvelteKit.
-Hosted on AWS S3 and distributed via CloudFront.
+The custom SvelteKit adapter is maintained in `adapters/aws-lambda-edge/`. The CDK application and infrastructure definitions are in `infra/`.
