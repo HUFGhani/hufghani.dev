@@ -18,12 +18,8 @@
 			<nav aria-label="Professional profiles" class="mt-4 flex flex-wrap gap-4 text-sm">
 				<a class="link link-primary" href="https://www.linkedin.com/in/hamza-u-f-ghani/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
 				<a class="link link-primary" href="https://github.com/HUFGhani" target="_blank" rel="noreferrer">GitHub ↗</a>
-				<a class="link link-primary" href="https://hufghani.dev/">Website ↗</a>
 			</nav>
 		</div>
-		<button type="button" class="btn btn-outline rounded-full print:hidden" onclick={() => window.print()}>
-			Print / Save as PDF
-		</button>
 	</div>
 
 	<section aria-labelledby="profile-heading" class="mb-10">
@@ -118,24 +114,3 @@
 	</section>
 </article>
 
-<style>
-	@media print {
-		:global(header),
-		:global(footer) {
-			display: none !important;
-		}
-
-		:global(body) {
-			background: #fff !important;
-			color: #111827 !important;
-		}
-
-		:global(main) {
-			padding: 0 !important;
-		}
-
-		article {
-			max-width: none !important;
-		}
-	}
-</style>
