@@ -4,11 +4,11 @@ import Page from './+page.svelte';
 
 describe('experience page', () => {
 	it('renders a professional CV without personal contact or family details', () => {
-		const { getByRole, getByText, queryByText } = render(Page);
+		const { getByRole, queryByText } = render(Page);
 
 		expect(getByRole('heading', { level: 1, name: /Hamza Ghani\s*\./ })).toBeInTheDocument();
 		expect(getByRole('heading', { name: 'Professional experience' })).toBeInTheDocument();
-		expect(getByRole('heading', { name: /Software Engineer\\s*·\\s*Booking[.]com/ })).toBeInTheDocument();
+		expect(getByRole('heading', { name: /Software Engineer\s*·\s*Booking[.]com/ })).toBeInTheDocument();
 		expect(queryByText(/husband|father|dad|Manchester, UK|@/i)).not.toBeInTheDocument();
 		expect(document.title).toContain('Professional Experience');
 		expect(document.head.querySelector('link[rel="canonical"]')).toHaveAttribute(
