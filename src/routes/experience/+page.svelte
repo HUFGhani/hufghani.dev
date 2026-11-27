@@ -72,7 +72,7 @@
 	<section aria-labelledby="experience-heading" class="mb-12">
 		<h2 id="experience-heading" class="mb-6 text-xs font-semibold uppercase tracking-[0.18em] text-primary">Professional experience</h2>
 		<div class="relative space-y-9 before:absolute before:bottom-2 before:left-[7px] before:top-2 before:w-px before:bg-base-content/15">
-			<div class="relative pl-8 transition-opacity duration-200" class:opacity-35={selectedSkill !== null && !roleSkills[0].includes(selectedSkill)}>
+			<div class="relative pl-8 transition-opacity duration-200" class:opacity-35={selectedSkill !== null && !roleSkills[0].includes(selectedSkill)} data-testid="experience-entry">
 				<span aria-hidden="true" class="absolute left-0 top-1.5 size-4 rounded-full border-[3px] border-primary bg-base-100"></span>
 				<div class="flex flex-col justify-between gap-1 sm:flex-row sm:items-baseline">
 					<h3 class="font-semibold">Software Engineer <span class="text-base-content/50">· Booking.com</span></h3>
@@ -85,7 +85,7 @@
 					<li>Collaborate with product and engineering partners, share technical knowledge and support the development of other engineers.</li>
 				</ul>
 			</div>
-			<div class="relative pl-8 transition-opacity duration-200" class:opacity-35={selectedSkill !== null && !roleSkills[1].includes(selectedSkill)}>
+			<div class="relative pl-8 transition-opacity duration-200" class:opacity-35={selectedSkill !== null && !roleSkills[1].includes(selectedSkill)} data-testid="experience-entry">
 				<span aria-hidden="true" class="absolute left-0 top-1.5 size-4 rounded-full border-[3px] border-base-content/30 bg-base-100"></span>
 				<div class="flex flex-col justify-between gap-1 sm:flex-row sm:items-baseline">
 					<h3 class="font-semibold">Graduate Software Engineer <span class="text-base-content/50">· Booking.com</span></h3>
@@ -97,7 +97,7 @@
 					<li>Contributed in collaborative Agile teams using pairing, code review and continuous improvement.</li>
 				</ul>
 			</div>
-			<div class="relative pl-8 transition-opacity duration-200" class:opacity-35={selectedSkill !== null && !roleSkills[2].includes(selectedSkill)}>
+			<div class="relative pl-8 transition-opacity duration-200" class:opacity-35={selectedSkill !== null && !roleSkills[2].includes(selectedSkill)} data-testid="experience-entry">
 				<span aria-hidden="true" class="absolute left-0 top-1.5 size-4 rounded-full border-[3px] border-base-content/30 bg-base-100"></span>
 				<div class="flex flex-col justify-between gap-1 sm:flex-row sm:items-baseline">
 					<h3 class="font-semibold">Junior Software Developer <span class="text-base-content/50">· Team Netsol</span></h3>
