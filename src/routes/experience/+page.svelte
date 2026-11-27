@@ -51,8 +51,6 @@
 			</div>
 			{#if selectedSkill}
 				<button class="btn btn-ghost btn-xs self-start sm:self-auto" onclick={() => (selectedSkill = null)}>Clear filter <span aria-hidden="true">×</span></button>
-			{:else}
-				<span class="text-xs text-base-content/40">SELECT A SKILL</span>
 			{/if}
 		</div>
 		<div class="space-y-5">
