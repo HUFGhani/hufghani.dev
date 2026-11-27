@@ -1,5 +1,14 @@
 <script lang="ts">
 	import { MetaTags } from '$lib/components/MetaTags';
+
+	let selectedSkill = $state<string | null>(null);
+
+	const skillGroups = [
+		{ name: 'Frontend', skills: ['TypeScript', 'JavaScript', 'React', 'Svelte', 'HTML', 'CSS', 'Micro-frontends'], pillClass: 'border-sky-500/25 bg-sky-500/[0.06] text-sky-700 hover:border-sky-500/50 hover:bg-sky-500/10 dark:text-sky-200', activeClass: 'border-sky-500 bg-sky-500 text-white shadow-sm' },
+		{ name: 'Backend & APIs', skills: ['Node.js', 'Java', 'Spring Boot', 'REST APIs', 'GraphQL', 'Kafka'], pillClass: 'border-violet-500/25 bg-violet-500/[0.06] text-violet-700 hover:border-violet-500/50 hover:bg-violet-500/10 dark:text-violet-200', activeClass: 'border-violet-500 bg-violet-600 text-white shadow-sm' },
+		{ name: 'Cloud & delivery', skills: ['AWS', 'AWS CDK', 'Lambda', 'S3', 'CloudFront', 'CI/CD'], pillClass: 'border-emerald-500/25 bg-emerald-500/[0.06] text-emerald-700 hover:border-emerald-500/50 hover:bg-emerald-500/10 dark:text-emerald-200', activeClass: 'border-emerald-600 bg-emerald-600 text-white shadow-sm' },
+		{ name: 'Testing & quality', skills: ['Vitest', 'Playwright', 'Contract testing', 'Observability', 'Code review'], pillClass: 'border-amber-500/25 bg-amber-500/[0.06] text-amber-700 hover:border-amber-500/50 hover:bg-amber-500/10 dark:text-amber-200', activeClass: 'border-amber-500 bg-amber-500 text-white shadow-sm' }
+	];
 </script>
 
 <MetaTags
@@ -30,81 +39,35 @@
 	</section>
 
 	<section aria-labelledby="skills-heading" class="mb-12">
-		<div class="mb-5 flex items-end justify-between gap-4">
+		<div class="mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
 			<div>
-				<h2 id="skills-heading" class="text-xs font-semibold uppercase tracking-[0.18em] text-primary">Core skills</h2>
-				<p class="mt-2 text-sm text-base-content/55">Tools and technologies I work with</p>
+				<h2 id="skills-heading" class="text-xs font-semibold uppercase tracking-[0.18em] text-primary">Technology map</h2>
+				<p class="mt-2 text-sm text-base-content/55">Choose a technology to explore where it appears in my experience.</p>
 			</div>
-			<span class="hidden text-xs text-base-content/40 sm:inline">TECH STACK</span>
+			{#if selectedSkill}
+				<button class="btn btn-ghost btn-xs self-start sm:self-auto" onclick={() => (selectedSkill = null)}>Clear filter <span aria-hidden="true">×</span></button>
+			{:else}
+				<span class="text-xs text-base-content/40">SELECT A SKILL</span>
+			{/if}
 		</div>
-
-		<div class="grid gap-3 sm:grid-cols-2">
-			<div class="group relative overflow-hidden rounded-2xl border border-sky-500/20 bg-sky-500/[0.045] p-5 transition duration-200 hover:-translate-y-1 hover:border-sky-500/40 hover:bg-sky-500/[0.075]">
-				<div class="absolute -right-8 -top-10 size-28 rounded-full bg-sky-500/10 blur-2xl transition group-hover:bg-sky-500/20"></div>
-				<div class="relative">
-					<div class="mb-4 flex items-center gap-3">
-						<span class="grid size-9 place-items-center rounded-xl bg-sky-500/15 text-sm font-bold text-sky-600 dark:text-sky-300">01</span>
-						<h3 class="text-sm font-semibold">Frontend</h3>
-					</div>
+		<div class="space-y-5">
+			{#each skillGroups as group}
+				<div>
+					<h3 class="mb-2 text-xs font-semibold uppercase tracking-wider text-base-content/55">{group.name}</h3>
 					<div class="flex flex-wrap gap-2">
-						{#each ['TypeScript', 'JavaScript', 'React', 'Svelte', 'HTML', 'CSS', 'Micro-frontends'] as skill}
-							<span class="rounded-lg border border-sky-500/20 bg-sky-500/10 px-2.5 py-1.5 text-xs font-medium text-sky-700 dark:text-sky-200">{skill}</span>
+						{#each group.skills as skill}
+							<button class="rounded-full border px-3 py-1.5 text-xs font-medium transition duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary {selectedSkill === skill ? group.activeClass : group.pillClass} {selectedSkill && selectedSkill !== skill ? 'opacity-40' : 'opacity-100'}" aria-pressed={selectedSkill === skill} onclick={() => (selectedSkill = selectedSkill === skill ? null : skill)}>{skill}</button>
 						{/each}
 					</div>
 				</div>
-			</div>
-
-			<div class="group relative overflow-hidden rounded-2xl border border-violet-500/20 bg-violet-500/[0.045] p-5 transition duration-200 hover:-translate-y-1 hover:border-violet-500/40 hover:bg-violet-500/[0.075]">
-				<div class="absolute -right-8 -top-10 size-28 rounded-full bg-violet-500/10 blur-2xl transition group-hover:bg-violet-500/20"></div>
-				<div class="relative">
-					<div class="mb-4 flex items-center gap-3">
-						<span class="grid size-9 place-items-center rounded-xl bg-violet-500/15 text-sm font-bold text-violet-600 dark:text-violet-300">02</span>
-						<h3 class="text-sm font-semibold">Backend & APIs</h3>
-					</div>
-					<div class="flex flex-wrap gap-2">
-						{#each ['Node.js', 'Java', 'Spring Boot', 'REST APIs', 'GraphQL', 'Kafka'] as skill}
-							<span class="rounded-lg border border-violet-500/20 bg-violet-500/10 px-2.5 py-1.5 text-xs font-medium text-violet-700 dark:text-violet-200">{skill}</span>
-						{/each}
-					</div>
-				</div>
-			</div>
-
-			<div class="group relative overflow-hidden rounded-2xl border border-emerald-500/20 bg-emerald-500/[0.045] p-5 transition duration-200 hover:-translate-y-1 hover:border-emerald-500/40 hover:bg-emerald-500/[0.075]">
-				<div class="absolute -right-8 -top-10 size-28 rounded-full bg-emerald-500/10 blur-2xl transition group-hover:bg-emerald-500/20"></div>
-				<div class="relative">
-					<div class="mb-4 flex items-center gap-3">
-						<span class="grid size-9 place-items-center rounded-xl bg-emerald-500/15 text-sm font-bold text-emerald-600 dark:text-emerald-300">03</span>
-						<h3 class="text-sm font-semibold">Cloud & delivery</h3>
-					</div>
-					<div class="flex flex-wrap gap-2">
-						{#each ['AWS', 'AWS CDK', 'Lambda', 'S3', 'CloudFront', 'CI/CD'] as skill}
-							<span class="rounded-lg border border-emerald-500/20 bg-emerald-500/10 px-2.5 py-1.5 text-xs font-medium text-emerald-700 dark:text-emerald-200">{skill}</span>
-						{/each}
-					</div>
-				</div>
-			</div>
-
-			<div class="group relative overflow-hidden rounded-2xl border border-amber-500/20 bg-amber-500/[0.045] p-5 transition duration-200 hover:-translate-y-1 hover:border-amber-500/40 hover:bg-amber-500/[0.075]">
-				<div class="absolute -right-8 -top-10 size-28 rounded-full bg-amber-500/10 blur-2xl transition group-hover:bg-amber-500/20"></div>
-				<div class="relative">
-					<div class="mb-4 flex items-center gap-3">
-						<span class="grid size-9 place-items-center rounded-xl bg-amber-500/15 text-sm font-bold text-amber-600 dark:text-amber-300">04</span>
-						<h3 class="text-sm font-semibold">Testing & quality</h3>
-					</div>
-					<div class="flex flex-wrap gap-2">
-						{#each ['Vitest', 'Playwright', 'Contract testing', 'Observability', 'Code review'] as skill}
-							<span class="rounded-lg border border-amber-500/20 bg-amber-500/10 px-2.5 py-1.5 text-xs font-medium text-amber-700 dark:text-amber-200">{skill}</span>
-						{/each}
-					</div>
-				</div>
-			</div>
+			{/each}
 		</div>
 	</section>
 
 	<section aria-labelledby="experience-heading" class="mb-12">
 		<h2 id="experience-heading" class="mb-6 text-xs font-semibold uppercase tracking-[0.18em] text-primary">Professional experience</h2>
 		<div class="relative space-y-9 before:absolute before:bottom-2 before:left-[7px] before:top-2 before:w-px before:bg-base-content/15">
-			<div class="relative pl-8">
+			<div class="relative pl-8 transition-opacity duration-200" class:opacity-35={selectedSkill !== null && !'TypeScript JavaScript React Svelte HTML CSS Micro-frontends Node.js REST APIs GraphQL AWS AWS CDK Lambda S3 CloudFront CI/CD Vitest Playwright Observability Code review'.includes(selectedSkill)}>
 				<span aria-hidden="true" class="absolute left-0 top-1.5 size-4 rounded-full border-[3px] border-primary bg-base-100"></span>
 				<div class="flex flex-col justify-between gap-1 sm:flex-row sm:items-baseline">
 					<h3 class="font-semibold">Software Engineer <span class="text-base-content/50">· Booking.com</span></h3>
@@ -117,7 +80,7 @@
 					<li>Collaborate with product and engineering partners, share technical knowledge and support the development of other engineers.</li>
 				</ul>
 			</div>
-			<div class="relative pl-8">
+			<div class="relative pl-8 transition-opacity duration-200" class:opacity-35={selectedSkill !== null && !'TypeScript JavaScript React Java Spring Boot Kafka REST APIs Contract testing Code review'.includes(selectedSkill)}>
 				<span aria-hidden="true" class="absolute left-0 top-1.5 size-4 rounded-full border-[3px] border-base-content/30 bg-base-100"></span>
 				<div class="flex flex-col justify-between gap-1 sm:flex-row sm:items-baseline">
 					<h3 class="font-semibold">Graduate Software Engineer <span class="text-base-content/50">· Booking.com</span></h3>
@@ -129,7 +92,7 @@
 					<li>Contributed in collaborative Agile teams using pairing, code review and continuous improvement.</li>
 				</ul>
 			</div>
-			<div class="relative pl-8">
+			<div class="relative pl-8 transition-opacity duration-200" class:opacity-35={selectedSkill !== null && !'Java Scala Python Jython Spring AWS'.includes(selectedSkill)}>
 				<span aria-hidden="true" class="absolute left-0 top-1.5 size-4 rounded-full border-[3px] border-base-content/30 bg-base-100"></span>
 				<div class="flex flex-col justify-between gap-1 sm:flex-row sm:items-baseline">
 					<h3 class="font-semibold">Junior Software Developer <span class="text-base-content/50">· Team Netsol</span></h3>
