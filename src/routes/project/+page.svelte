@@ -45,9 +45,9 @@
 	});
 
 	const cleanProjectTitle = (title: string) =>
-		title === 'api.hufghani.dev' ? title : title.replace(/[_.-]/g, ' ').replace(/\\s+/g, ' ').trim();
+		title === 'api.hufghani.dev' ? title : title.replace(/[_.-]/g, ' ').replace(/\s+/g, ' ').trim();
 
-	const normalizeSearchText = (value: string) => value.trim().toLowerCase().replace(/\\s+/g, ' ');
+	const normalizeSearchText = (value: string) => value.trim().toLowerCase().replace(/\s+/g, ' ');
 
 	const languageIcons: Record<string, string> = {
 		c: 'c/c-original.svg',
