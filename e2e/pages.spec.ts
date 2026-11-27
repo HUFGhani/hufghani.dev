@@ -98,6 +98,26 @@ test.describe('homepage', () => {
 		await expect(page.getByText(/husband|father|dad|Manchester, UK/i)).toHaveCount(0);
 	});
 
+	test('keeps the shared navigation mounted while route content transitions', async ({ page }) => {
+		await mockRepositories(page);
+		await page.goto('/');
+
+		const navigation = page.getByRole('navigation', { name: 'Main navigation' });
+		const navigationElement = await navigation.elementHandle();
+
+		expect(navigationElement).not.toBeNull();
+
+		await page.getByRole('link', { name: 'Project' }).click();
+		await expect(page).toHaveURL(/\\/project\\/?$/);
+		await expect(page.getByRole('heading', { level: 1, name: 'Projects.' })).toBeVisible();
+		await expect.poll(() => navigationElement!.evaluate((element) => element.isConnected)).toBe(true);
+
+		await page.getByRole('link', { name: 'Experience' }).click();
+		await expect(page).toHaveURL(/\\/experience\\/?$/);
+		await expect(page.getByRole('heading', { name: 'Technical Skills' })).toBeVisible();
+		await expect.poll(() => navigationElement!.evaluate((element) => element.isConnected)).toBe(true);
+	});
+
 	test('switches between light and dark themes and remembers the selection', async ({ page }) => {
 		await page.goto('/');
 
