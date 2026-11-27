@@ -41,7 +41,7 @@
 	<section aria-labelledby="skills-heading" class="mb-12">
 		<div class="mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
 			<div>
-				<h2 id="skills-heading" class="text-xs font-semibold uppercase tracking-[0.18em] text-primary">Technology map</h2>
+				<h2 id="skills-heading" class="text-xs font-semibold uppercase tracking-[0.18em] text-primary">Technical Skills</h2>
 				<p class="mt-2 text-sm text-base-content/55">Technologies and tools I have worked with.</p>
 			</div>
 		</div>
