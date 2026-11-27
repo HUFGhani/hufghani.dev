@@ -91,6 +91,18 @@ describe('projects page', () => {
 		expect(window.location.search).not.toContain('page=');
 	});
 
+	it('normalizes case and repeated whitespace when filtering projects', async () => {
+		const { getByRole, queryByRole } = renderProjectsPage();
+		const search = getByRole('searchbox', { name: 'Search projects' });
+
+		await fireEvent.input(search, { target: { value: '  PROJECT   2  ' } });
+
+		await waitFor(() => {
+			expect(getByRole('heading', { level: 2, name: 'Project 2' })).toBeInTheDocument();
+			expect(queryByRole('heading', { level: 2, name: 'Project 1' })).not.toBeInTheDocument();
+		});
+	});
+
 	it('clears the search and restores the full project list', async () => {
 		const { getByRole } = renderProjectsPage();
 		const search = getByRole('searchbox', { name: 'Search projects' });
