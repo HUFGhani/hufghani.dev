@@ -9,6 +9,11 @@
 		{ name: 'Cloud & delivery', skills: ['AWS', 'AWS CDK', 'Lambda', 'S3', 'CloudFront', 'CI/CD'], pillClass: 'border-emerald-500/25 bg-emerald-500/[0.06] text-emerald-700 hover:border-emerald-500/50 hover:bg-emerald-500/10 dark:text-emerald-200', activeClass: 'border-emerald-600 bg-emerald-600 text-white shadow-sm' },
 		{ name: 'Testing & quality', skills: ['Vitest', 'Playwright', 'Contract testing', 'Observability', 'Code review'], pillClass: 'border-amber-500/25 bg-amber-500/[0.06] text-amber-700 hover:border-amber-500/50 hover:bg-amber-500/10 dark:text-amber-200', activeClass: 'border-amber-500 bg-amber-500 text-white shadow-sm' }
 	];
+	const roleSkills = [
+		['TypeScript', 'JavaScript', 'React', 'Svelte', 'HTML', 'CSS', 'Micro-frontends', 'Node.js', 'REST APIs', 'GraphQL', 'AWS', 'AWS CDK', 'Lambda', 'S3', 'CloudFront', 'CI/CD', 'Vitest', 'Playwright', 'Observability', 'Code review'],
+		['TypeScript', 'JavaScript', 'React', 'Java', 'Spring Boot', 'Kafka', 'REST APIs', 'Contract testing', 'Code review'],
+		['Java', 'Scala', 'Python', 'Jython', 'Spring', 'AWS']
+	];
 </script>
 
 <MetaTags
@@ -67,7 +72,7 @@
 	<section aria-labelledby="experience-heading" class="mb-12">
 		<h2 id="experience-heading" class="mb-6 text-xs font-semibold uppercase tracking-[0.18em] text-primary">Professional experience</h2>
 		<div class="relative space-y-9 before:absolute before:bottom-2 before:left-[7px] before:top-2 before:w-px before:bg-base-content/15">
-			<div class="relative pl-8 transition-opacity duration-200" class:opacity-35={selectedSkill !== null && !'TypeScript JavaScript React Svelte HTML CSS Micro-frontends Node.js REST APIs GraphQL AWS AWS CDK Lambda S3 CloudFront CI/CD Vitest Playwright Observability Code review'.includes(selectedSkill)}>
+			<div class="relative pl-8 transition-opacity duration-200" class:opacity-35={selectedSkill !== null && !roleSkills[0].includes(selectedSkill)}>
 				<span aria-hidden="true" class="absolute left-0 top-1.5 size-4 rounded-full border-[3px] border-primary bg-base-100"></span>
 				<div class="flex flex-col justify-between gap-1 sm:flex-row sm:items-baseline">
 					<h3 class="font-semibold">Software Engineer <span class="text-base-content/50">· Booking.com</span></h3>
@@ -80,7 +85,7 @@
 					<li>Collaborate with product and engineering partners, share technical knowledge and support the development of other engineers.</li>
 				</ul>
 			</div>
-			<div class="relative pl-8 transition-opacity duration-200" class:opacity-35={selectedSkill !== null && !'TypeScript JavaScript React Java Spring Boot Kafka REST APIs Contract testing Code review'.includes(selectedSkill)}>
+			<div class="relative pl-8 transition-opacity duration-200" class:opacity-35={selectedSkill !== null && !roleSkills[1].includes(selectedSkill)}>
 				<span aria-hidden="true" class="absolute left-0 top-1.5 size-4 rounded-full border-[3px] border-base-content/30 bg-base-100"></span>
 				<div class="flex flex-col justify-between gap-1 sm:flex-row sm:items-baseline">
 					<h3 class="font-semibold">Graduate Software Engineer <span class="text-base-content/50">· Booking.com</span></h3>
@@ -92,7 +97,7 @@
 					<li>Contributed in collaborative Agile teams using pairing, code review and continuous improvement.</li>
 				</ul>
 			</div>
-			<div class="relative pl-8 transition-opacity duration-200" class:opacity-35={selectedSkill !== null && !'Java Scala Python Jython Spring AWS'.includes(selectedSkill)}>
+			<div class="relative pl-8 transition-opacity duration-200" class:opacity-35={selectedSkill !== null && !roleSkills[2].includes(selectedSkill)}>
 				<span aria-hidden="true" class="absolute left-0 top-1.5 size-4 rounded-full border-[3px] border-base-content/30 bg-base-100"></span>
 				<div class="flex flex-col justify-between gap-1 sm:flex-row sm:items-baseline">
 					<h3 class="font-semibold">Junior Software Developer <span class="text-base-content/50">· Team Netsol</span></h3>
