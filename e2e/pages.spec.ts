@@ -98,6 +98,33 @@ test.describe('homepage', () => {
 		await expect(page.getByText(/husband|father|dad|Manchester, UK/i)).toHaveCount(0);
 	});
 
+	test('covers the experience page skills, career history, education and certification', async ({ page }) => {
+		await page.goto('/experience/');
+
+		await expect(page).toHaveTitle(/Professional Experience/);
+		await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+			'href',
+			'https://hufghani.dev/experience/'
+		);
+
+		for (const heading of ['Frontend', 'Backend & APIs', 'Cloud & delivery', 'Testing & quality']) {
+			await expect(page.getByRole('heading', { name: heading, exact: true })).toBeVisible();
+		}
+
+		for (const technology of ['TypeScript', 'React', 'Node.js', 'AWS CDK', 'Playwright']) {
+			await expect(page.getByText(technology, { exact: true })).toBeVisible();
+		}
+
+		await expect(page.getByRole('heading', { name: 'Professional experience' })).toBeVisible();
+		await expect(page.getByRole('heading', { name: /Software Engineer.*Booking.com/ })).toBeVisible();
+		await expect(page.getByRole('heading', { name: /Graduate Software Engineer.*Booking.com/ })).toBeVisible();
+		await expect(page.getByRole('heading', { name: /Junior Software Developer.*Team Netsol/ })).toBeVisible();
+		await expect(page.getByRole('heading', { name: 'Education' })).toBeVisible();
+		await expect(page.getByRole('heading', { name: 'Certification' })).toBeVisible();
+		await expect(page.getByText('AWS Certified Developer – Associate')).toBeVisible();
+		await expect(page.getByRole('navigation', { name: 'Professional profiles' }).getByRole('link')).toHaveCount(2);
+	});
+
 	test('keeps the shared navigation mounted while route content transitions', async ({ page }) => {
 		await mockRepositories(page);
 		await page.goto('/');
