@@ -30,38 +30,72 @@
 	</section>
 
 	<section aria-labelledby="skills-heading" class="mb-12">
-		<h2 id="skills-heading" class="mb-5 text-xs font-semibold uppercase tracking-[0.18em] text-primary">Core skills</h2>
-		<div class="space-y-5">
+		<div class="mb-5 flex items-end justify-between gap-4">
 			<div>
-				<h3 class="mb-3 text-sm font-semibold">Frontend</h3>
-				<div class="flex flex-wrap gap-2">
-					{#each ['TypeScript', 'JavaScript', 'React', 'Svelte', 'HTML', 'CSS', 'Micro-frontends'] as skill}
-						<span class="badge badge-soft badge-info px-3 py-3 text-xs font-medium transition-colors">{skill}</span>
-					{/each}
+				<h2 id="skills-heading" class="text-xs font-semibold uppercase tracking-[0.18em] text-primary">Core skills</h2>
+				<p class="mt-2 text-sm text-base-content/55">Tools and technologies I work with</p>
+			</div>
+			<span class="hidden text-xs text-base-content/40 sm:inline">TECH STACK</span>
+		</div>
+
+		<div class="grid gap-3 sm:grid-cols-2">
+			<div class="group relative overflow-hidden rounded-2xl border border-sky-500/20 bg-sky-500/[0.045] p-5 transition duration-200 hover:-translate-y-1 hover:border-sky-500/40 hover:bg-sky-500/[0.075]">
+				<div class="absolute -right-8 -top-10 size-28 rounded-full bg-sky-500/10 blur-2xl transition group-hover:bg-sky-500/20"></div>
+				<div class="relative">
+					<div class="mb-4 flex items-center gap-3">
+						<span class="grid size-9 place-items-center rounded-xl bg-sky-500/15 text-sm font-bold text-sky-600 dark:text-sky-300">01</span>
+						<h3 class="text-sm font-semibold">Frontend</h3>
+					</div>
+					<div class="flex flex-wrap gap-2">
+						{#each ['TypeScript', 'JavaScript', 'React', 'Svelte', 'HTML', 'CSS', 'Micro-frontends'] as skill}
+							<span class="rounded-lg border border-sky-500/20 bg-sky-500/10 px-2.5 py-1.5 text-xs font-medium text-sky-700 dark:text-sky-200">{skill}</span>
+						{/each}
+					</div>
 				</div>
 			</div>
-			<div>
-				<h3 class="mb-3 text-sm font-semibold">Backend & APIs</h3>
-				<div class="flex flex-wrap gap-2">
-					{#each ['Node.js', 'Java', 'Spring Boot', 'REST APIs', 'GraphQL', 'Kafka'] as skill}
-						<span class="badge badge-soft badge-secondary px-3 py-3 text-xs font-medium transition-colors">{skill}</span>
-					{/each}
+
+			<div class="group relative overflow-hidden rounded-2xl border border-violet-500/20 bg-violet-500/[0.045] p-5 transition duration-200 hover:-translate-y-1 hover:border-violet-500/40 hover:bg-violet-500/[0.075]">
+				<div class="absolute -right-8 -top-10 size-28 rounded-full bg-violet-500/10 blur-2xl transition group-hover:bg-violet-500/20"></div>
+				<div class="relative">
+					<div class="mb-4 flex items-center gap-3">
+						<span class="grid size-9 place-items-center rounded-xl bg-violet-500/15 text-sm font-bold text-violet-600 dark:text-violet-300">02</span>
+						<h3 class="text-sm font-semibold">Backend & APIs</h3>
+					</div>
+					<div class="flex flex-wrap gap-2">
+						{#each ['Node.js', 'Java', 'Spring Boot', 'REST APIs', 'GraphQL', 'Kafka'] as skill}
+							<span class="rounded-lg border border-violet-500/20 bg-violet-500/10 px-2.5 py-1.5 text-xs font-medium text-violet-700 dark:text-violet-200">{skill}</span>
+						{/each}
+					</div>
 				</div>
 			</div>
-			<div>
-				<h3 class="mb-3 text-sm font-semibold">Cloud & delivery</h3>
-				<div class="flex flex-wrap gap-2">
-					{#each ['AWS', 'AWS CDK', 'Lambda', 'S3', 'CloudFront', 'CI/CD'] as skill}
-						<span class="badge badge-soft badge-success px-3 py-3 text-xs font-medium transition-colors">{skill}</span>
-					{/each}
+
+			<div class="group relative overflow-hidden rounded-2xl border border-emerald-500/20 bg-emerald-500/[0.045] p-5 transition duration-200 hover:-translate-y-1 hover:border-emerald-500/40 hover:bg-emerald-500/[0.075]">
+				<div class="absolute -right-8 -top-10 size-28 rounded-full bg-emerald-500/10 blur-2xl transition group-hover:bg-emerald-500/20"></div>
+				<div class="relative">
+					<div class="mb-4 flex items-center gap-3">
+						<span class="grid size-9 place-items-center rounded-xl bg-emerald-500/15 text-sm font-bold text-emerald-600 dark:text-emerald-300">03</span>
+						<h3 class="text-sm font-semibold">Cloud & delivery</h3>
+					</div>
+					<div class="flex flex-wrap gap-2">
+						{#each ['AWS', 'AWS CDK', 'Lambda', 'S3', 'CloudFront', 'CI/CD'] as skill}
+							<span class="rounded-lg border border-emerald-500/20 bg-emerald-500/10 px-2.5 py-1.5 text-xs font-medium text-emerald-700 dark:text-emerald-200">{skill}</span>
+						{/each}
+					</div>
 				</div>
 			</div>
-			<div>
-				<h3 class="mb-3 text-sm font-semibold">Testing & quality</h3>
-				<div class="flex flex-wrap gap-2">
-					{#each ['Vitest', 'Playwright', 'Contract testing', 'Observability', 'Code review'] as skill}
-						<span class="badge badge-soft badge-warning px-3 py-3 text-xs font-medium transition-colors">{skill}</span>
-					{/each}
+
+			<div class="group relative overflow-hidden rounded-2xl border border-amber-500/20 bg-amber-500/[0.045] p-5 transition duration-200 hover:-translate-y-1 hover:border-amber-500/40 hover:bg-amber-500/[0.075]">
+				<div class="absolute -right-8 -top-10 size-28 rounded-full bg-amber-500/10 blur-2xl transition group-hover:bg-amber-500/20"></div>
+				<div class="relative">
+					<div class="mb-4 flex items-center gap-3">
+						<span class="grid size-9 place-items-center rounded-xl bg-amber-500/15 text-sm font-bold text-amber-600 dark:text-amber-300">04</span>
+						<h3 class="text-sm font-semibold">Testing & quality</h3>
+					</div>
+					<div class="flex flex-wrap gap-2">
+						{#each ['Vitest', 'Playwright', 'Contract testing', 'Observability', 'Code review'] as skill}
+							<span class="rounded-lg border border-amber-500/20 bg-amber-500/10 px-2.5 py-1.5 text-xs font-medium text-amber-700 dark:text-amber-200">{skill}</span>
+						{/each}
+					</div>
 				</div>
 			</div>
 		</div>
