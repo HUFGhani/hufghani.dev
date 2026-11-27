@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { Fade } from '$lib/components/Fade';
-	import { MetaTags } from '$lib/components/MetaTags';
+		import { MetaTags } from '$lib/components/MetaTags';
 	import { ProjectCard } from '$lib/components/ProjectCard';
 	import { ProjectEmptyState } from '$lib/components/ProjectEmptyState';
 	import { ProjectPagination } from '$lib/components/ProjectPagination';
@@ -23,7 +22,6 @@
 	const loadError = $derived(data.loadError ?? false);
 
 	const pageSize = 9;
-	let visible = $state(false);
 	let query = $state('');
 	let currentPage = $state(1);
 	let urlReady = $state(false);
@@ -37,7 +35,6 @@
 
 	onMount(() => {
 		readUrlState();
-		visible = true;
 		urlReady = true;
 
 		window.addEventListener('popstate', readUrlState);
@@ -134,7 +131,6 @@
 	pageDescription="Selected projects, experiments and open-source work by Hamza Ghani."
 />
 
-<Fade {visible}>
 	<section class="mx-auto w-full max-w-6xl px-5 pb-20 pt-8 sm:px-8 lg:px-10">
 		<div class="mb-12 flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
 			<div class="max-w-2xl">
@@ -184,4 +180,3 @@
 			onPageChange={changePage}
 		/>
 	</section>
-</Fade>
