@@ -9,7 +9,7 @@ describe('homepage', () => {
 		expect(getByRole('heading', { level: 1, name: /Hello, I'm Hamza/ })).toBeInTheDocument();
 		expect(getByText(/frontend engineering, reliable systems/)).toBeInTheDocument();
 		expect(getByRole('link', { name: /Explore my work/ })).toHaveAttribute('href', '/project');
-		expect(getByRole('link', { name: /Professional experience/ })).toHaveAttribute('href', '/experience');
+		expect(getByRole('link', { name: 'Professional experience', exact: true })).toHaveAttribute('href', '/experience');
 		expect(document.title).toContain('Hamza Ghani');
 		expect(document.head.querySelector('meta[name="description"]')).toHaveAttribute(
 			'content',
