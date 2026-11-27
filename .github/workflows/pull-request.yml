@@ -76,7 +76,7 @@ jobs:
           done
           cat /tmp/portfolio-preview.log
           exit 1
-      - name: Run Pa11y WCAG 2.1 AA checks
+      - name: Run Pa11y WCAG 2.0 AA checks
         run: |
           pa11y --standard WCAG2AA --reporter cli http://127.0.0.1:4173/
           pa11y --standard WCAG2AA --reporter cli http://127.0.0.1:4173/experience/
