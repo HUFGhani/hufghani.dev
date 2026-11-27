@@ -9,13 +9,28 @@ describe('experience page', () => {
 		expect(getByRole('heading', { level: 1, name: 'Hamza Ghani.' })).toBeInTheDocument();
 		expect(getByRole('heading', { name: 'Professional experience' })).toBeInTheDocument();
 		expect(getByText(/Software Engineer · Booking[.]com/)).toBeInTheDocument();
-		expect(getByRole('button', { name: 'Print / Save as PDF' })).toBeInTheDocument();
 		expect(queryByText(/husband|father|dad|Manchester, UK|@/i)).not.toBeInTheDocument();
 		expect(document.title).toContain('Professional Experience');
 		expect(document.head.querySelector('link[rel="canonical"]')).toHaveAttribute(
 			'href',
 			'https://hufghani.dev/experience/'
 		);
+	});
+
+	it('connects technology selections to relevant experience', async () => {
+		const { getByRole, getAllByTestId } = render(Page);
+		const typescript = getByRole('button', { name: 'TypeScript' });
+
+		typescript.click();
+
+		expect(typescript).toHaveAttribute('aria-pressed', 'true');
+		expect(getAllByTestId('experience-entry')[0]).not.toHaveClass('opacity-35');
+		expect(getAllByTestId('experience-entry')[2]).toHaveClass('opacity-35');
+
+		getByRole('button', { name: /Clear filter/ }).click();
+
+		expect(typescript).toHaveAttribute('aria-pressed', 'false');
+		expect(getAllByTestId('experience-entry')[2]).not.toHaveClass('opacity-35');
 	});
 
 	it('provides professional profile links', () => {
