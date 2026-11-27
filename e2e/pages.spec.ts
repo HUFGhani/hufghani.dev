@@ -112,7 +112,7 @@ test.describe('homepage', () => {
 		await expect(page.getByRole('heading', { level: 1, name: 'Projects.' })).toBeVisible();
 		await expect.poll(() => navigationElement!.evaluate((element) => element.isConnected)).toBe(true);
 
-		await page.getByRole('link', { name: 'Experience' }).click();
+		await page.getByRole('link', { name: 'Professional experience' }).click();
 		await expect(page).toHaveURL(/\/experience\/?$/);
 		await expect(page.getByRole('heading', { name: 'Technical Skills' })).toBeVisible();
 		await expect.poll(() => navigationElement!.evaluate((element) => element.isConnected)).toBe(true);
