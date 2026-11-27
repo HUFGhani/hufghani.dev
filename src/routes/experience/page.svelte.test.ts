@@ -1,4 +1,4 @@
-import { render } from '@testing-library/svelte';
+import { fireEvent, render, waitFor } from '@testing-library/svelte';
 import { describe, expect, it } from 'vitest';
 import Page from './+page.svelte';
 
@@ -21,16 +21,20 @@ describe('experience page', () => {
 		const { getByRole, getAllByTestId } = render(Page);
 		const typescript = getByRole('button', { name: 'TypeScript' });
 
-		typescript.click();
+		await fireEvent.click(typescript);
 
-		expect(typescript).toHaveAttribute('aria-pressed', 'true');
-		expect(getAllByTestId('experience-entry')[0]).not.toHaveClass('opacity-35');
-		expect(getAllByTestId('experience-entry')[2]).toHaveClass('opacity-35');
+		await waitFor(() => {
+			expect(typescript).toHaveAttribute('aria-pressed', 'true');
+			expect(getAllByTestId('experience-entry')[0]).not.toHaveClass('opacity-35');
+			expect(getAllByTestId('experience-entry')[2]).toHaveClass('opacity-35');
+		});
 
-		getByRole('button', { name: /Clear filter/ }).click();
+		await fireEvent.click(getByRole('button', { name: /Clear filter/ }));
 
-		expect(typescript).toHaveAttribute('aria-pressed', 'false');
-		expect(getAllByTestId('experience-entry')[2]).not.toHaveClass('opacity-35');
+		await waitFor(() => {
+			expect(typescript).toHaveAttribute('aria-pressed', 'false');
+			expect(getAllByTestId('experience-entry')[2]).not.toHaveClass('opacity-35');
+		});
 	});
 
 	it('provides professional profile links', () => {
