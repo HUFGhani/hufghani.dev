@@ -16,7 +16,7 @@
 		</div>
 	</div>
 
-	<aside class="card card-border bg-base-200/40">
+	<div class="card card-border bg-base-200/40">
 		<div class="card-body p-6 sm:p-8">
 			<p class="text-xs font-medium uppercase tracking-[0.2em] text-base-content/50">Engineering focus</p>
 			<ul class="mt-5 space-y-4 text-sm leading-6 text-base-content/80">
@@ -34,5 +34,5 @@
 				</li>
 			</ul>
 		</div>
-	</aside>
+	</div>
 </section>
