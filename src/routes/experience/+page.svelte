@@ -36,7 +36,7 @@
 				<h3 class="mb-3 text-sm font-semibold">Frontend</h3>
 				<div class="flex flex-wrap gap-2">
 					{#each ['TypeScript', 'JavaScript', 'React', 'Svelte', 'HTML', 'CSS', 'Micro-frontends'] as skill}
-						<span class="rounded-full border border-base-content/10 bg-base-200/50 px-3 py-1.5 text-xs font-medium text-base-content/80">{skill}</span>
+						<span class="badge badge-soft badge-info px-3 py-3 text-xs font-medium transition-colors">{skill}</span>
 					{/each}
 				</div>
 			</div>
@@ -44,7 +44,7 @@
 				<h3 class="mb-3 text-sm font-semibold">Backend & APIs</h3>
 				<div class="flex flex-wrap gap-2">
 					{#each ['Node.js', 'Java', 'Spring Boot', 'REST APIs', 'GraphQL', 'Kafka'] as skill}
-						<span class="rounded-full border border-base-content/10 bg-base-200/50 px-3 py-1.5 text-xs font-medium text-base-content/80">{skill}</span>
+						<span class="badge badge-soft badge-secondary px-3 py-3 text-xs font-medium transition-colors">{skill}</span>
 					{/each}
 				</div>
 			</div>
@@ -52,7 +52,7 @@
 				<h3 class="mb-3 text-sm font-semibold">Cloud & delivery</h3>
 				<div class="flex flex-wrap gap-2">
 					{#each ['AWS', 'AWS CDK', 'Lambda', 'S3', 'CloudFront', 'CI/CD'] as skill}
-						<span class="rounded-full border border-base-content/10 bg-base-200/50 px-3 py-1.5 text-xs font-medium text-base-content/80">{skill}</span>
+						<span class="badge badge-soft badge-success px-3 py-3 text-xs font-medium transition-colors">{skill}</span>
 					{/each}
 				</div>
 			</div>
@@ -60,7 +60,7 @@
 				<h3 class="mb-3 text-sm font-semibold">Testing & quality</h3>
 				<div class="flex flex-wrap gap-2">
 					{#each ['Vitest', 'Playwright', 'Contract testing', 'Observability', 'Code review'] as skill}
-						<span class="rounded-full border border-base-content/10 bg-base-200/50 px-3 py-1.5 text-xs font-medium text-base-content/80">{skill}</span>
+						<span class="badge badge-soft badge-warning px-3 py-3 text-xs font-medium transition-colors">{skill}</span>
 					{/each}
 				</div>
 			</div>
