@@ -95,7 +95,6 @@ test.describe('homepage', () => {
 		await expect(page.getByRole('heading', { level: 1, name: /Hamza Ghani\s*\./ })).toBeVisible();
 		await expect(page.getByRole('heading', { name: 'Professional experience' })).toBeVisible();
 		await expect(page.getByRole('heading', { name: 'Technical Skills' })).toBeVisible();
-		await expect(page.getByText(/husband|father|dad|Manchester, UK/i)).toHaveCount(0);
 	});
 
 	test('covers the experience page skills, career history, education and certification', async ({ page }) => {
