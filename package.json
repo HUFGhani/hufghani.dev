@@ -18,7 +18,8 @@
 		"test:e2e": "playwright test",
 		"test:adapter": "node --test adapters/aws-lambda-edge/handler.test.js",
 		"infra:synth": "cdk synth --app 'node infra/app.mjs'",
-		"infra:deploy": "cdk deploy --app 'node infra/app.mjs' --require-approval never"
+		"infra:deploy": "cdk deploy --app 'node infra/app.mjs' --require-approval never",
+		"test:a11y": "playwright test e2e/accessibility.spec.ts --project=Chromium"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.4.1",
@@ -55,7 +56,6 @@
 		"aws-cdk-lib": "^2.277.0",
 		"daisyui": "^5.8.0",
 		"graphql": "^16.15.0",
-		"graphql-request": "^7.4.0",
 		"graphql-tag": "^2.12.7",
 		"svelte-meta-tags": "^4.7.0"
 	}

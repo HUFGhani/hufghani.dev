@@ -1,34 +1,58 @@
-import { setTheme } from '$lib/utlis';
 import { fireEvent, render } from '@testing-library/svelte';
-import { describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 import NavBar from './NavBar.svelte';
 
-const mockGetTheme = vi.fn();
-vi.mock('$lib/utlis', () => {
-	return {
-		...vi.importActual('$lib/utlis'),
-		getTheme: () => mockGetTheme,
-		setTheme: vi.fn(),
-		setHTMLAttribute: vi.fn(),
-		setLocalStorageForTheme: vi.fn()
-	};
-});
-
-describe('NavBar.svelte', () => {
-	it('should render the NavBar component', () => {
-		const { getByLabelText } = render(NavBar);
-		expect(getByLabelText('Go to Homepage')).toBeInTheDocument();
+describe('NavBar', () => {
+	beforeEach(() => {
+		localStorage.clear();
+		document.documentElement.removeAttribute('data-theme');
 	});
 
-	it('should call selectRandomTheme and set a random theme', async () => {
-		const { getByLabelText } = render(NavBar);
-		const randomThemeButton = getByLabelText('random theme selector');
+	it('renders the home link, primary navigation and theme control', () => {
+		const { getByRole, queryByRole } = render(NavBar);
 
-		mockGetTheme.mockReturnValue('light');
+		expect(getByRole('link', { name: 'hufghani.dev home' })).toBeInTheDocument();
+		expect(getByRole('navigation', { name: 'Main navigation' })).toBeInTheDocument();
+		expect(getByRole('link', { name: 'Project' })).toHaveAttribute('href', '/project');
+		expect(getByRole('link', { name: 'Professional experience' })).toHaveAttribute(
+			'href',
+			'/experience'
+		);
+		expect(queryByRole('link', { name: 'Blog' })).not.toBeInTheDocument();
+		expect(getByRole('button', { name: 'Switch to light mode' })).toBeInTheDocument();
+	});
 
-		await fireEvent.click(randomThemeButton);
+	it('restores the saved light theme on mount', () => {
+		localStorage.setItem('theme', 'light');
 
-		expect(setTheme).toHaveBeenCalled();
-		expect(setTheme).toHaveBeenCalledWith(expect.any(String));
+		const { getByRole } = render(NavBar);
+
+		expect(document.documentElement).toHaveAttribute('data-theme', 'light');
+		expect(getByRole('button', { name: 'Switch to dark mode' })).toBeInTheDocument();
+	});
+
+	it('restores the saved dark theme on mount', () => {
+		localStorage.setItem('theme', 'dark');
+
+		const { getByRole } = render(NavBar);
+
+		expect(document.documentElement).toHaveAttribute('data-theme', 'dark');
+		expect(getByRole('button', { name: 'Switch to light mode' })).toBeInTheDocument();
+	});
+
+	it('toggles and persists the selected theme', async () => {
+		const { getByRole } = render(NavBar);
+
+		await fireEvent.click(getByRole('button', { name: 'Switch to light mode' }));
+
+		expect(document.documentElement).toHaveAttribute('data-theme', 'light');
+		expect(localStorage.getItem('theme')).toBe('light');
+		expect(getByRole('button', { name: 'Switch to dark mode' })).toBeInTheDocument();
+
+		await fireEvent.click(getByRole('button', { name: 'Switch to dark mode' }));
+
+		expect(document.documentElement).toHaveAttribute('data-theme', 'dark');
+		expect(localStorage.getItem('theme')).toBe('dark');
+		expect(getByRole('button', { name: 'Switch to light mode' })).toBeInTheDocument();
 	});
 });

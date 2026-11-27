@@ -2,34 +2,36 @@ import { render } from '@testing-library/svelte';
 import { describe, expect, it } from 'vitest';
 import Footer from './Footer.svelte';
 
-const renderFooter = () => {
-	return render(Footer);
-};
+describe('Footer', () => {
+	it('renders the footer landmark', () => {
+		const { getByRole } = render(Footer);
 
-describe('<Footer/>', () => {
-	it('renders the footer component', () => {
-		const { getByTestId } = renderFooter();
-		expect(getByTestId('footer')).toBeInTheDocument();
+		expect(getByRole('contentinfo')).toBeInTheDocument();
 	});
 
-	it('displays the correct copyright year', () => {
-		const { getByTestId } = renderFooter();
+	it('displays the current copyright year and professional author name', () => {
+		const { getByText } = render(Footer);
 		const currentYear = new Date().getFullYear();
-		expect(getByTestId('copyRight-year').textContent).toContain(`© 2017 - ${currentYear}`);
+
+		expect(getByText(`© 2017–${currentYear} Hamza Ghani`)).toBeInTheDocument();
 	});
 
-	it('displays the correct author name', () => {
-		const { getByTestId } = renderFooter();
-		const currentYear = new Date().getFullYear();
-		expect(getByTestId('copyRight-year').textContent).toContain(
-			`© 2017 - ${currentYear}, All right reserved Hamza U. F. Ghani`
-		);
-	});
+	it('renders only professional social links with safe external-link attributes', () => {
+		const { getByRole, queryByRole } = render(Footer);
+		const socialNavigation = getByRole('navigation', { name: 'Social links' });
 
-	it('renders the SocialMedia component', () => {
-		const { getByText } = renderFooter();
-		expect(
-			getByText('Built with SvelteKit · Hosted on S3 and distributed by CloudFront')
-		).toBeInTheDocument();
+		for (const [label, url] of [
+			['GitHub', 'https://github.com/HUFGhani'],
+			['LinkedIn', 'https://www.linkedin.com/in/hamza-u-f-ghani/']
+		]) {
+			const link = getByRole('link', { name: label });
+
+			expect(socialNavigation).toContainElement(link);
+			expect(link).toHaveAttribute('href', url);
+			expect(link).toHaveAttribute('target', '_blank');
+			expect(link).toHaveAttribute('rel', 'noreferrer');
+		}
+
+		expect(queryByRole('link', { name: 'Instagram' })).not.toBeInTheDocument();
 	});
 });

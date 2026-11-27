@@ -1,8 +1,6 @@
 export const WEBSITE = 'hufghani.dev';
 
-export const AUTHORNAME = 'Hamza U. F. Ghani';
-
-export const SHROTAUTHORNAME = `Hamza Ghani`;
+export const AUTHORNAME = 'Hamza Ghani';
 
 export const SOCIAL_LINKS: {
 	id: number;
@@ -11,18 +9,13 @@ export const SOCIAL_LINKS: {
 }[] = [
 	{
 		id: 1,
-		title: 'Github',
+		title: 'GitHub',
 		link: 'https://github.com/HUFGhani'
 	},
 	{
 		id: 2,
-		title: `Linkedin`,
-		link: `https://www.linkedin.com/in/hamza-u-f-ghani/`
-	},
-	{
-		id: 3,
-		title: `Instagram`,
-		link: `https://www.instagram.com/the.ghani/`
+		title: 'LinkedIn',
+		link: 'https://www.linkedin.com/in/hamza-u-f-ghani/'
 	}
 ];
 
@@ -30,7 +23,6 @@ export const MENULINK: {
 	title: string;
 	link: string;
 	isExternal: boolean;
-	abbr?: boolean;
 	fullTitle?: string;
 }[] = [
 	{
@@ -44,22 +36,18 @@ export const MENULINK: {
 		isExternal: false
 	},
 	{
-		title: 'CV',
-		link: 'docs/Curriculum-Vitae.pdf',
-		isExternal: true,
-		abbr: true,
-		fullTitle: 'Curriculum Vitae'
+		title: 'Experience',
+		link: 'experience',
+		isExternal: false,
+		fullTitle: 'Professional experience'
 	}
 ];
-
-export const META_DATA = {
-	twitter: '@the_ghani'
-};
 
 export const NON_PROJECT: string[] = [
 	'hacknotts',
 	'anvil hack',
 	'old hufghani dev',
+	'hufghani dev',
 	'new hufghani dev',
 	'ddclient docker',
 	'HUFGHANI',
@@ -70,9 +58,18 @@ export const NON_PROJECT: string[] = [
 	'dotfiles',
 	'dotBash',
 	'Curriculum Vitae',
-	'COMP66090 Masters Project'
+	'COMP66090 Masters Project',
+	'Personal Website',
+	'Portfolio Website',
+	'Portfolio',
+	'Configuration',
+	'Configs',
+	'Learning',
+	'Tutorial',
+	'Tutorials',
+	'University Coursework'
 ];
 
 export const FeatureFlagsList: Record<string, boolean> = {
-	showLogo: false
+	showBlog: false
 };

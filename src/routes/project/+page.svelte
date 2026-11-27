@@ -1,82 +1,182 @@
 <script lang="ts">
-	import { Fade } from '$lib/components/Fade';
-	import { MetaTags } from '$lib/components/MetaTags';
+		import { MetaTags } from '$lib/components/MetaTags';
+	import { ProjectCard } from '$lib/components/ProjectCard';
+	import { ProjectEmptyState } from '$lib/components/ProjectEmptyState';
+	import { ProjectPagination } from '$lib/components/ProjectPagination';
+	import { ProjectSearch } from '$lib/components/ProjectSearch';
 	import { NON_PROJECT } from '$lib/config';
 	import { onMount } from 'svelte';
 	import type { PageData } from './$types';
 
+	interface Repository {
+		name: string;
+		url: string;
+		description?: string | null;
+		isArchived: boolean;
+		isTemplate: boolean;
+		primaryLanguage?: { name: string } | null;
+	}
+
 	let { data }: { data: PageData } = $props();
+	const repos = $derived(data.viewer.repositories.nodes as Repository[]);
+	const loadError = $derived(data.loadError ?? false);
 
-	const { repositories: repoNodes } = data.viewer;
-	const { nodes: repos } = repoNodes;
+	const pageSize = 9;
+	let query = $state('');
+	let currentPage = $state(1);
+	let urlReady = $state(false);
 
-	let visible = $state(false);
+	const readUrlState = () => {
+		const params = new URLSearchParams(window.location.search);
+		query = params.get('q') ?? '';
+		const requestedPage = Number(params.get('page'));
+		currentPage = Number.isInteger(requestedPage) && requestedPage > 0 ? requestedPage : 1;
+	};
 
 	onMount(() => {
-		visible = true;
+		readUrlState();
+		urlReady = true;
+
+		window.addEventListener('popstate', readUrlState);
+		return () => window.removeEventListener('popstate', readUrlState);
 	});
 
-	const cleanProjetTitle = (title: string) => {
-		return title !== 'api.hufghani.dev' ? title.replace(/_|-|\./g, ' ') : title;
+	const cleanProjectTitle = (title: string) =>
+		title === 'api.hufghani.dev' ? title : title.replace(/[_.-]/g, ' ').replace(/\s+/g, ' ').trim();
+
+	const normalizeSearchText = (value: string) => value.trim().toLowerCase().replace(/\s+/g, ' ');
+
+	const languageIcons: Record<string, string> = {
+		c: 'c/c-original.svg',
+		'c++': 'cplusplus/cplusplus-original.svg',
+		'c#': 'csharp/csharp-original.svg',
+		css: 'css3/css3-original.svg',
+		dart: 'dart/dart-original.svg',
+		go: 'go/go-original.svg',
+		html: 'html5/html5-original.svg',
+		java: 'java/java-original.svg',
+		javascript: 'javascript/javascript-original.svg',
+		kotlin: 'kotlin/kotlin-original.svg',
+		php: 'php/php-original.svg',
+		python: 'python/python-original.svg',
+		ruby: 'ruby/ruby-original.svg',
+		rust: 'rust/rust-original.svg',
+		shell: 'bash/bash-original.svg',
+		swift: 'swift/swift-original.svg',
+		typescript: 'typescript/typescript-original.svg'
 	};
 
-	const languageIcon = (programmingLanguage: string): string => {
-		if (programmingLanguage.toUpperCase() === 'Shell'.toUpperCase()) {
-			return `<img class="block m-auto w-7 h-7" src="img/devIcons/bash/bash-original.svg" alt="bash" title="bash" loading="lazy" rel="preload">`;
-		} else if (programmingLanguage.toUpperCase() === 'Objective-C'.toUpperCase()) {
-			return `<img class="block m-auto w-7 h-7" src="img/devIcons/objectivec/objectivec-plain.svg" alt="Objective C" title="Objective C" loading="lazy" rel="preload">`;
-		} else if (programmingLanguage.toUpperCase() === 'tex'.toUpperCase()) {
-			return `<img class="block m-auto w-7 h-7" src="img/devIcons/latex/latex-original.svg" alt="latex" loading="lazy" title="latex" rel="preload">`;
-		} else {
-			return `<img class="block m-auto w-7 h-7" src="img/devIcons/${programmingLanguage.toLowerCase()}/${programmingLanguage.toLowerCase()}-original.svg" alt="${programmingLanguage}" title="${programmingLanguage}" loading="lazy" rel="preload">`;
-		}
+	const excludedProjects = new Set(NON_PROJECT.map(normalizeSearchText));
+
+	const projects = $derived(
+		repos
+			.filter((repo) => {
+				const normalizedName = normalizeSearchText(cleanProjectTitle(repo.name));
+				return !repo.isArchived && !repo.isTemplate && !excludedProjects.has(normalizedName);
+			})
+			.map((repo) => {
+				const title = cleanProjectTitle(repo.name);
+				const language =
+					repo.name.toLowerCase() === 'museum of transport greater manchester'
+						? 'Java'
+						: (repo.primaryLanguage?.name ?? null);
+
+				return {
+					...repo,
+					title,
+					language,
+					languageIcon: language ? languageIcons[language.toLowerCase()] : undefined,
+					searchText: normalizeSearchText(
+						`${repo.name} ${title} ${repo.description ?? ''} ${language ?? ''}`
+					)
+				};
+			})
+	);
+
+	const normalizedQuery = $derived(normalizeSearchText(query));
+	const filteredProjects = $derived(
+		projects.filter((project) => project.searchText.includes(normalizedQuery))
+	);
+	const totalPages = $derived(Math.ceil(filteredProjects.length / pageSize));
+	const safePage = $derived(totalPages === 0 ? 1 : Math.min(currentPage, totalPages));
+	const paginatedProjects = $derived(
+		filteredProjects.slice((safePage - 1) * pageSize, safePage * pageSize)
+	);
+	const firstResult = $derived(filteredProjects.length === 0 ? 0 : (safePage - 1) * pageSize + 1);
+	const lastResult = $derived(Math.min(safePage * pageSize, filteredProjects.length));
+
+	const changePage = (page: number) => {
+		currentPage = page;
+		const url = new URL(window.location.href);
+		if (page > 1) url.searchParams.set('page', String(page));
+		else url.searchParams.delete('page');
+		window.history.pushState(window.history.state, '', url);
 	};
+
+	$effect(() => {
+		if (!urlReady) return;
+		const url = new URL(window.location.href);
+		if (query.trim()) url.searchParams.set('q', query.trim());
+		else url.searchParams.delete('q');
+		if (safePage > 1) url.searchParams.set('page', String(safePage));
+		else url.searchParams.delete('page');
+		window.history.replaceState(window.history.state, '', url);
+	});
 </script>
 
 <MetaTags
+	pagePath="/project/"
 	ogType="website"
-	pageTitle="Project"
-	pageDescription="The list of Project that I have worked on or working on"
+	pageTitle="Projects"
+	pageDescription="Selected projects, experiments and open-source work by Hamza Ghani."
 />
 
-<Fade {visible}>
-	<div class="justify-left flex w-full flex-col px-5">
-		<h1 class="text-3xl font-bold">Project</h1>
-		<div class="pt-8 lg:px-10">
-			<table class="table w-full table-fixed text-center">
-				<thead>
-					<tr>
-						<th>Projects</th>
-						<th>Description</th>
-						<th>Language</th>
-					</tr>
-				</thead>
-				<tbody>
-					{#each repos as repo}
-						{#if !repo.isArchived && !repo.isTemplate}
-							{#if !NON_PROJECT.includes(cleanProjetTitle(repo.name))}
-								<tr class="hover">
-									<td class="whitespace-pre-line">
-										<a href={repo.url} target="_blank" rel="noreferrer"
-											>{cleanProjetTitle(repo.name)}</a
-										>
-									</td>
-									<td class="w-9/12 whitespace-pre-line"
-										>{#if repo.description != null}
-											{repo.description}
-										{/if}
-									</td>
-									<td class="text-center align-middle">
-										{#if repo.primaryLanguage != null || repo.primaryLanguage != undefined}
-											{@html languageIcon(repo.primaryLanguage['name'])}
-										{/if}
-									</td>
-								</tr>
-							{/if}
-						{/if}
-					{/each}
-				</tbody>
-			</table>
+	<section class="mx-auto w-full max-w-6xl px-5 pb-20 pt-8 sm:px-8 lg:px-10">
+		<div class="mb-12 flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
+			<div class="max-w-2xl">
+				<p class="mb-4 text-sm font-medium tracking-[0.18em] text-primary uppercase">Things I've built</p>
+				<h1 class="text-4xl font-semibold tracking-tight sm:text-5xl">Projects<span class="text-primary">.</span></h1>
+				<p class="mt-5 max-w-xl text-base leading-7 text-[var(--muted)] sm:text-lg">
+					A collection of side projects, experiments and open-source work. A little bit of everything—from useful tools to ideas explored in code.
+				</p>
+			</div>
+			<ProjectSearch
+				value={query}
+				onChange={(value) => {
+					query = value;
+					currentPage = 1;
+				}}
+			/>
 		</div>
-	</div>
-</Fade>
+
+		<div class="mb-5 flex items-center justify-between border-b border-[var(--line)] pb-4">
+			<p class="text-sm text-[var(--muted)]" aria-live="polite" aria-atomic="true">
+				{filteredProjects.length} <span class="text-[var(--subtle)]">projects</span>
+			</p>
+			<p class="hidden text-xs tracking-wide text-[var(--subtle)] sm:block">OPEN SOURCE & PERSONAL WORK</p>
+		</div>
+
+		{#if loadError}
+			<ProjectEmptyState
+				title="Unable to load projects"
+				description="Please refresh the page to try again."
+			/>
+		{:else if filteredProjects.length}
+			<div id="project-results" class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+				{#each paginatedProjects as project (project.name)}
+					<ProjectCard {project} />
+				{/each}
+			</div>
+		{:else}
+			<ProjectEmptyState />
+		{/if}
+
+		<ProjectPagination
+			currentPage={safePage}
+			{totalPages}
+			{firstResult}
+			{lastResult}
+			totalResults={filteredProjects.length}
+			onPageChange={changePage}
+		/>
+	</section>
