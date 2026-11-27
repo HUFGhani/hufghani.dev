@@ -116,9 +116,9 @@ test.describe('homepage', () => {
 		}
 
 		await expect(page.getByRole('heading', { name: 'Professional experience' })).toBeVisible();
-		await expect(page.getByRole('heading', { name: /Software Engineer.*Booking.com/ })).toBeVisible();
-		await expect(page.getByRole('heading', { name: /Graduate Software Engineer.*Booking.com/ })).toBeVisible();
-		await expect(page.getByRole('heading', { name: /Junior Software Developer.*Team Netsol/ })).toBeVisible();
+		await expect(page.getByRole('heading', { name: 'Software Engineer · Booking.com', exact: true })).toBeVisible();
+		await expect(page.getByRole('heading', { name: 'Graduate Software Engineer · Booking.com', exact: true })).toBeVisible();
+		await expect(page.getByRole('heading', { name: 'Junior Software Developer · Team Netsol', exact: true })).toBeVisible();
 		await expect(page.getByRole('heading', { name: 'Education' })).toBeVisible();
 		await expect(page.getByRole('heading', { name: 'Certification' })).toBeVisible();
 		await expect(page.getByText('AWS Certified Developer – Associate')).toBeVisible();
