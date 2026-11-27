@@ -1,3 +1,6 @@
+// Keep production rendering server-side; E2E builds disable SSR so browser-level API mocks
+// can control repository responses without calling GitHub during the test run.
+export const ssr = import.meta.env.VITE_E2E_TESTING !== 'true';
 export const csr = true;
 
 const emptyViewer = {
