@@ -38,8 +38,8 @@ jobs:
         run: pnpm run build && pnpm run test:adapter
 
   website-e2e:
-    name: Playwright end-to-end tests
-    timeout-minutes: 25
+    name: Playwright end-to-end and accessibility tests
+    timeout-minutes: 30
     needs: [website-test]
     runs-on: ubuntu-latest
     env:
@@ -60,6 +60,27 @@ jobs:
         run: pnpm exec playwright test --forbid-only
       - name: Run axe accessibility tests
         run: pnpm run test:a11y
+      - name: Install Pa11y and its browser
+        run: npm install --global pa11y puppeteer
+      - name: Build site for Pa11y
+        run: pnpm run build
+      - name: Start preview server
+        run: |
+          pnpm run preview -- --host 127.0.0.1 > /tmp/portfolio-preview.log 2>&1 &
+          echo $! > /tmp/portfolio-preview.pid
+          for attempt in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:4173/ > /dev/null; then
+              exit 0
+            fi
+            sleep 2
+          done
+          cat /tmp/portfolio-preview.log
+          exit 1
+      - name: Run Pa11y WCAG 2.2 AA checks
+        run: |
+          pa11y --standard WCAG2AA --reporter cli http://127.0.0.1:4173/
+          pa11y --standard WCAG2AA --reporter cli http://127.0.0.1:4173/experience/
+          pa11y --standard WCAG2AA --reporter cli http://127.0.0.1:4173/project/
       - name: Upload Playwright diagnostics
         if: always()
         uses: actions/upload-artifact@v4.6.2
@@ -68,5 +89,6 @@ jobs:
           path: |
             playwright-report/
             test-results/
+            /tmp/portfolio-preview.log
           if-no-files-found: ignore
           retention-days: 7
